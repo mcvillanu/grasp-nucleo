@@ -1,27 +1,33 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
-enum Order
-{
-    GRIP_HAMMER = 0,
-    GRIP_PINCH = 1,
-    GRIP_BALL = 2,
-    GRIP_C = 3,
-    GRIP_FLAT = 4,
-    STOP = 5
+#include <vector>
+using namespace std;
 
+enum MSG
+{
+    HANDSHAKE = 0,
+    OK = 1,
+    STOP = 2,
+    GRIP_HAMMER = 3,
+    GRIP_PINCH = 4,
+    GRIP_BALL = 5,
+    GRIP_C = 6,
+    GRIP_FLAT = 7
 };
 
 class Communication
 {
     public:
+        vector<int> order();
+        vector<int> param();
+        int BAUDRATE;
         Communication(int BAUDRATE);
-        int message[];
-        void read_message(int message[]);
-
-    private:
-        void wait_for_handshake();
+        void read_message();
+        void handshake();
         void send_confirmation();
+        vector<int> get_order();
+        vector<int> get_param();
 };
 
 #endif
