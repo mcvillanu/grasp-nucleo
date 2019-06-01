@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <Arduino.h>
 
-Communication::Communication(int BAUDRATE) 
+Communication::Communication(int BAUDRATE)
 {
     // Maybe let use 9600 rate
     this->BAUDRATE = BAUDRATE;
@@ -20,8 +20,10 @@ void Communication::handshake()
     }
     read_message();
     // Check that the handshake has been successfully performed
-    if (this->order == 0x00 && this->param == 0xFF)
+    if (this->order.front() == 0x00 && this->param.front() == 0xFF)
     {
+        this->order.pop();
+        this->param.pop();
         Serial.write(OK);
     }
 }
@@ -32,17 +34,17 @@ void Communication::read_message()
     {
         /*do nothing*/
     }
-    
-    this->order = Serial.read();
-    this->param = Serial.read();
+
+    this->order.push(Serial.read());
+    this->param.push(Serial.read());
 }
 
-vector<int> Communication::get_order()
+queue<int> Communication::get_order()
 {
     return this->order;
 }
 
-vector<int> Communication::get_param()
+queue<int> Communication::get_param()
 {
     return this->param;
 }

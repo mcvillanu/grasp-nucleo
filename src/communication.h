@@ -1,7 +1,7 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
-#include <vector>
+#include <queue>
 using namespace std;
 
 enum MSG
@@ -19,15 +19,15 @@ enum MSG
 class Communication
 {
     public:
-        vector<int> order();
-        vector<int> param();
+        queue<int> order;
+        queue<int> param;
         int BAUDRATE;
         Communication(int BAUDRATE);
         void read_message();
         void handshake();
         void send_confirmation();
-        vector<int> get_order();
-        vector<int> get_param();
+        queue<int> get_order();
+        queue<int> get_param();
 };
 
 #endif
