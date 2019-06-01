@@ -1,5 +1,6 @@
 #ifndef MOTOR_H
 #define MOTOR_H
+#include <Servo.h>
 class Motor {
     public:
         /**
@@ -14,5 +15,7 @@ class Motor {
         void move_to(int position);
     private:
         int pin;
+        Servo servo;
+
 };
 #endif

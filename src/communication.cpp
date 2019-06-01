@@ -20,10 +20,8 @@ void Communication::handshake()
     }
     read_message();
     // Check that the handshake has been successfully performed
-    if (this->order.front() == 0x00 && this->param.front() == 0xFF)
+    if (this->order == 0x00 && this->param == 0xFF)
     {
-        this->order.pop();
-        this->param.pop();
         Serial.write(OK);
     }
 }
@@ -35,16 +33,16 @@ void Communication::read_message()
         /*do nothing*/
     }
 
-    this->order.push(Serial.read());
-    this->param.push(Serial.read());
+    this->order =Serial.read();
+    this->param =Serial.read();
 }
 
-queue<int> Communication::get_order()
+int Communication::get_order()
 {
     return this->order;
 }
 
-queue<int> Communication::get_param()
+int Communication::get_param()
 {
     return this->param;
 }
