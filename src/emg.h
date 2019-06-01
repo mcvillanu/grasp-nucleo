@@ -4,11 +4,15 @@
  * WIP cuz idk c++
 */
 
-#ifndef EMG_SIG
-#define EMG_SIG
+#ifndef EMG_H
+#define EMG_H
+
+#include ""
+
+
 class Emg_signal {
     public:
-        /* Default constructor for EMG input */
+        /* Default constructor for EMG input, initialize input PIN */
         Emg_signal(int pin);
         
         /* find initial value for relaxed hand */
@@ -19,10 +23,13 @@ class Emg_signal {
 
         /* returns the value of the voltage read from the pin */
         int emg_voltage(void);
+
+        void emg_loop(void);
     private:
         int pin;
         int reference;
         float voltage;
-        int array_voltage[1000]; /* save last 100 values for something, need something to reference the start */
+        bool flex;
+        int array_voltage[1000]; /* save last 100 values for something, need something to reference the start ?? */
 };
 #endif
