@@ -7,6 +7,8 @@ class Motor {
          **/
         Motor(int pin);
 
+        void setup();
+
         /**
          * Moves the motor to the defined percentage along its arc.
          * 50 = 50%, 100 = 100%, etc.
@@ -14,5 +16,6 @@ class Motor {
         void move_to(int position);
     private:
         int pin;
+
 };
 #endif
