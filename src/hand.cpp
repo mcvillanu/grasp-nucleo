@@ -1,12 +1,7 @@
 #include "hand.h"
-#include <constants.h>
+
 
 Hand::Hand() {
-    this->motors.push_back(Motor(PINS::THUMB_PWM));
-    this->motors.push_back(Motor(PINS::INDEX_PWM));
-    this->motors.push_back(Motor(PINS::MIDDLE_PWM));
-    this->motors.push_back(Motor(PINS::RING_PWM));
-    this->motors.push_back(Motor(PINS::PINKY_PWM));
 
 }
 
