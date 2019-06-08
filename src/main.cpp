@@ -1,24 +1,33 @@
 #include <Arduino.h>
-#include <Servo.h>
-#include <motor.h>
+// #include <Servo.h>
+// #include <motor.h>
+#include <communication.h>
 #include <constants.h>
 
 // Motor motor(PINS::THUMB_PWM);
-Servo servo;
+Communication comms(9600);
+// Servo servo;
 void setup()
 {
-    Serial.begin(9600);
-    // motor.move_to(0);
-    servo.attach(PINS::THUMB_PWM);
+    // Serial.begin(9600);
+    // motor.setup();
+    comms.setup();
+    // servo.attach(PINS::THUMB_PWM);
 }
 
 void loop()
 {
-    Serial.println("loopy boi");
-    // motor.move_to(180);
-    servo.write(50);
-    delay(5000);
-    servo.write(0);
+    comms.handshake();
+    comms.read_message();
+    if (comms.get_order() == MSG::GRIP_HAMMER){
+        comms.send_confirmation();
+    }
+    // motor.move_to(0);
+    // servo.write(100);
+    delay(3000);
+    // motor.move_to(50);
+    delay(3000);
+    // servo.write(60);
     // motor.move_to(100);
     delay(5000);
 }

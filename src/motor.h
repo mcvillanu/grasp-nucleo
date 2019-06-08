@@ -1,12 +1,13 @@
 #ifndef MOTOR_H
 #define MOTOR_H
-#include <Servo.h>
 class Motor {
     public:
         /**
          * Default constructor for the motor. Sets up linear actuator on given pin.
          **/
         Motor(int pin);
+
+        void setup();
 
         /**
          * Moves the motor to the defined percentage along its arc.
@@ -15,7 +16,6 @@ class Motor {
         void move_to(int position);
     private:
         int pin;
-        Servo servo;
 
 };
 #endif

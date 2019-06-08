@@ -2,7 +2,7 @@
 #define HAND_H
 #include <motor.h>
 #include <constants.h>
-// #include <vector>
+#include <vector>
 using namespace std;
 
 
@@ -38,7 +38,7 @@ class Hand {
             Motor(PINS::RING_PWM),
             Motor(PINS::PINKY_PWM)
         };
-        int grip_table[2][5][5] =  {
+        vector<vector<vector<int>>> grip_table {
             //Grip 0 (Hammer)
             {
                 //Finger 0 (Thumb)

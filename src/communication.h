@@ -23,6 +23,7 @@ class Communication
         int param_index = 0;
         int BAUDRATE;
         Communication(int BAUDRATE);
+        void setup();
         void read_message();
         void handshake();
         void send_confirmation();
