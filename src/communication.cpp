@@ -17,8 +17,9 @@ void Communication::setup() {
 
 void Communication::handshake(){   
     while (Serial.available() < 2)
-{
-        /*do nothing*/
+    {
+        Serial.write(4);
+            /*do nothing*/
     }
     // Serial.write(4);
     this->read_message();
