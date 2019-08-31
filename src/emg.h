@@ -7,27 +7,23 @@
 #ifndef EMG_H
 #define EMG_H
 
-#include ""
+#define REF_VOLTAGE 1.0
 
 
 class Emg_signal {
     public:
         /* Default constructor for EMG input, initialize input PIN */
         Emg_signal(int pin);
-        
-        /* find initial value for relaxed hand */
-        float find_reference();
+    
 
         /* returns a flag that means a flex has occured*/
-        bool peak_detected(int voltage);
+        bool peak_detected(float voltage);
 
-        /* returns the value of the voltage read from the pin */
-        int emg_voltage(void);
+        void emg_voltage();
 
-        void emg_loop(void);
+        void emg_loop();
     private:
         int pin;
-        int reference;
         float voltage;
         bool flex;
         int array_voltage[1000]; /* save last 100 values for something, need something to reference the start ?? */
