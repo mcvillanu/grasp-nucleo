@@ -9,11 +9,10 @@ Motor::Motor(int pin) {
 
 void Motor::setup() {
     // this->servo.attach(this->pin);
+    pinMode(this->pin, OUTPUT);
 }
 
 void Motor::move_to(int position) {
-    //This needs to be adjusted for STM
-    position /= 1.7;
-    position += 70;
+    position *= (255/100);
     analogWrite(this->pin, position);
 }
