@@ -7,7 +7,7 @@
 #include "emg.h"
 #include "Arduino.h" // is this possible ??
 
-#define RESOLUTION_ADC 1023; // ??
+#define RESOLUTION_ADC 1024.0; // ??
 
 Emg_signal::Emg_signal(int pin) {
     /* assign analog input pin to emg signal */
@@ -15,8 +15,8 @@ Emg_signal::Emg_signal(int pin) {
 }
 
 bool Emg_signal::peak_detected(float voltage) {
-    this->emg_voltage();
-    if (this->voltage > REF_VOLTAGE) {
+    //this->emg_voltage();
+    if (voltage > REF_VOLTAGE) {
         return true;
     }
     else {
@@ -24,8 +24,8 @@ bool Emg_signal::peak_detected(float voltage) {
     }
 }
 
-void Emg_signal::emg_voltage() {
+float Emg_signal::emg_voltage() {
     int adc_value = analogRead(this->pin);
-    float voltage = adc_value * 5 / RESOLUTION_ADC; // ??
-    this->voltage = voltage;
+    float voltage = adc_value * 5.0 / RESOLUTION_ADC; // ??
+    return voltage;
 }

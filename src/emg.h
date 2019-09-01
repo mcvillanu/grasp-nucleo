@@ -1,13 +1,12 @@
 /* EMG Software
  * Written: June 1, 2019
  * Purpose: Detect when the EMG signal voltage is above a certain threshold and throw a flag
- * WIP cuz idk c++
 */
 
 #ifndef EMG_H
 #define EMG_H
 
-#define REF_VOLTAGE 1.0
+#define REF_VOLTAGE 0.8
 
 
 class Emg_signal {
@@ -19,7 +18,7 @@ class Emg_signal {
         /* returns a flag that means a flex has occured*/
         bool peak_detected(float voltage);
 
-        void emg_voltage();
+        float emg_voltage();
 
         void emg_loop();
     private:

@@ -11,6 +11,8 @@ namespace PINS {
     const int WRIST_DIR = 8;
     const int WRIST_M0 = 10;
     const int WRIST_M1 = 11;
+
+    const int EMG_SIG = 3;
 }
 
 namespace VARS {
