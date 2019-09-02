@@ -23,9 +23,10 @@ electrodes can be moved around to find the best spot
 **use Putty to read the serial output!**
 
 
-![connections](https://raw.githubusercontent.com/UBCBear/grasp-nucleo/master/setup-photos/IMG_20190901_122850.jpg)
+![connections](setup-photos/IMG_20190901_122850.jpg)
+![connections](setup-photos/circuit.JPG)
 
-![connections](https://raw.githubusercontent.com/UBCBear/grasp-nucleo/master/setup-photos/InkedIMG_20190901_164441_LI.jpg)
+![connections](setup-photos/InkedIMG_20190901_164441_LI.jpg)
 
 # to do
 Add a voltage regulator for emg signal input
