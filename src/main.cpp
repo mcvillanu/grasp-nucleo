@@ -21,12 +21,12 @@ void setup()
     wrist.setup();
     comms.setup();
     // servo.attach(PINS::THUMB_PWM);
-    wrist.rotate_by(10*360);
+    wrist.rotate_by(5*360);
 }
 
 void loop()
 {
-    // delayMicroseconds(wrist.poll());
+    delayMicroseconds(wrist.poll());
     // // if (comms.get_order() == MSG::GRIP_HAMMER){
     // //     comms.send_confirmation();
     // //     motor.move_to(0);
@@ -43,12 +43,17 @@ void loop()
     // // }
     float voltage = emg.emg_voltage();
     Serial.println(voltage);
+    //wrist.rotate_by(180);
+    // wrist.rotate_by(-180);
+    // delay(3000);
+
     if (emg.peak_detected(voltage)) {
         Serial.println("Flex that");
         motor.move_to(100);
         delay(2000);
         motor.move_to(0);
         wrist.rotate_by(100);
+
     }
    // delay(2000);
 }

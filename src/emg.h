@@ -6,7 +6,7 @@
 #ifndef EMG_H
 #define EMG_H
 
-#define REF_VOLTAGE 0.8
+#define REF_VOLTAGE 1.2
 
 
 class Emg_signal {
