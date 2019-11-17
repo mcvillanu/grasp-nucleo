@@ -1,18 +1,18 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 namespace PINS {
-    const int THUMB_PWM = 5;
-    const int INDEX_PWM = 6;
-    const int MIDDLE_PWM = 0;
-    const int RING_PWM = 0;
-    const int PINKY_PWM = 0;
+    const int THUMB_PWM = PA1;
+    const int INDEX_PWM = PB0;
+    const int MIDDLE_PWM = PA15;
+    const int RING_PWM = PA6;
+    const int PINKY_PWM = PA11;
 
-    const int WRIST_STEP = 9;
-    const int WRIST_DIR = 8;
-    const int WRIST_M0 = 10;
-    const int WRIST_M1 = 11;
+    const int WRIST_STEP = PB6;
+    const int WRIST_DIR = PB15;
+    const int WRIST_M0 = PA9;
+    const int WRIST_M1 = PC7;
 
-    const int EMG_SIG = 3;
+    const int EMG_SIG = PC12;
 }
 
 namespace VARS {
