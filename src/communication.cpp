@@ -1,6 +1,7 @@
 #include <communication.h>
 #include <stdlib.h>
 #include <Arduino.h>
+#include <constants.h>
 
 Communication::Communication(int BAUDRATE)
 {
@@ -31,13 +32,14 @@ void Communication::handshake(){
 }
 
 void Communication::read_message(){
-    while (Serial.available() < 2)
-{
+    while (Serial.available() < 2) // buffer has to be at least two bytes long
+    {
         /*do nothing*/
     }
 
     this->order =Serial.read();
     this->param =Serial.read();
+    
 }
 
 int Communication::get_order(){

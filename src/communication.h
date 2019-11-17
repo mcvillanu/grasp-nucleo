@@ -5,6 +5,7 @@ using namespace std;
 
 enum MSG
 {
+    SAFETY_OFF = -1, 
     HANDSHAKE = 0,
     OK = 1,
     STOP = 2,
