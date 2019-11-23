@@ -31,7 +31,6 @@ void setup()
     // Choose which emg pin to read. 
     // start with close hand. if read to close hand then switch to
       //   read the other emg for the close signal
-    digitalWrite(PINS::EMG_SWITCH, HIGH);
 }
 
 void loop()
