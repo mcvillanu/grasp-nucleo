@@ -1,5 +1,6 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
+
 namespace PINS {
     const int THUMB_PWM = PA1;
     const int INDEX_PWM = PB0;
