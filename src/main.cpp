@@ -1,5 +1,5 @@
 #include <Arduino.h>
-// #include <Servo.h>
+#include <Servo.h>
 #include <motor.h>
 #include <wrist.h>
 #include <communication.h>
