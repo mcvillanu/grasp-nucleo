@@ -20,3 +20,20 @@ void Haptic::haptic(int power, int time) {
     delay(time);
     Serial.println("off");
 }
+
+// example of usages
+/*
+
+haptic.haptic(50, 200); // High power vibrate and short delay
+  
+haptic.haptic(50, 1000); // high power vibrate with medium delay
+ 
+haptic.haptic(50, 2000); // high power vibrate with long delay
+
+haptic.haptic(165, 200); // low power vibrate with short delay
+
+haptic.haptic(165, 1000); // low power vibrate with medium delay
+
+haptic.haptic(165, 2000); // low power vibrate with long delay
+
+*/
