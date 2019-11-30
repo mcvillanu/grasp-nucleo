@@ -1,10 +1,7 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
-<<<<<<< HEAD
-=======
 #include <Arduino.h>
->>>>>>> 7feec4be8ad5e64bfa1bb97e0c072d7b44e0a0a2
 namespace PINS {
     const int THUMB_PWM = PA1;
     const int INDEX_PWM = PB0;
