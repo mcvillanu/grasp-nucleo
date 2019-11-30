@@ -5,6 +5,7 @@
 #include <communication.h>
 #include <constants.h>
 #include <emg.h>
+#include <TaskManager.h>
 
 
 // Motor motor(PINS::THUMB_PWM);
@@ -29,6 +30,8 @@ Hand myHand;
 Wrist wrist(32);
 Communication comms(9600);
 Emg_signal emg(PINS::EMG_SIG);
+TaskManager manager;
+bool safetyOff = false;
 // Servo servo;
 
 void setup()
@@ -43,124 +46,60 @@ void setup()
     wrist.setup();
     comms.setup();
     // servo.attach(PINS::THUMB_PWM);
-    wrist.rotate_by(5*360);
+    wrist.rotate_by(5*360); 
+    pinMode(3, INPUT);
+    pinMode(PC12, OUTPUT);
+    // Choose which emg pin to read. 
+    // start with close hand. if read to close hand then switch to
+      //   read the other emg for the close signal
 }
 
 void loop()
-{   
-
-    if (!written) {
-        myHand.grip_Choose(0);
-        written = true;
+{
+    if( safetyOff == false)
+    {
+        if(comms.get_order() == MSG::SAFETY_OFF)
+        {
+            Serial.println("Safety is still turned off");
+            safetyOff = true;
+        }
     }
-    else if (written) {
-        myHand.grip_Choose(5);
-        written = false;
+    else if(safetyOff == true)
+    {
+        delayMicroseconds(wrist.poll());
+
+        if (!written) {
+            myHand.grip_Choose(0);
+             written = true;
+        }
+        else if (written) {
+            myHand.grip_Choose(5);
+            written = false;
+        }
+        // // if (comms.get_order() == MSG::GRIP_HAMMER){
+        // //     comms.send_confirmation();
+        // //     motor.move_to(0);
+        // //     motor2.move_to(0);
+        // //     // servo.write(100);
+        // //     delay(3000);
+        // //     motor.move_to(50);
+        // //     motor2.move_to(50);
+        // //     delay(3000);
+        // //     // servo.write(60);
+        // //     motor.move_to(100);
+        // //     motor2.move_to(100);
+        // //     delay(5000);
+        // // }
+        
+        int order = comms.get_order();
+        manager.executeOrder(order);
+
+        float voltage = emg.emg_voltage();
+        Serial.println(voltage);
+        //wrist.rotate_by(180);
+        // wrist.rotate_by(-180);
+        // delay(3000);
+
+    // delay(2000);
     }
-
-    // // Hammer:
-    // Serial.println("Hammer");
-    // t_Motor.move_to(hammer[0]);
-    // i_Motor.move_to(hammer[1]);
-    // m_Motor.move_to(hammer[2]);
-    // r_Motor.move_to(hammer[3]);
-    // p_Motor.move_to(hammer[4]);
-    // delay(3000);
-    // t_Motor.move_to(reset[0]);
-    // i_Motor.move_to(reset[1]);
-    // m_Motor.move_to(reset[2]);
-    // r_Motor.move_to(reset[3]);
-    // p_Motor.move_to(reset[4]);
-    // delay(3000);
-
-    // // Cup:
-    // Serial.println("Cup");
-    // t_Motor.move_to(cup[0]);
-    // i_Motor.move_to(cup[1]);
-    // m_Motor.move_to(cup[2]);
-    // r_Motor.move_to(cup[3]);
-    // p_Motor.move_to(cup[4]);
-    // delay(3000);
-    // t_Motor.move_to(reset[0]);
-    // i_Motor.move_to(reset[1]);
-    // m_Motor.move_to(reset[2]);
-    // r_Motor.move_to(reset[3]);
-    // p_Motor.move_to(reset[4]);
-    // delay(3000);
-
-    // // Pinch:
-    // Serial.println("Pinch");
-    // t_Motor.move_to(pinch[0]);
-    // i_Motor.move_to(pinch[1]);
-    // m_Motor.move_to(pinch[2]);
-    // r_Motor.move_to(pinch[3]);
-    // p_Motor.move_to(pinch[4]);
-    // delay(3000);
-    // t_Motor.move_to(reset[0]);
-    // i_Motor.move_to(reset[1]);
-    // m_Motor.move_to(reset[2]);
-    // r_Motor.move_to(reset[3]);
-    // p_Motor.move_to(reset[4]);
-    // delay(3000);
-
-    // // Card:
-    // Serial.println("Card");
-    // t_Motor.move_to(card[0]);
-    // i_Motor.move_to(card[1]);
-    // m_Motor.move_to(card[2]);
-    // r_Motor.move_to(card[3]);
-    // p_Motor.move_to(card[4]);
-    // delay(3000);
-    // t_Motor.move_to(reset[0]);
-    // i_Motor.move_to(reset[1]);
-    // m_Motor.move_to(reset[2]);
-    // r_Motor.move_to(reset[3]);
-    // p_Motor.move_to(reset[4]);
-    // delay(3000);
-
-    // // Ball
-    // Serial.println("Ball");
-    // t_Motor.move_to(ball[0]);
-    // i_Motor.move_to(ball[1]);
-    // m_Motor.move_to(ball[2]);
-    // r_Motor.move_to(ball[3]);
-    // p_Motor.move_to(ball[4]);
-    // delay(3000);
-    // t_Motor.move_to(reset[0]);
-    // i_Motor.move_to(reset[1]);
-    // m_Motor.move_to(reset[2]);
-    // r_Motor.move_to(reset[3]);
-    // p_Motor.move_to(reset[4]);
-    // delay(3000);
-    
-    // delayMicroseconds(wrist.poll());
-    // // if (comms.get_order() == MSG::GRIP_HAMMER){
-    // //     comms.send_confirmation();
-    // //     motor.move_to(0);
-    // //     motor2.move_to(0);
-    // //     // servo.write(100);
-    // //     delay(3000);
-    // //     motor.move_to(50);
-    // //     motor2.move_to(50);
-    // //     delay(3000);
-    // //     // servo.write(60);
-    // //     motor.move_to(100);
-    // //     motor2.move_to(100);
-    // //     delay(5000);
-    // // }
-    // float voltage = emg.emg_voltage();
-    // Serial.println(voltage);
-    //wrist.rotate_by(180);
-    // wrist.rotate_by(-180);
-    // delay(3000);
-
-    // if (emg.peak_detected(voltage)) {
-    //     Serial.println("Flex that");
-    //     motor.move_to(100);
-    //     delay(2000);
-    //     motor.move_to(0);
-    //     wrist.rotate_by(100);
-
-    // }
-   // delay(2000);
 }
