@@ -1,8 +1,8 @@
 #include "hand.h"
+#include <PololuMaestro.h>
 
-
-Hand::Hand() {
-
+Hand::Hand(MicroMaestro* maestro) {
+    this->maestro = maestro;
 }
 
 void Hand::setup() {

@@ -6,7 +6,7 @@
 #include <constants.h>
 #include <emg.h>
 #include <TaskManager.h>
-
+#include <PololuMaestro.h>
 
 // Motor motor(PINS::THUMB_PWM);
 // Motor motor2(PINS::INDEX_PWM);
@@ -26,13 +26,23 @@ int grasp_Val;
 // Motor m_Motor(PINS::MIDDLE_PWM);
 // Motor r_Motor(PINS::RING_PWM);
 // Motor p_Motor(PINS::RING_PWM);
-Hand myHand;
-Wrist wrist(32);
 Communication comms(9600);
 Emg_signal emg(PINS::EMG_SIG);
 TaskManager manager;
 bool safetyOff = false;
 // Servo servo;
+
+// Maestro servo controller stuff
+#ifdef SERIAL_PORT_HARDWARE_OPEN
+  #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
+#else
+  #include <SoftwareSerial.h>
+  SoftwareSerial maestroSerial(10, 11);
+#endif
+MicroMaestro maestro(maestroSerial);
+
+Hand myHand(&maestro);
+Wrist wrist(32);
 
 void setup()
 {
@@ -52,6 +62,7 @@ void setup()
     // Choose which emg pin to read. 
     // start with close hand. if read to close hand then switch to
       //   read the other emg for the close signal
+    maestroSerial.begin(9600);
 }
 
 void loop()

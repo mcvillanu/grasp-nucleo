@@ -3,15 +3,15 @@
 #include <motor.h>
 #include <constants.h>
 #include <vector>
+#include <PololuMaestro.h>
 using namespace std;
-
 
 class Hand {
     public:
         /**
         * Default constructor for the hand.
         **/
-        Hand();
+        Hand(MicroMaestro* maestro);
         /**
          * sets up motors and hand
          * Uses the base ordering schema defined in communication.
@@ -36,13 +36,15 @@ class Hand {
         int selected_grip;
         int step = 0;
 
+        MicroMaestro* maestro;
+
 
         Motor motors[5] = {
-            Motor(PINS::THUMB_PWM,PINS::THUMB_FSR),
-            Motor(PINS::INDEX_PWM,PINS::INDEX_FSR),
-            Motor(PINS::MIDDLE_PWM,PINS::MIDDLE_FSR),
-            Motor(PINS::RING_PWM,PINS::RING_FSR),
-            Motor(PINS::PINKY_PWM,PINS::PINKY_FSR),
+            Motor(PINS::THUMB_PWM,PINS::THUMB_FSR,maestro),
+            Motor(PINS::INDEX_PWM,PINS::INDEX_FSR,maestro),
+            Motor(PINS::MIDDLE_PWM,PINS::MIDDLE_FSR,maestro),
+            Motor(PINS::RING_PWM,PINS::RING_FSR,maestro),
+            Motor(PINS::PINKY_PWM,PINS::PINKY_FSR,maestro),
         };
 
         vector<vector<int>> grip_table {
