@@ -38,11 +38,11 @@ class Hand {
 
 
         Motor motors[5] = {
-            Motor(PINS::THUMB_PWM),
-            Motor(PINS::INDEX_PWM),
-            Motor(PINS::MIDDLE_PWM),
-            Motor(PINS::RING_PWM),
-            Motor(PINS::PINKY_PWM)
+            Motor(PINS::THUMB_PWM,PINS::THUMB_FSR),
+            Motor(PINS::INDEX_PWM,PINS::INDEX_FSR),
+            Motor(PINS::MIDDLE_PWM,PINS::MIDDLE_FSR),
+            Motor(PINS::RING_PWM,PINS::RING_FSR),
+            Motor(PINS::PINKY_PWM,PINS::PINKY_FSR),
         };
 
         vector<vector<int>> grip_table {

@@ -1,11 +1,12 @@
 #ifndef MOTOR_H
 #define MOTOR_H
+#include <fsr.h>
 class Motor {
     public:
         /**
          * Default constructor for the motor. Sets up linear actuator on given pin.
          **/
-        Motor(int pin);
+        Motor(int pin, int fsrpin);
 
         void setup();
 
@@ -16,6 +17,9 @@ class Motor {
         void move_to(int position);
     private:
         int pin;
+        int fsrpin;
+        Fsr fsr = Fsr(fsrpin);
+        int currPos; // current position
 
 };
 #endif

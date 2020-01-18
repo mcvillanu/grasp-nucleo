@@ -14,6 +14,13 @@ namespace PINS {
     const int WRIST_M1 = PC7;
 
     const int EMG_SIG = PC12;
+
+    //TODO: Assign pins
+    const int THUMB_FSR = 0;
+    const int INDEX_FSR = 0;
+    const int MIDDLE_FSR = 0;
+    const int RING_FSR = 0;
+    const int PINKY_FSR = 0;
 }
 
 namespace VARS {

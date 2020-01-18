@@ -21,3 +21,7 @@ float Fsr::getPsi() {
     float voltage = (float) analogRead(pin) * 5.0 / 1023.0;
     return curveConst / pulldown / (5.0 / voltage - 1);
 }
+
+bool Fsr::safetyBrake() {
+    return getPsi()>brakeThresh;
+}

@@ -1,8 +1,10 @@
 #include "motor.h"
 #include <Arduino.h>
+#include <communication.h>
 
-Motor::Motor(int pin) {
+Motor::Motor(int pin, int fsrpin) {
     this->pin = pin;
+    this->fsrpin = fsrpin;
     // this->servo.attach(pin);
     //TODO: Finish this
 }
@@ -13,6 +15,12 @@ void Motor::setup() {
 }
 
 void Motor::move_to(int position) {
-    position *= (255/100);
-    analogWrite(this->pin, position);
+    if (!fsr.safetyBrake() || position<=currPos){
+        currPos = position;
+        // If brake is on, finger can only release
+        position *= (255/100);
+        analogWrite(this->pin, position);
+    } else {
+        // TODO: communicate that the brake is on
+    }
 }
