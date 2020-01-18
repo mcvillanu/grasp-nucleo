@@ -8,6 +8,7 @@
 
 #define REF_VOLTAGE 1.2
 
+#include <CoAmpCAN.h>
 
 class Emg_signal {
     public:
