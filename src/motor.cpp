@@ -3,8 +3,8 @@
 #include <communication.h>
 #include <PololuMaestro.h>
 
-Motor::Motor(int pin, int fsrpin, MicroMaestro* maestro) {
-    this->pin = pin;
+Motor::Motor(int channel, int fsrpin, MicroMaestro* maestro) {
+    this->channel = channel;
     this->fsrpin = fsrpin;
     this->maestro = maestro;
     // this->servo.attach(pin);
@@ -13,7 +13,7 @@ Motor::Motor(int pin, int fsrpin, MicroMaestro* maestro) {
 
 void Motor::setup() {
     // this->servo.attach(this->pin);
-    pinMode(this->pin, OUTPUT);
+    pinMode(this->channel, OUTPUT);
 }
 
 void Motor::move_to(uint16_t position) {
@@ -21,7 +21,7 @@ void Motor::move_to(uint16_t position) {
         currPos = position;
         // If brake is on, finger can only release
         //analogWrite(this->pin, position);
-        maestro->setTarget(this->pin,position);
+        maestro->setTarget(this->channel,position);
     } else {
         // TODO: communicate that the brake is on
     }
@@ -29,9 +29,9 @@ void Motor::move_to(uint16_t position) {
 }
 
 void Motor::setSpeed(uint16_t speed){
-    maestro->setSpeed(pin,speed);
+    maestro->setSpeed(channel,speed);
 }
 
 void Motor::setAcceleration(uint16_t accel){
-    maestro->setAcceleration(pin,accel);
+    maestro->setAcceleration(channel,accel);
 }

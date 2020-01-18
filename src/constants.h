@@ -2,6 +2,7 @@
 #define CONSTANTS_H
 #include "Arduino.h"
 namespace PINS {
+    //TODO: Change to channels
     const int THUMB_PWM = PA1;
     const int INDEX_PWM = PB0;
     const int MIDDLE_PWM = PA15;

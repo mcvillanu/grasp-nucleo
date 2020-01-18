@@ -7,7 +7,7 @@ class Motor {
         /**
          * Default constructor for the motor. Sets up linear actuator on given pin.
          **/
-        Motor(int pin, int fsrpin, MicroMaestro* maestro);
+        Motor(int channel, int fsrpin, MicroMaestro* maestro);
 
         void setup();
 
@@ -20,7 +20,7 @@ class Motor {
         void setSpeed(uint16_t speed);
         void setAcceleration(uint16_t accel);
     private:
-        int pin;
+        int channel;
         int fsrpin;
         Fsr fsr = Fsr(fsrpin);
         uint16_t currPos; // current position
