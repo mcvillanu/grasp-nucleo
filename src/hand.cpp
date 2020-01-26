@@ -1,9 +1,7 @@
 #include "hand.h"
 
 
-Hand::Hand() {
-
-}
+Hand::Hand() {}
 
 void Hand::start_grip(int grip_id) {
     this->step = 0;

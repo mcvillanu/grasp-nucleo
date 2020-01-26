@@ -16,8 +16,6 @@ class TaskManager
         void gripBall();
         void gripFlat();                                                          
         void gripC();
-        
-
 };
 
 

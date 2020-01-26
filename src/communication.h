@@ -1,11 +1,14 @@
 #ifndef COMMUNICATION_H
 #define COMMUNICATION_H
 
-using namespace std;
+#include <stdlib.h>
+#include <document.h>
 
-enum MSG
-{
-    SAFETY_OFF = -1, 
+using namespace std;
+using namespace rapidjson;
+
+enum MSG {
+    SAFETY_OFF = -1,
     HANDSHAKE = 0,
     OK = 1,
     STOP = 2,
@@ -16,13 +19,15 @@ enum MSG
     GRIP_FLAT = 7
 };
 
-class Communication
-{
-    public:
+class Communication {
+    private:
         int order;
         int param;
         int param_index = 0;
         int BAUDRATE;
+        char const * const END_TAG = "\n";
+
+    public:
         Communication(int BAUDRATE);
         void setup();
         void read_message();
@@ -30,6 +35,15 @@ class Communication
         void send_confirmation();
         int get_order();
         int get_param();
+
+        String readRawMessage() const;
+        Document * const readMessage() const;
+
+        String * const getStringFromMessage (Document * const json, String key) const;
+        bool   * const getBoolFromMessage   (Document * const json, String key) const;
+        int    * const getIntFromMessage    (Document * const json, String key) const;
+        double * const getDoubleFromMessage (Document * const json, String key) const;
+        void   * const getArrayFromMessage  (Document * const json, String key) const;
 };
 
 #endif

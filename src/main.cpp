@@ -7,6 +7,12 @@
 #include <emg.h>
 #include <TaskManager.h>
 
+#include <document.h>
+#include <allocators.h>
+
+using namespace std;
+using namespace rapidjson;
+
 
 Motor motor(PINS::THUMB_PWM);
 Motor motor2(PINS::INDEX_PWM);
@@ -17,34 +23,32 @@ TaskManager manager;
 bool safetyOff = false;
 // Servo servo;
 
-void setup()
-{
+void setup() {
+    /* Begin serial communication: */
     Serial.begin(9600);
+
+    /* Set up the motors */
     motor.setup();
     // motor2.setup();
     wrist.setup();
     comms.setup();
+
     // servo.attach(PINS::THUMB_PWM);
-    wrist.rotate_by(5*360); 
+    wrist.rotate_by(5*360);
     pinMode(3, INPUT);
     pinMode(PC12, OUTPUT);
-    // Choose which emg pin to read. 
+    // Choose which emg pin to read.
     // start with close hand. if read to close hand then switch to
       //   read the other emg for the close signal
 }
 
-void loop()
-{
-    if( safetyOff == false)
-    {
-        if(comms.get_order() == MSG::SAFETY_OFF)
-        {
+void loop() {
+    if (!safetyOff) {
+        if (comms.get_order() == MSG::SAFETY_OFF) {
             Serial.println("Safety is still turned off");
             safetyOff = true;
         }
-    }
-    else if(safetyOff == true)
-    {
+    } else if (safetyOff) {
         delayMicroseconds(wrist.poll());
         // // if (comms.get_order() == MSG::GRIP_HAMMER){
         // //     comms.send_confirmation();
@@ -60,7 +64,7 @@ void loop()
         // //     motor2.move_to(100);
         // //     delay(5000);
         // // }
-        
+
         int order = comms.get_order();
         manager.executeOrder(order);
 
@@ -76,7 +80,6 @@ void loop()
             delay(2000);
             motor.move_to(0);
             wrist.rotate_by(100);
-
         }
     // delay(2000);
     }

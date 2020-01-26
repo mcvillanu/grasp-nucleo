@@ -5,7 +5,7 @@
 */
 
 #include "emg.h"
-#include "Arduino.h" // is this possible ??
+#include <Arduino.h>
 
 #define RESOLUTION_ADC 1024.0; // ??
 
