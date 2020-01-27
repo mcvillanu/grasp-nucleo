@@ -3,20 +3,25 @@
 
 #include <stdlib.h>
 #include <document.h>
+#include <Arduino.h>
+#include <Utils.h>
+#include <constants.h>
 
 using namespace std;
 using namespace rapidjson;
+using namespace Utils;
+using namespace COMMUNICATION;
 
 enum MSG {
-    SAFETY_OFF = -1,
-    HANDSHAKE = 0,
-    OK = 1,
-    STOP = 2,
+    SAFETY_OFF  = -1,
+    HANDSHAKE   = 0,
+    OK          = 1,
+    STOP        = 2,
     GRIP_HAMMER = 3,
-    GRIP_PINCH = 4,
-    GRIP_BALL = 5,
-    GRIP_C = 6,
-    GRIP_FLAT = 7
+    GRIP_PINCH  = 4,
+    GRIP_BALL   = 5,
+    GRIP_C      = 6,
+    GRIP_FLAT   = 7
 };
 
 class Communication {
@@ -24,11 +29,9 @@ class Communication {
         int order;
         int param;
         int param_index = 0;
-        int BAUDRATE;
-        char const * const END_TAG = "\n";
 
     public:
-        Communication(int BAUDRATE);
+        Communication();
         void setup();
         void read_message();
         void handshake();
@@ -36,14 +39,11 @@ class Communication {
         int get_order();
         int get_param();
 
-        String readRawMessage() const;
+        std::string const readRawMessage() const;
         Document * const readMessage() const;
 
-        String * const getStringFromMessage (Document * const json, String key) const;
-        bool   * const getBoolFromMessage   (Document * const json, String key) const;
-        int    * const getIntFromMessage    (Document * const json, String key) const;
-        double * const getDoubleFromMessage (Document * const json, String key) const;
-        void   * const getArrayFromMessage  (Document * const json, String key) const;
+
+        void * const getValueFromMessage(Document * const json, std::string stdstr_key) const;
 };
 
 #endif

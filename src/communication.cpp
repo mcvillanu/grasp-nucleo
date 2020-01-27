@@ -1,20 +1,16 @@
 #include <communication.h>
-#include <stdlib.h>
-#include <Arduino.h>
-#include <constants.h>
-#include "document.h"
-#include "rapidjson/prettywriter.h"
 
 
-using namespace rapidjson;
 
-Communication::Communication(int BAUDRATE) : BAUDRATE(BAUDRATE) {}
+
+Communication::Communication() {}
 
 /*  Setup:
         Begins the serial communication channel and flushes the serial buffer before anything is sent/received.
 */
 void Communication::setup() {
-    Serial.begin(this->BAUDRATE);
+    // Serial.begin(this->BAUDRATE);
+	Serial.begin(COMMUNICATION::BAUDRATE);
     Serial.flush();
 }
 
@@ -50,39 +46,38 @@ void Communication::send_confirmation() {
 }
 
 
-String Communication::readRawMessage() const {
-    return Serial.readStringUntil(*(this->END_TAG));
+
+
+
+std::string const Communication::readRawMessage() const {
+    char const * const serialMsg = Serial.readStringUntil(*(this->END_TAG)).c_str();
+    return std::string(serialMsg);
 }
 
-// Document * const Communication::readMessage() const {
-//     char const * const msg = this->readRawMessage().toCharArray;
-//     Document * doc = new Document();
-//     return &(doc->Parse(msg));
-// }
-
 Document * const Communication::readMessage() const {
-    char const * const msg = this->readRawMessage().toCharArray;
+    char const * const msg = Utils::stdStrToChar(this->readRawMessage());
     Document * doc = new Document();
     return &(doc->Parse(msg));
 }
 
-String * const Communication::getStringFromMessage(Document * const json, String key) const {
-    if (!(json && key && json->HasMember(key.toCharArray) && json[key.toCharArray].IsString())) return nullptr;
-    return json[key.toCharArray].GetString();
-}
-bool * const Communication::getBoolFromMessage(Document * const json, String key) const {
-    if (!(json && key && json->HasMember(key.toCharArray) && json[key.toCharArray].IsBool())) return nullptr;
-    return json[key.toCharArray].GetBool();
-}
-int * const Communication::getIntFromMessage(Document * const json, String key) const {
-    if (!(json && key && json->HasMember(key.toCharArray) && json[key.toCharArray].IsInt())) return nullptr;
-    return json[key.toCharArray].GetInt();
-}
-double * const Communication::getDoubleFromMessage(Document * const json, String key) const {
-    if (!(json && key && json->HasMember(key.toCharArray) && json[key.toCharArray].IsDouble())) return nullptr;
-    return json[key.toCharArray].GetDouble();
-}
-void * const Communication::getArrayFromMessage(Document * const json, String key) const {
-    if (!(json && key && json->HasMember(key.toCharArray) && json[key.toCharArray].IsArray())) return nullptr;
-    return json[key.toCharArray];
+
+void * const Communication::getValueFromMessage(Document * const json, std::string stdstr_key) const {
+	char const * const char_key = Utils::stdStrToChar(stdstr_key);
+	if (!(json && json->HasMember(char_key))) return nullptr;
+	else {
+		if      ((*json)[char_key].IsString() ) return (void * const) new std::string((*json)[char_key].GetString());
+		else if ((*json)[char_key].IsBool()   ) return (void * const) new        bool((*json)[char_key].GetBool()  );
+		else if ((*json)[char_key].IsInt()    ) return (void * const) new         int((*json)[char_key].GetInt()   );
+		else if ((*json)[char_key].IsDouble() ) return (void * const) new      double((*json)[char_key].GetDouble());
+		// else if ((*json)[char_key].IsArray()  ) {
+		// 	rapidjson::GenericArray<false,rapidjson::GenericValue<rapidjson::UTF8<char>,rapidjson::MemoryPoolAllocator<rapidjson::CrtAllocator>>> * genDoc = &(*json)[char_key].GetArray();
+		// 	int size = genDoc->Size();
+		// 	void * * const arr = (void * * const) malloc(size * sizeof(void *));
+		// 	for (int i=0; i<size; i++) {
+		// 		genDoc[i];
+		// 	}
+		// 	return nullptr;
+		// }
+		else return nullptr;
+	}
 }

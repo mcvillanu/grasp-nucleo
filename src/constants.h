@@ -3,6 +3,11 @@
 
 #include <Arduino.h>
 
+namespace COMMUNICATION {
+    int const BAUDRATE;
+    char const * const END_TAG = "\n";
+}
+
 namespace PINS {
     /* Fingers */
     const int THUMB_PWM  = PA1;
