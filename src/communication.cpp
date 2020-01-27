@@ -50,7 +50,7 @@ void Communication::send_confirmation() {
 
 
 std::string const Communication::readRawMessage() const {
-    char const * const serialMsg = Serial.readStringUntil(*(this->END_TAG)).c_str();
+    char const * const serialMsg = Serial.readStringUntil(*(COMMUNICATION::END_TAG)).c_str();
     return std::string(serialMsg);
 }
 
