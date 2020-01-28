@@ -61,7 +61,74 @@ void Communication::setup() {
 }
 
 
+rapidjson::Document * const Communication::createNewJSON() const {
+	rapidjson::Document * const json = new rapidjson::Document();
+	rapidjson::Value & value = json->SetObject();
+	return json;
+}
+void Communication::addString(rapidjson::Document * const & json, std::string const & stdstr_key, std::string const & stdstr_val) const {
+	char * const char_key = Utils::stdStrToChar(stdstr_key);
+	char * const char_val = Utils::stdStrToChar(stdstr_val);
 
+	if ((!json) || (json->HasMember(char_key))) return;
+
+	rapidjson::Document::AllocatorType & allocator = json->GetAllocator();
+
+	rapidjson::Value rval_key;
+	rapidjson::Value rval_val;
+	rval_key.SetString(char_key,allocator);
+	rval_val.SetString(char_val,allocator);
+
+	json->AddMember(rval_key,rval_val,allocator);  
+}
+void Coomunication::addBool(rapidjson::Document * const & json, std::string const & stdstr_key, bool const & bool_val) const {
+	char * const char_key = stdStrToChar(stdstr_key);
+
+	if ((!json) || (json->HasMember(char_key))) return;
+
+	rapidjson::Document::AllocatorType & allocator = json->GetAllocator();
+
+	rapidjson::Value rval_key;
+	rapidjson::Value rval_val;
+	rval_key.SetString(char_key,allocator);
+	rval_val.SetBool(bool_val);
+
+	json->AddMember(rval_key,rval_val,allocator);  
+}
+void addInt(rapidjson::Document * const json, std::string const & stdstr_key, int const & int_val) {
+	char * const char_key = Utils::stdStrToChar(stdstr_key);
+
+	if ((!json) || (json->HasMember(char_key))) return;
+
+	rapidjson::Document::AllocatorType & allocator = json->GetAllocator();
+
+	rapidjson::Value rval_key;
+	rapidjson::Value rval_val;
+	rval_key.SetString(char_key,allocator);
+	rval_val.SetInt(int_val);
+
+	json->AddMember(rval_key,rval_val,allocator);  
+}
+void addDouble(rapidjson::Document * const json, std::string const & stdstr_key, double const & double_val) {
+	char * const char_key = Utils::stdStringToChar(stdstr_key);
+
+	if ((!json) || (json->HasMember(char_key))) return;
+
+	rapidjson::Document::AllocatorType & allocator = json->GetAllocator();
+
+	rapidjson::Value rval_key;
+	rapidjson::Value rval_val;
+	rval_key.SetString(char_key,allocator);
+	rval_val.SetDouble(double_val);
+
+	json->AddMember(rval_key,rval_val,allocator);  
+}
+std::string * const stringifyDocumentToJSON(rapidjson::Document * const json) {
+	StringBuffer s;
+	PrettyWriter<StringBuffer> writer(s);
+	json->Accept(writer);
+	return new std::string(s.GetString());
+}
 
 
 
@@ -79,10 +146,10 @@ std::string const Communication::readRawMessage() const {
  * The array of chars is then passed into a new Document pointer, which then converts that into a JSON Document.
  * The JSON Document is returned as a pointer ().
  */
-Document * const Communication::readMessage() const {
-    char const * const msg = Utils::stdStrToChar(this->readRawMessage());
+Document * const Communication::parseMessageIntoDocument(std::string const & stdstr_msg) const {
+    char const * const char_msg = Utils::stdStrToChar(stdstr_msg);
     Document * doc = new Document();
-    return &(doc->Parse(msg));
+    return &(doc->Parse(char_msg));
 }
 /* Get Type:
  * Takes in a JSON Document and a std::string key to search the Document against.

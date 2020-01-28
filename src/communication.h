@@ -6,6 +6,8 @@
 #include <Arduino.h>
 #include <Utils.h>
 #include <constants.h>
+#include <stringbuffer.h>
+#include <prettywriter.h>
 
 using namespace std;
 using namespace rapidjson;
@@ -29,12 +31,21 @@ class Communication {
 
 
 
+        rapidjson::Document * const createNewJSON() const;
+        std::string * const stringifyDocumentToJSON(rapidjson::Document * const & json) const;
+        void addString (rapidjson::Document * const & json, std::string const & stdstr_key, std::string const & stdstr_val ) const;
+        void addBool   (rapidjson::Document * const & json, std::string const & stdstr_key, bool        const & bool_val   ) const;
+        void addInt    (rapidjson::Document * const & json, std::string const & stdstr_key, int         const & int_val    ) const;
+        void addDouble (rapidjson::Document * const & json, std::string const & stdstr_key, double      const & double_val ) const;
+
+
+
         int const getType(Document const * const & json, std::string const & stdstr_key) const;
 
 
 
         std::string const readRawMessage() const;
-        Document * const readMessage() const;
+        Document * const parseMessageIntoDocument(std::string const & stdstr_msg) const;
 
 
 

@@ -17,7 +17,7 @@ using namespace rapidjson;
 Motor motor(PINS::THUMB_PWM);
 Motor motor2(PINS::INDEX_PWM);
 Wrist wrist(32);
-Communication comms(9600);
+Communication comms;
 Emg_signal emg(PINS::EMG_SIG);
 TaskManager manager;
 bool safetyOff = false;
@@ -44,7 +44,7 @@ void setup() {
 
 void loop() {
     if (!safetyOff) {
-        if (comms.get_order() == MSG::SAFETY_OFF) {
+        if (comms.get_order() == STATE::SAFE_SHUTDOWN) {
             Serial.println("Safety is still turned off");
             safetyOff = true;
         }
