@@ -4,9 +4,36 @@
 #include <Arduino.h>
 
 namespace COMMUNICATION {
-    int const BAUDRATE;
-    char const * const END_TAG = "\n";
+    int const          BAUDRATE = 9600;
+    char const * const END_TAG  = "\n";
 }
+
+enum JSON_TYPES {
+    DNE = -1,
+    STR = 0,
+    BLN = 1,
+    INT = 2,
+    DBL = 3,
+    ARR = 4
+};
+
+enum MSG {
+    OK   = 1,
+    STOP = 2
+};
+
+enum STATE {
+    ACTIVE         = 0,
+    SAFE_SHUTDOWN  = 1
+};
+
+enum GRIPS {
+    GRIP_HAMMER = 0,
+    GRIP_PINCH  = 1,
+    GRIP_BALL   = 2,
+    GRIP_C      = 3,
+    GRIP_FLAT   = 4
+};
 
 namespace PINS {
     /* Fingers */

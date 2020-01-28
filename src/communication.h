@@ -12,18 +12,6 @@ using namespace rapidjson;
 using namespace Utils;
 using namespace COMMUNICATION;
 
-enum MSG {
-    SAFETY_OFF  = -1,
-    HANDSHAKE   = 0,
-    OK          = 1,
-    STOP        = 2,
-    GRIP_HAMMER = 3,
-    GRIP_PINCH  = 4,
-    GRIP_BALL   = 5,
-    GRIP_C      = 6,
-    GRIP_FLAT   = 7
-};
-
 class Communication {
     private:
         int order;
@@ -39,11 +27,22 @@ class Communication {
         int get_order();
         int get_param();
 
+
+
+        int const getType(Document const * const & json, std::string const & stdstr_key) const;
+
+
+
         std::string const readRawMessage() const;
         Document * const readMessage() const;
 
 
-        void * const getValueFromMessage(Document * const json, std::string stdstr_key) const;
+
+        void        * const readValueFromMessage  (Document const * const & json, std::string const & stdstr_key) const;
+        std::string * const readStringFromMessage (Document const * const & json, std::string const & stdstr_key) const;
+        bool        * const readBoolFromMessage   (Document const * const & json, std::string const & stdstr_key) const;
+        int         * const readIntFromMessage    (Document const * const & json, std::string const & stdstr_key) const;
+        double      * const readDoubleFromMessage (Document const * const & json, std::string const & stdstr_key) const;
 };
 
 #endif

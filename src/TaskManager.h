@@ -1,6 +1,10 @@
 #ifndef TASKMANAGER_H
 #define TASKMANAGER_H
 
+#include <Arduino.h>
+#include <communication.h>
+#include <constants.h>
+
 
 class TaskManager
 {

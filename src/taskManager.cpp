@@ -1,17 +1,14 @@
-#include "taskManager.h"
-#include <Arduino.h>
-#include <communication.h>
+#include <TaskManager.h>
 
  TaskManager::TaskManager() {}
 
-void TaskManager::executeOrder(int order)
-{
+void TaskManager::executeOrder(int order) {
     switch (order) {
-        case MSG::GRIP_HAMMER : gripHammer(); break;
-        case MSG::GRIP_PINCH  : gripPinch();  break;
-        case MSG::GRIP_BALL   : gripBall();   break;
-        case MSG::GRIP_FLAT   : gripFlat();   break;
-        case MSG::GRIP_C      : gripC();      break;
+        case GRIPS::GRIP_HAMMER : gripHammer(); break;
+        case GRIPS::GRIP_PINCH  : gripPinch();  break;
+        case GRIPS::GRIP_BALL   : gripBall();   break;
+        case GRIPS::GRIP_FLAT   : gripFlat();   break;
+        case GRIPS::GRIP_C      : gripC();      break;
     }
     return;
 }
