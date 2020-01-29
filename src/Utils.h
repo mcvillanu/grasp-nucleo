@@ -17,6 +17,6 @@ namespace Utils {
     String      const charToSysStr      (char const * const & char_msg);
     std::string const sysStrToStdStr    (String const & sysstr_msg);
     char      * const sysStrToChar      (String const & sysstr_msg);
-}
+};
 
-#endif UTILS_H
+#endif

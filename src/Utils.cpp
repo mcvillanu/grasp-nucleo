@@ -9,8 +9,8 @@ char * const Utils::stdStrToChar(std::string const & stdstr_msg) {
 
     return std::strcpy(dest,charSource);
 }
-std::string const Utils::charToStdStr(char const * const & char_msg) {
-    return std::string(char_msg);
+String const Utils::stdStrToSysString(std::string const & stdstr_msg) {
+    return String(stdstr_msg.c_str());
 }
 std::string const Utils::charToStdStr(char const * const & char_msg) {
     return std::string(char_msg);

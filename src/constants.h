@@ -6,7 +6,7 @@
 namespace COMMUNICATION {
     int const          BAUDRATE = 9600;
     char const * const END_TAG  = "\n";
-}
+};
 
 enum JSON_TYPES {
     DNE = -1,
@@ -53,9 +53,9 @@ namespace PINS {
 
     /* EMG */
     const int EMG_SIG    = PC12;
-}
+};
 
 namespace VARS {
     const int WRIST_RPM = 100;
-}
+};
 #endif

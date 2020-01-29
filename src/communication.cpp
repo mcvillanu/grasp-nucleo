@@ -63,7 +63,7 @@ void Communication::setup() {
 
 rapidjson::Document * const Communication::createNewJSON() const {
 	rapidjson::Document * const json = new rapidjson::Document();
-	rapidjson::Value & value = json->SetObject();
+	json->SetObject();
 	return json;
 }
 void Communication::addString(rapidjson::Document * const & json, std::string const & stdstr_key, std::string const & stdstr_val) const {
@@ -81,7 +81,7 @@ void Communication::addString(rapidjson::Document * const & json, std::string co
 
 	json->AddMember(rval_key,rval_val,allocator);  
 }
-void Coomunication::addBool(rapidjson::Document * const & json, std::string const & stdstr_key, bool const & bool_val) const {
+void Communication::addBool(rapidjson::Document * const & json, std::string const & stdstr_key, bool const & bool_val) const {
 	char * const char_key = stdStrToChar(stdstr_key);
 
 	if ((!json) || (json->HasMember(char_key))) return;
@@ -95,7 +95,7 @@ void Coomunication::addBool(rapidjson::Document * const & json, std::string cons
 
 	json->AddMember(rval_key,rval_val,allocator);  
 }
-void addInt(rapidjson::Document * const json, std::string const & stdstr_key, int const & int_val) {
+void Communication::addInt(rapidjson::Document * const & json, std::string const & stdstr_key, int const & int_val) const {
 	char * const char_key = Utils::stdStrToChar(stdstr_key);
 
 	if ((!json) || (json->HasMember(char_key))) return;
@@ -109,8 +109,8 @@ void addInt(rapidjson::Document * const json, std::string const & stdstr_key, in
 
 	json->AddMember(rval_key,rval_val,allocator);  
 }
-void addDouble(rapidjson::Document * const json, std::string const & stdstr_key, double const & double_val) {
-	char * const char_key = Utils::stdStringToChar(stdstr_key);
+void Communication::addDouble(rapidjson::Document * const & json, std::string const & stdstr_key, double const & double_val) const {
+	char * const char_key = Utils::stdStrToChar(stdstr_key);
 
 	if ((!json) || (json->HasMember(char_key))) return;
 
@@ -123,7 +123,7 @@ void addDouble(rapidjson::Document * const json, std::string const & stdstr_key,
 
 	json->AddMember(rval_key,rval_val,allocator);  
 }
-std::string * const stringifyDocumentToJSON(rapidjson::Document * const json) {
+std::string * const Communication::stringifyDocumentToJSON(rapidjson::Document * const & json) const {
 	StringBuffer s;
 	PrettyWriter<StringBuffer> writer(s);
 	json->Accept(writer);
@@ -163,7 +163,9 @@ int const Communication::getType(Document const * const & json, std::string cons
 		else if ((*json)[char_key].IsInt()   ) return JSON_TYPES::INT;
 		else if ((*json)[char_key].IsDouble()) return JSON_TYPES::DBL;
 		else if ((*json)[char_key].IsArray() ) return JSON_TYPES::ARR;
-	} else return JSON_TYPES::DNE;
+		else return JSON_TYPES::DNE;
+	}
+	return JSON_TYPES::DNE;
 }
 /* Read Value from Message:
  * Receives a JSON Document to search through and a std::string which is the key the JSON is searched against.
