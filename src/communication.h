@@ -16,18 +16,18 @@ using namespace COMMUNICATION;
 
 class Communication {
     private:
-        int order;
-        int param;
-        int param_index = 0;
+        // int order;
+        // int param;
+        // int param_index = 0;
 
     public:
         Communication();
         void setup();
-        void read_message();
-        void handshake();
-        void send_confirmation();
-        int get_order();
-        int get_param();
+        // void read_message();
+        // void handshake();
+        // void send_confirmation();
+        // int get_order();
+        // int get_param();
 
 
 

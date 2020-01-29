@@ -56,7 +56,7 @@ Communication::Communication() {}
  * Flushes the Serial Buffer before beginning.
  */
 void Communication::setup() {
-	Serial.begin(COMMUNICATION::BAUDRATE);
+	Serial.begin(COMMUNICATION::META::BAUDRATE);
     Serial.flush();
 }
 
@@ -138,7 +138,7 @@ std::string * const Communication::stringifyDocumentToJSON(rapidjson::Document *
  * Returns a std::string.
  */
 std::string const Communication::readRawMessage() const {
-    char const * const serialMsg = Serial.readStringUntil(*(COMMUNICATION::END_TAG)).c_str();
+    char const * const serialMsg = Serial.readStringUntil(*(COMMUNICATION::META::END_TAG)).c_str();
     return std::string(serialMsg);
 }
 /* Read Message:
