@@ -83,7 +83,7 @@ namespace PINS {
         WRIST_M1   = PC7
     };
     enum EMG {
-        EMG_SING   = PC12
+        EMG_SGNL   = PC12
     };
 };
 

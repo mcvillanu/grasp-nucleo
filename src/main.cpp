@@ -6,7 +6,6 @@
 #include <constants.h>
 #include <emg.h>
 #include <TaskManager.h>
-
 #include <document.h>
 #include <allocators.h>
 
@@ -18,7 +17,7 @@ Motor motor(PINS::THUMB_PWM);
 Motor motor2(PINS::INDEX_PWM);
 Wrist wrist(32);
 Communication comms;
-Emg_signal emg(PINS::EMG_SIG);
+Emg_signal emg(PINS::EMG::EMG_SGNL);
 TaskManager manager;
 bool safetyOff = false;
 // Servo servo;
