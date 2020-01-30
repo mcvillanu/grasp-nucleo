@@ -8,6 +8,7 @@
 #include <TaskManager.h>
 #include <document.h>
 #include <allocators.h>
+#include <communication.cpp>
 
 using namespace std;
 using namespace rapidjson;
@@ -20,9 +21,6 @@ TaskManager manager;
 bool safetyOff = false;
 Emg_signal emg(PINS::EMG::EMGSIGNAL);
 // Servo servo;
-
-
-Communication * comms = new Communication();
 
 
 // void setup() {

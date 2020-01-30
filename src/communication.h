@@ -9,12 +9,23 @@
 #include <stringbuffer.h>
 #include <prettywriter.h>
 
-using namespace std;
-using namespace rapidjson;
-using namespace Utils;
-using namespace COMMUNICATION;
+// using namespace std;
+// using namespace rapidjson;
+// using namespace Utils;
+// using namespace COMMUNICATION;
 
-/* DOCUMENTATION -------------------- */
+/* -------------------- DOCUMENTATION -------------------- */
+/* ***NOTE***:
+ * There are a few different types of ways chars/strings can be represented in this situation:
+ * 		1) A null-terminated array of chars
+ * 		2) A std::string
+ * 		3) The Arduino Framework's String
+ * The RapidJSON library uses 1) and the Arduino Framework uses 3).
+ * This can be kind of confusing, so there are "conversion" functions declared in the Utils.h class which will allow you to convert one type into any of the other two.
+ * 
+ * However, while interfacing with this class, one will notice that std::string is always preferred. This was chosen mainly because std::string is part of the Standard C++ Library.
+ * Also, std::string probably contains less overhead than the Arduino Framework's String (emphasis on probably...), and I think it will be easier to use and adapt to.
+ */
 /* Communication:
  * Empty default constructor.
  */
@@ -106,8 +117,9 @@ using namespace COMMUNICATION;
  * If the key does not exist in the JSON OR if the key does exist but its value is not a double, a nullptr is returned! Check for a nullptr before using!
  */
 
-namespace Communication {
-    static bool serialActive;
+class Communication {
+    private:
+        static bool serialActive;
     // int order;
     // int param;
     // int param_index = 0;
@@ -117,25 +129,26 @@ namespace Communication {
     // int get_order();
     // int get_param();
     
-    void setup();
+    public:
+        static void setup();
 
-    rapidjson::Document * const createNewJSON();
-    std::string * const stringifyDocumentToJSON(rapidjson::Document * const & json);
-    void addString (rapidjson::Document * const & json, std::string const & stdstr_key, std::string const & stdstr_val );
-    void addBool   (rapidjson::Document * const & json, std::string const & stdstr_key, bool        const & bool_val   );
-    void addInt    (rapidjson::Document * const & json, std::string const & stdstr_key, int         const & int_val    );
-    void addDouble (rapidjson::Document * const & json, std::string const & stdstr_key, double      const & double_val );
+        static rapidjson::Document * const createNewJSON();
+        static std::string * const stringifyDocumentToJSON(rapidjson::Document * const & json);
+        static void addString (rapidjson::Document * const & json, std::string const & stdstr_key, std::string const & stdstr_val );
+        static void addBool   (rapidjson::Document * const & json, std::string const & stdstr_key, bool        const & bool_val   );
+        static void addInt    (rapidjson::Document * const & json, std::string const & stdstr_key, int         const & int_val    );
+        static void addDouble (rapidjson::Document * const & json, std::string const & stdstr_key, double      const & double_val );
 
-    int const getType(rapidjson::Document const * const & json, std::string const & stdstr_key);
+        static int const getType(rapidjson::Document const * const & json, std::string const & stdstr_key);
 
-    std::string const readRawMessage();
-    rapidjson::Document * const parseMessageIntoDocument(std::string const & stdstr_msg);
+        static std::string const readRawMessage();
+        static rapidjson::Document * const parseMessageIntoDocument(std::string const & stdstr_msg);
 
-    void        * const readValueFromMessage  (rapidjson::Document const * const & json, std::string const & stdstr_key);
-    std::string * const readStringFromMessage (rapidjson::Document const * const & json, std::string const & stdstr_key);
-    bool        * const readBoolFromMessage   (rapidjson::Document const * const & json, std::string const & stdstr_key);
-    int         * const readIntFromMessage    (rapidjson::Document const * const & json, std::string const & stdstr_key);
-    double      * const readDoubleFromMessage (rapidjson::Document const * const & json, std::string const & stdstr_key);
+        static void        * const readValueFromMessage  (rapidjson::Document const * const & json, std::string const & stdstr_key);
+        static std::string * const readStringFromMessage (rapidjson::Document const * const & json, std::string const & stdstr_key);
+        static bool        * const readBoolFromMessage   (rapidjson::Document const * const & json, std::string const & stdstr_key);
+        static int         * const readIntFromMessage    (rapidjson::Document const * const & json, std::string const & stdstr_key);
+        static double      * const readDoubleFromMessage (rapidjson::Document const * const & json, std::string const & stdstr_key);
 };
 
 #endif
