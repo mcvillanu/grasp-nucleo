@@ -13,73 +13,80 @@ using namespace std;
 using namespace rapidjson;
 
 
-Motor motor(PINS::FINGERS::THUMB_PWM);
+Motor motor1(PINS::FINGERS::THUMB_PWM);
 Motor motor2(PINS::FINGERS::INDEX_PWM);
 Wrist wrist(32);
-Communication comms;
 TaskManager manager;
 bool safetyOff = false;
 Emg_signal emg(PINS::EMG::EMGSIGNAL);
 // Servo servo;
 
+
+Communication * comms = new Communication();
+
+
+// void setup() {
+//     /* Begin serial communication: */
+//     // Serial.begin(9600);
+    
+//     /* Set up the motors */
+//     comms.setup();
+//     motor1.setup();
+//     motor2.setup();
+//     wrist.setup();
+
+//     // servo.attach(PINS::THUMB_PWM);
+//     wrist.rotate_by(5*360);
+//     pinMode(3, INPUT);
+//     pinMode(PC12, OUTPUT);
+//     // Choose which emg pin to read.
+//     // start with close hand. if read to close hand then switch to
+//       //   read the other emg for the close signal
+// }
+
+// void loop() {
+//     if (!safetyOff) {
+//         if (comms.get_order() == STATE::SAFE_SHUTDOWN) {
+//             Serial.println("Safety is still turned off");
+//             safetyOff = true;
+//         }
+//     } else if (safetyOff) {
+//         delayMicroseconds(wrist.poll());
+//         // // if (comms.get_order() == MSG::GRIP_HAMMER){
+//         // //     comms.send_confirmation();
+//         // //     motor.move_to(0);
+//         // //     motor2.move_to(0);
+//         // //     // servo.write(100);
+//         // //     delay(3000);
+//         // //     motor.move_to(50);
+//         // //     motor2.move_to(50);
+//         // //     delay(3000);
+//         // //     // servo.write(60);
+//         // //     motor.move_to(100);
+//         // //     motor2.move_to(100);
+//         // //     delay(5000);
+//         // // }
+
+//         int order = comms.get_order();
+//         manager.executeOrder(order);
+
+//         float voltage = emg.emg_voltage();
+//         Serial.println(voltage);
+//         //wrist.rotate_by(180);
+//         // wrist.rotate_by(-180);
+//         // delay(3000);
+
+//         if (emg.peak_detected(voltage)) {
+//             Serial.println("Flex that");
+//             motor1.move_to(100);
+//             delay(2000);
+//             motor1.move_to(0);
+//             wrist.rotate_by(100);
+//         }
+//     // delay(2000);
+//     }
+// }
+
 void setup() {
-    /* Begin serial communication: */
-    Serial.begin(9600);
-
-    /* Set up the motors */
-    motor.setup();
-    // motor2.setup();
-    wrist.setup();
-    comms.setup();
-
-    // servo.attach(PINS::THUMB_PWM);
-    wrist.rotate_by(5*360);
-    pinMode(3, INPUT);
-    pinMode(PC12, OUTPUT);
-    // Choose which emg pin to read.
-    // start with close hand. if read to close hand then switch to
-      //   read the other emg for the close signal
-}
-
-void loop() {
-    if (!safetyOff) {
-        if (comms.get_order() == STATE::SAFE_SHUTDOWN) {
-            Serial.println("Safety is still turned off");
-            safetyOff = true;
-        }
-    } else if (safetyOff) {
-        delayMicroseconds(wrist.poll());
-        // // if (comms.get_order() == MSG::GRIP_HAMMER){
-        // //     comms.send_confirmation();
-        // //     motor.move_to(0);
-        // //     motor2.move_to(0);
-        // //     // servo.write(100);
-        // //     delay(3000);
-        // //     motor.move_to(50);
-        // //     motor2.move_to(50);
-        // //     delay(3000);
-        // //     // servo.write(60);
-        // //     motor.move_to(100);
-        // //     motor2.move_to(100);
-        // //     delay(5000);
-        // // }
-
-        int order = comms.get_order();
-        manager.executeOrder(order);
-
-        float voltage = emg.emg_voltage();
-        Serial.println(voltage);
-        //wrist.rotate_by(180);
-        // wrist.rotate_by(-180);
-        // delay(3000);
-
-        if (emg.peak_detected(voltage)) {
-            Serial.println("Flex that");
-            motor.move_to(100);
-            delay(2000);
-            motor.move_to(0);
-            wrist.rotate_by(100);
-        }
-    // delay(2000);
-    }
+    Communication::setup();
 }

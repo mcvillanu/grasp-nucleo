@@ -46,9 +46,11 @@
 
 
 
-
+bool Communication::serialActive = false;
 Communication::Communication() {}
 void Communication::setup() {
+	if (Communication::serialActive) return;
+	Communication::serialActive = true;
 	Serial.begin(COMMUNICATION::META::BAUDRATE);
     Serial.flush();
 }
@@ -120,7 +122,7 @@ std::string * const Communication::stringifyDocumentToJSON(rapidjson::Document *
 	json->Accept(writer);
 	return new std::string(s.GetString());
 }
-std::string const Communication::readRawMessage() const {
+std::string const Communication::readRawMessage() {
     char const * const serialMsg = Serial.readStringUntil(*(COMMUNICATION::META::END_TAG)).c_str();
     return std::string(serialMsg);
 }
