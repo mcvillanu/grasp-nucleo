@@ -113,13 +113,14 @@ class Communication {
         // int param_index = 0;
 
     public:
-        Communication();
-        void setup();
         // void read_message();
         // void handshake();
         // void send_confirmation();
         // int get_order();
         // int get_param();
+
+        Communication();
+        void setup();
 
         rapidjson::Document * const createNewJSON() const;
         std::string * const stringifyDocumentToJSON(rapidjson::Document * const & json) const;

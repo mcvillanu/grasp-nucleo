@@ -13,13 +13,13 @@ using namespace std;
 using namespace rapidjson;
 
 
-Motor motor(PINS::THUMB_PWM);
-Motor motor2(PINS::INDEX_PWM);
+Motor motor(PINS::FINGERS::THUMB_PWM);
+Motor motor2(PINS::FINGERS::INDEX_PWM);
 Wrist wrist(32);
 Communication comms;
-Emg_signal emg(PINS::EMG::EMG_SGNL);
 TaskManager manager;
 bool safetyOff = false;
+Emg_signal emg(PINS::EMG::EMGSIGNAL);
 // Servo servo;
 
 void setup() {

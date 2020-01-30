@@ -55,7 +55,7 @@ enum STATE {
 
 /* Grips:
  * Honestly, this should be perfectly self-explanatory, why are you even looking for an explanation for this enum? It's literally in the name lol...
-*/
+ */
 enum GRIPS {
     GRIP_HAMMER = 0,
     GRIP_PINCH  = 1,
@@ -83,7 +83,7 @@ namespace PINS {
         WRIST_M1   = PC7
     };
     enum EMG {
-        EMG_SGNL   = PC12
+        EMGSIGNAL   = PC12
     };
 };
 
