@@ -32,6 +32,7 @@
 //     Serial.write(MSG::OK);
 // }
 bool Communication::serialActive = false;
+Communication::Communication() {}
 bool const Communication::isSerialActive() {
 	return Communication::serialActive;
 }

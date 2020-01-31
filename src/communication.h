@@ -9,10 +9,7 @@
 #include <stringbuffer.h>
 #include <prettywriter.h>
 
-// using namespace std;
-// using namespace rapidjson;
-// using namespace Utils;
-// using namespace COMMUNICATION;
+
 
 /* -------------------- DOCUMENTATION -------------------- */
 /* ***NOTE***:
@@ -27,7 +24,7 @@
  * Also, std::string probably contains less overhead than the Arduino Framework's String (emphasis on probably...), and I think it will be easier to use and adapt to.
  */
 /* Communication:
- * Empty default constructor.
+ * Empty default constructor. This technically needs to exist...
  */
 /* Setup:
  * Initializes the this->BAUDRATE to COMMUNICATION::META::BAUDRATE and then flushes the Serial buffer.
@@ -134,6 +131,8 @@ class Communication {
     // int get_param();
     
     public:
+        Communication();
+
         static bool const isSerialActive();
 
         static void setup();
@@ -159,6 +158,13 @@ class Communication {
         static void writeRawMessage(std::string const stdstr_msg);
 };
 
-
+/* TODO:
+ * 1)   Implement object functionality (i.e. adding objects to and reading objects from JSONs; as of right now, only std::strings, bools, ints, and doubles can be added to and read from JSONs).
+ * 2)   Implement array functionality (i.e. adding arrays to and reading arrays from JSONs).
+ * 3)   Implement functionality to override values for keys that already exist
+ *          I.E., with the current implementation, if a key-value pair is added to a JSON, but the key already exists in the JSON, no updating will occur.
+ *          This could pose a problem if a certain key was inputed, but then an event occurred and the value of that pre-existing key needed to be updated, but was unable to because of the lack of overriding.
+ *          Either create new specific methods that update the state for existing keys, or change the implementation of addString, addBool, addInt, and addDouble.
+ */
 
 #endif
