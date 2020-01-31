@@ -31,7 +31,10 @@
 // void Communication::send_confirmation() {
 //     Serial.write(MSG::OK);
 // }
-bool serialActive = false;
+bool Communication::serialActive = false;
+bool const Communication::isSerialActive() {
+	return Communication::serialActive;
+}
 void Communication::setup() {
 	if (Communication::serialActive) return;
 	Communication::serialActive = true;
@@ -166,4 +169,8 @@ double * const Communication::readDoubleFromMessage(rapidjson::Document const * 
 	char const * const char_key = Utils::stdStrToChar(stdstr_key);
 	if (!(json && json->HasMember(char_key) && (*json)[char_key].IsDouble())) return nullptr;
 	return new double((*json)[char_key].GetDouble());
+}
+void Communication::writeRawMessage(std::string const stdstr_msg) {
+	char const * const char_msg = Utils::stdStrToChar(stdstr_msg);
+	Serial.write(char_msg);
 }

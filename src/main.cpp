@@ -87,4 +87,5 @@ Emg_signal emg(PINS::EMG::EMGSIGNAL);
 
 void setup() {
     Communication::setup();
+    
 }

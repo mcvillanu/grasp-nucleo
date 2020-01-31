@@ -116,6 +116,10 @@
  * If the key is found and if the value is a double, it is returned as a (double *)! No casting will have to be done in order to use the return value.
  * If the key does not exist in the JSON OR if the key does exist but its value is not a double, a nullptr is returned! Check for a nullptr before using!
  */
+/* Write Raw Message:
+ * Takes in a std::string and writes it to the Serial bridge.
+ */
+
 
 class Communication {
     private:
@@ -130,6 +134,8 @@ class Communication {
     // int get_param();
     
     public:
+        static bool const isSerialActive();
+
         static void setup();
 
         static rapidjson::Document * const createNewJSON();
@@ -149,6 +155,10 @@ class Communication {
         static bool        * const readBoolFromMessage   (rapidjson::Document const * const & json, std::string const & stdstr_key);
         static int         * const readIntFromMessage    (rapidjson::Document const * const & json, std::string const & stdstr_key);
         static double      * const readDoubleFromMessage (rapidjson::Document const * const & json, std::string const & stdstr_key);
+
+        static void writeRawMessage(std::string const stdstr_msg);
 };
+
+
 
 #endif
