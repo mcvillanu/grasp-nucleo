@@ -37,7 +37,8 @@ bool safetyOff = false;
   #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
 #else
   #include <SoftwareSerial.h>
-  SoftwareSerial maestroSerial(10, 11);
+  #include <HardwareSerial.h>
+  HardwareSerial maestroSerial(PA9, PB7);
 #endif
 MicroMaestro maestro(maestroSerial);
 
