@@ -104,6 +104,41 @@ void Communication::addDouble(rapidjson::Document * const & json, std::string co
 
 	json->AddMember(rval_key,rval_val,allocator);  
 }
+void Communication::removeKeyPair(rapidjson::Document * const & json, std::string const & stdstr_key) {
+	char * const char_key = Utils::stdStrToChar(stdstr_key);
+
+	if (!(json && json->HasMember(char_key))) return;
+
+	json->RemoveMember(char_key);
+}
+void Communication::replaceWithString(rapidjson::Document * const & json, std::string const & stdstr_key, std::string const & stdstr_val) {
+	char const * const char_key = Utils::stdStrToChar(stdstr_key);
+	if (!(json && json->HasMember(char_key))) return;
+
+	Communication::removeKeyPair(json,stdstr_key);
+	Communication::addString(json,stdstr_key,stdstr_val);
+}
+void Communication::replaceWithBool(rapidjson::Document * const & json, std::string const & stdstr_key, bool const & bool_val) {
+	char const * const char_key = Utils::stdStrToChar(stdstr_key);
+	if (!(json && json->HasMember(char_key))) return;
+
+	Communication::removeKeyPair(json,stdstr_key);
+	Communication::addBool(json,stdstr_key,bool_val);
+}
+void Communication::replaceWithInt(rapidjson::Document * const & json, std::string const & stdstr_key, int const & int_val) {
+	char const * const char_key = Utils::stdStrToChar(stdstr_key);
+	if (!(json && json->HasMember(char_key))) return;
+
+	Communication::removeKeyPair(json,stdstr_key);
+	Communication::addInt(json,stdstr_key,int_val);
+}
+void Communication::replaceWithDouble(rapidjson::Document * const & json, std::string const & stdstr_key, double const & double_val) {
+	char const * const char_key = Utils::stdStrToChar(stdstr_key);
+	if (!(json && json->HasMember(char_key))) return;
+
+	Communication::removeKeyPair(json,stdstr_key);
+	Communication::addDouble(json,stdstr_key,double_val);
+}
 std::string * const Communication::stringifyDocumentToJSON(rapidjson::Document * const & json) {
 	rapidjson::StringBuffer s;
 	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(s);

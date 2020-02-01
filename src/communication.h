@@ -144,6 +144,13 @@ class Communication {
         static void addInt    (rapidjson::Document * const & json, std::string const & stdstr_key, int         const & int_val    );
         static void addDouble (rapidjson::Document * const & json, std::string const & stdstr_key, double      const & double_val );
 
+        static void removeKeyPair (rapidjson::Document * const & json, std::string const & stdstr_key);
+
+        static void replaceWithString (rapidjson::Document * const & json, std::string const & stdstr_key, std::string const & stdstr_val);
+        static void replaceWithBool   (rapidjson::Document * const & json, std::string const & stdstr_key, bool const & bool_val);
+        static void replaceWithInt    (rapidjson::Document * const & json, std::string const & stdstr_key, int const & int_val);
+        static void replaceWithDouble (rapidjson::Document * const & json, std::string const & stdstr_key, double const & double_val);
+
         static int const getType(rapidjson::Document const * const & json, std::string const & stdstr_key);
 
         static std::string const readRawMessage();
@@ -157,14 +164,5 @@ class Communication {
 
         static void writeRawMessage(std::string const stdstr_msg);
 };
-
-/* TODO:
- * 1)   Implement object functionality (i.e. adding objects to and reading objects from JSONs; as of right now, only std::strings, bools, ints, and doubles can be added to and read from JSONs).
- * 2)   Implement array functionality (i.e. adding arrays to and reading arrays from JSONs).
- * 3)   Implement functionality to override values for keys that already exist
- *          I.E., with the current implementation, if a key-value pair is added to a JSON, but the key already exists in the JSON, no updating will occur.
- *          This could pose a problem if a certain key was inputed, but then an event occurred and the value of that pre-existing key needed to be updated, but was unable to because of the lack of overriding.
- *          Either create new specific methods that update the state for existing keys, or change the implementation of addString, addBool, addInt, and addDouble.
- */
 
 #endif
