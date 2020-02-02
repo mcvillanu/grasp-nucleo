@@ -1,15 +1,13 @@
-#include "fsr.h"
+#include "Communication/FSRComm/FSRComm.h"
 #include <Arduino.h>
 
-Fsr::Fsr(int pin) {
-    this->pin = pin;
-}
+FSR::FSR(int pin) : pin(pin) {}
 
-void Fsr::setup() {
+void FSR::setup() {
     pinMode(this->pin, INPUT);
 }
 
-float Fsr::getPsi() {
+float FSR::getPSI() {
     /* Useful link: https://learn.adafruit.com/force-sensitive-resistor-fsr/using-an-fsr
      * Given pressure F
      * pulldown resistance R
@@ -22,6 +20,6 @@ float Fsr::getPsi() {
     return curveConst / pulldown / (5.0 / voltage - 1);
 }
 
-bool Fsr::safetyBrake() {
-    return getPsi()>brakeThresh;
+bool FSR::safetyBrake() {
+    return getPSI()>brakeThresh;
 }

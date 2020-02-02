@@ -1,18 +1,18 @@
-#ifndef FSR_H
-#define FSR_H
-class Fsr {
+#ifndef FSRCOMM_H
+#define FSRCOMM_H
+class FSR {
     public:
         /**
          * Default constructor for the FSR.
          **/
-        Fsr(int pin);
+        FSR(int pin);
 
         void setup();
 
         /**
          * Gets psi from reading voltage of pin
          **/
-        float getPsi();
+        float getPSI();
 
         /**
          * Returns true if psi is above a threshold
