@@ -6,24 +6,38 @@
 
 
 namespace COMMUNICATION {
-    namespace META {
-        int const          BAUDRATE = 9600;
-        char const * const END_TAG  = "\n";
-    };
-    enum JSON_TYPES {
-        DNE = -1,
-        NIL = 0,
-        STR = 1,
-        BLN = 2,
-        INT = 3,
-        DBL = 4,
-        ARR = 5,
-        OBJ = 6
-    };
-    enum MSG {
-        OK   = 1,
-        STOP = 2
-    };
+    namespace EMGCOMM {
+
+    }
+    namespace FSRCOMM {
+        float const VCC               = 5.0;
+        float const BRAKE_THRESHOLD   = 12;    // threshold above which brakes are activated
+        float const PULLDOWN_RESISTOR = 10000; // value of pulldown resistor (in Ohms)
+        float const CURVE_CONSTANT    = 9000;  // constant given by resistance-pressure curve (1/2 inch medium resistance thrumode) https://www.sensitronics.com/product-res/half-inch-thru-mode-fsr/docs/half-inch-thru-mode-medium-res.pdf
+    }
+    namespace MAECOMM {
+
+    }
+    namespace PICOMM {
+        namespace META {
+            int const          BAUDRATE = 9600;
+            char const * const END_TAG  = "\n";
+        };
+        enum JSON_TYPES {
+            DNE = -1,
+            NIL = 0,
+            STR = 1,
+            BLN = 2,
+            INT = 3,
+            DBL = 4,
+            ARR = 5,
+            OBJ = 6
+        };
+        enum MSG {
+            OK   = 1,
+            STOP = 2
+        };
+    }
 };
 
 enum STATE {

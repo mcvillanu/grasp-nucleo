@@ -1,10 +1,10 @@
 #ifndef MAECOMM_H
 #define MAECOMM_H
 
-#include <fsr.h>
+#include <Communication/FSRComm/FSRComm.h>
 #include <PololuMaestro.h>
 #include <Arduino.h>
-#include <PiComm.h>
+#include <Communication/PiComm/PiComm.h>
 
 
 
@@ -12,7 +12,7 @@ class Motor {
     private:
         int channel;
         int fsrpin;
-        Fsr fsr = Fsr(fsrpin);
+        FSR fsr = FSR(fsrpin);
         uint16_t currPos;
         MicroMaestro * maestro;
 

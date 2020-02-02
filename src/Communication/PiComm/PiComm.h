@@ -1,11 +1,11 @@
-#ifndef PI_COMM_H
-#define PI_COMM_H
+#ifndef PICOMM_H
+#define PICOMM_H
 
 #include <stdlib.h>
 #include <document.h>
 #include <Arduino.h>
-#include <Utils.h>
-#include <constants.h>
+#include <Utilities/Accessories/Accessories.h>
+#include <Utilities/Constants.h>
 #include <stringbuffer.h>
 #include <prettywriter.h>
 

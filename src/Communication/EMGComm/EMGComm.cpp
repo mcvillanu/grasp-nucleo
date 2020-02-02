@@ -4,17 +4,11 @@
  * WIP cuz idk c++
 */
 
-#include "emg.h"
-#include <Arduino.h>
+#include "Communication/EMGComm/EMGComm.h"
 
-#define RESOLUTION_ADC 1024.0; // ??
+EMG::EMG(int pin) : pin(pin) { /* assign analog input pin to emg signal */ }
 
-Emg_signal::Emg_signal(int pin) {
-    /* assign analog input pin to emg signal */
-    this->pin = pin;
-}
-
-bool Emg_signal::peak_detected(float voltage) {
+bool EMG::peakDetected(float voltage) {
     //this->emg_voltage();
     if (voltage > REF_VOLTAGE) {
         return true;
@@ -24,8 +18,7 @@ bool Emg_signal::peak_detected(float voltage) {
     }
 }
 
-float Emg_signal::emg_voltage() {
-    int adc_value = analogRead(this->pin);
-    float voltage = adc_value * 5.0 / RESOLUTION_ADC; // ??
-    return voltage;
+float EMG::EMGVoltage() {
+    int ADCValue = analogRead(this->pin);
+    return ((ADCValue * 5.0) / RESOLUTION_ADC); // ??
 }

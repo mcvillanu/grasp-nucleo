@@ -1,4 +1,4 @@
-#include <PiComm.h>
+#include <Communication/PiComm/PiComm.h>
 
 
 // void Communication::handshake() {
@@ -39,7 +39,7 @@ bool const Communication::isSerialActive() {
 void Communication::setup() {
 	if (Communication::serialActive) return;
 	Communication::serialActive = true;
-	Serial.begin(COMMUNICATION::META::BAUDRATE);
+	Serial.begin(COMMUNICATION::PICOMM::META::BAUDRATE);
     Serial.flush();
 }
 rapidjson::Document * const Communication::createNewJSON() {
@@ -146,7 +146,7 @@ std::string * const Communication::stringifyDocumentToJSON(rapidjson::Document *
 	return new std::string(s.GetString());
 }
 std::string const Communication::readRawMessage() {
-    char const * const serialMsg = Serial.readStringUntil(*(COMMUNICATION::META::END_TAG)).c_str();
+    char const * const serialMsg = Serial.readStringUntil(*(COMMUNICATION::PICOMM::META::END_TAG)).c_str();
     return std::string(serialMsg);
 }
 rapidjson::Document * const Communication::parseMessageIntoDocument(std::string const & stdstr_msg) {
@@ -157,14 +157,14 @@ rapidjson::Document * const Communication::parseMessageIntoDocument(std::string 
 int const Communication::getType(rapidjson::Document const * const & json, std::string const & stdstr_key) {
 	char const * const char_key = Utils::stdStrToChar(stdstr_key);
 	if (json && json->HasMember(char_key)) {
-		if      ((*json)[char_key].IsString()) return COMMUNICATION::JSON_TYPES::STR;
-		else if ((*json)[char_key].IsBool()  ) return COMMUNICATION::JSON_TYPES::BLN;
-		else if ((*json)[char_key].IsInt()   ) return COMMUNICATION::JSON_TYPES::INT;
-		else if ((*json)[char_key].IsDouble()) return COMMUNICATION::JSON_TYPES::DBL;
-		else if ((*json)[char_key].IsArray() ) return COMMUNICATION::JSON_TYPES::ARR;
-		else return COMMUNICATION::JSON_TYPES::DNE;
+		if      ((*json)[char_key].IsString()) return COMMUNICATION::PICOMM::JSON_TYPES::STR;
+		else if ((*json)[char_key].IsBool()  ) return COMMUNICATION::PICOMM::JSON_TYPES::BLN;
+		else if ((*json)[char_key].IsInt()   ) return COMMUNICATION::PICOMM::JSON_TYPES::INT;
+		else if ((*json)[char_key].IsDouble()) return COMMUNICATION::PICOMM::JSON_TYPES::DBL;
+		else if ((*json)[char_key].IsArray() ) return COMMUNICATION::PICOMM::JSON_TYPES::ARR;
+		else return COMMUNICATION::PICOMM::JSON_TYPES::DNE;
 	}
-	return COMMUNICATION::JSON_TYPES::DNE;
+	return COMMUNICATION::PICOMM::JSON_TYPES::DNE;
 }
 void * const Communication::readValueFromMessage(rapidjson::Document const * const & json, std::string const & stdstr_key) {
 	char const * const char_key = Utils::stdStrToChar(stdstr_key);

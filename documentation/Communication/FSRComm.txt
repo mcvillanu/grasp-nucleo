@@ -1,0 +1,16 @@
+/* FSR:
+ * Default constructor for the FSR.
+ */
+/* Safety Brake:
+ * Returns true if psi is above a threshold
+ */
+/* Get PSI:
+ * Gets psi from reading voltage of pin.
+ * Useful link: https://learn.adafruit.com/force-sensitive-resistor-fsr/using-an-fsr
+ * Given pressure F
+ * pulldown resistance R
+ * resistance vs pressure curve constant C
+ * supply voltage Vcc = 5 V
+ * voltage reading V_o
+ * We have F = C / R  * 1 / (Vcc / V_o - 1)
+ */
