@@ -1,8 +1,8 @@
 #ifndef HAND_H
 #define HAND_H
 
-#include <motor.h>
-#include <constants.h>
+#include <Communication/MaeComm/MaeComm.h>
+#include <Utilities/Constants.h>
 #include <vector>
 #include <PololuMaestro.h>
 

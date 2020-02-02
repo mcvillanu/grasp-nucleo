@@ -9,21 +9,24 @@
 #include <CoAmpCAN.h>
 #include <Arduino.h>
 #include <Utilities/Constants.h>
+#include <Communication/BaseComm/BaseComm.h>
 
 
 
-class EMG {
+class EMG : Base {
     private:
-        int pin;
         float voltage;
         bool flex;
         int arrayVoltage[1000]; /* save last 100 values for something, need something to reference the start ?? */
 
     public:
         EMG(int pin);
-        bool peakDetected(float voltage);
-        float EMGVoltage();
-        void EMGLoop();
+        
+        virtual void setup();
+
+        bool const peakDetected(float const & voltage) const;
+        float const EMGVoltage() const;
+        void EMGLoop() const;
 };
 
 #endif

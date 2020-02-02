@@ -1,4 +1,5 @@
-#include <MaeComm.h>
+#include <Communication/MaeComm/MaeComm.h>
+
 
 
 Motor::Motor(int const & channel, int const & fsrPin, MicroMaestro * const & maestro) : channel(channel), fsrPin(fsrPin), fsr(FSR(fsrPin)), maestro(maestro) {

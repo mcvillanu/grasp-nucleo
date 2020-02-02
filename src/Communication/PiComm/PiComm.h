@@ -11,7 +11,7 @@
 
 
 
-class Communication {
+class Pi {
     private:
         static bool serialActive;
     // int order;
@@ -24,7 +24,7 @@ class Communication {
     // int get_param();
     
     public:
-        Communication();
+        Pi();
 
         static bool const isSerialActive();
 

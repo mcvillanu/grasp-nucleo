@@ -11,10 +11,11 @@ class FSR {
         int const pin;
 
     public:
-        FSR(int pin);
+        FSR(int const pin);
 
         void        setup             () const;
         float const getPSI            () const;
+        int   const getPin            () const;
         bool  const exceededThreshold () const;
 };
 

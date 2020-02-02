@@ -1,4 +1,4 @@
-#include <hand.h>
+#include "Hand/Hand.h"
 
 Hand::Hand(MicroMaestro* maestro) {
     this->maestro = maestro;

@@ -1,10 +1,18 @@
 #include "Communication/EMGComm/EMGComm.h"
 
-EMG::EMG(int pin) : pin(pin) {}
-bool EMG::peakDetected(float voltage) {
+
+
+EMG::EMG(int pin) : Base::Base(pin) {}
+void EMG::setup() {
+    pinMode(this->pin,INPUT);
+}
+bool const EMG::peakDetected(float const & voltage) const {
     return (voltage > COMMUNICATION::EMGCOMM::REFERENCE_VOLTAGE);
 }
-float EMG::EMGVoltage() {
+float const EMG::EMGVoltage() const {
     int ADCValue = analogRead(this->pin);
     return ((ADCValue * CONSTANTS::VCC) / COMMUNICATION::EMGCOMM::RESOLUTION_ADC); // ??
+}
+void EMG::EMGLoop() const {
+    // TODO
 }

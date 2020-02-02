@@ -2,9 +2,12 @@
 
 
 
-FSR::FSR(int pin) : pin(pin) {}
+FSR::FSR(int const pin) : pin(pin) {}
 void FSR::setup() const {
     pinMode(this->pin, INPUT);
+}
+int const FSR::getPin() const {
+    return this->pin;
 }
 float const FSR::getPSI() const {
     float voltage = (float) ((analogRead(this->pin) * CONSTANTS::VCC) / 1023.0);
