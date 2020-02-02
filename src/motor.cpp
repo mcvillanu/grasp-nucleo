@@ -1,12 +1,7 @@
-#include "motor.h"
-#include <Arduino.h>
-#include <communication.h>
-#include <PololuMaestro.h>
+#include <motor.h>
 
-Motor::Motor(int channel, int fsrpin, MicroMaestro* maestro) {
-    this->channel = channel;
-    this->fsrpin = fsrpin;
-    this->maestro = maestro;
+
+Motor::Motor(int const & channel, int const & fsrpin, MicroMaestro * const & maestro) : channel(channel), fsrpin(fsrpin), maestro(maestro) {
     // this->servo.attach(pin);
     //TODO: Finish this
 }
@@ -32,6 +27,6 @@ void Motor::setSpeed(uint16_t speed){
     maestro->setSpeed(channel,speed);
 }
 
-void Motor::setAcceleration(uint16_t accel){
+void Motor::setAcceleration(uint16_t accel) {
     maestro->setAcceleration(channel,accel);
 }

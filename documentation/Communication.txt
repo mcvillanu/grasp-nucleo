@@ -1,4 +1,4 @@
--------------------- A QUICK PREFACE BEFORE READING THE REST OF THIS DOCUMENTATION --------------------
+-------------------- INTRODUCTION --------------------
 There are a few different types of ways chars/strings can be represented in this situation:
     1) A null-terminated array of chars
     2) A std::string

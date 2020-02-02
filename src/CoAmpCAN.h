@@ -12,14 +12,14 @@
 
 // INCLUDES
 #if (ARDUINO >= 100)
- #include <Arduino.h>
+    #include <Arduino.h>
 #else
- #include <WProgram.h>
- #include <pins_arduino.h>
+    #include <WProgram.h>
+    #include <pins_arduino.h>
 #endif
 
 #include <CAN.h>
-#include <SPI.h>          // Required to resolve #define conflicts  
+#include <SPI.h>
 
 // CONSTANTS/MACROS
 #define NUM_EMG_CHANNELS    8
@@ -38,4 +38,4 @@ void TransmitGainCANMsg( uint8_t allChannelsGain );
 void TransmitStartCANMsg( void );
 uint8_t CoAmpCANAvailable( uint16_t *a_EMGSample, uint8_t *p_numEMGSamples );
 
-#endif /* COAMPCAN_H */
+#endif

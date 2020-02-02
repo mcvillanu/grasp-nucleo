@@ -1,29 +1,12 @@
-#include "hand.h"
-#include <PololuMaestro.h>
+#include <hand.h>
 
-<<<<<<< HEAD
-
-Hand::Hand() {}
-
-void Hand::start_grip(int grip_id) {
-    this->step = 0;
-    this->selected_grip = grip_id;
-=======
 Hand::Hand(MicroMaestro* maestro) {
     this->maestro = maestro;
->>>>>>> origin
 }
 
 void Hand::setup() {
     for( int i = 0; i < 5; i ++) {
-<<<<<<< HEAD
-        if (this->grip_table[this->selected_grip][i].size() > this->step) {
-            this->motors[i].move_to(this->grip_table[this->selected_grip][i][this->step]);
-            more_steps = true;
-        }   
-=======
         this->motors[i].setup();    
->>>>>>> origin
     }
 }
 
@@ -49,6 +32,6 @@ void Hand::setup() {
 //user choose grip value between 0-4 (reset is grip 5 done by hand)
 void Hand::grip_Choose(int gripVal) {
     for( int i = 0; i < 5; i ++) {
-        this->motors[i].move_to(this->grip_table[gripVal][i]);    
+        this->motors[i].move_to(this->grip_table[gripVal][i]);
     }
 }

@@ -40,7 +40,7 @@ enum GRIPS {
 };
 
 namespace PINS {
-    enum FINGERS {
+    enum PWM {
         THUMB_PWM  = PA1,
         INDEX_PWM  = PB0,
         MIDDLE_PWM = PA15,
@@ -53,7 +53,7 @@ namespace PINS {
         WRIST_M0   = PA9,
         WRIST_M1   = PC7
     };
-    enum FSR {
+    namespace FSR {
         //TODO: Assign pins
         const int THUMB_FSR  = 0;
         const int INDEX_FSR  = 0;

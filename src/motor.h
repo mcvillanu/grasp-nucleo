@@ -1,13 +1,26 @@
 #ifndef MOTOR_H
 #define MOTOR_H
+
 #include <fsr.h>
 #include <PololuMaestro.h>
+#include <Arduino.h>
+#include <communication.h>
+
+
+
 class Motor {
+    private:
+        int channel;
+        int fsrpin;
+        Fsr fsr = Fsr(fsrpin);
+        uint16_t currPos;
+        MicroMaestro * maestro;
+
     public:
         /**
          * Default constructor for the motor. Sets up linear actuator on given pin.
          **/
-        Motor(int channel, int fsrpin, MicroMaestro* maestro);
+        Motor(int const & channel, int const & fsrpin, MicroMaestro * const & maestro);
 
         void setup();
 
@@ -19,12 +32,6 @@ class Motor {
 
         void setSpeed(uint16_t speed);
         void setAcceleration(uint16_t accel);
-    private:
-        int channel;
-        int fsrpin;
-        Fsr fsr = Fsr(fsrpin);
-        uint16_t currPos; // current position
-        MicroMaestro* maestro;
-
 };
+
 #endif

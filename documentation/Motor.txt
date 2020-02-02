@@ -1,0 +1,3 @@
+-------------------- INTRODUCTION --------------------
+The motor class uses the Pololu Library to send unsigned 16bit integers to the control board.
+
