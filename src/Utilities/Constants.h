@@ -3,14 +3,16 @@
 
 #include <Arduino.h>
 
-
+namespace CONSTANTS {
+    float const VCC = 5.0;
+}
 
 namespace COMMUNICATION {
     namespace EMGCOMM {
-
+        double const REFERENCE_VOLTAGE = 1.2;
+        double const RESOLUTION_ADC    = 1024.0;
     }
     namespace FSRCOMM {
-        float const VCC               = 5.0;
         float const BRAKE_THRESHOLD   = 12;    // threshold above which brakes are activated
         float const PULLDOWN_RESISTOR = 10000; // value of pulldown resistor (in Ohms)
         float const CURVE_CONSTANT    = 9000;  // constant given by resistance-pressure curve (1/2 inch medium resistance thrumode) https://www.sensitronics.com/product-res/half-inch-thru-mode-fsr/docs/half-inch-thru-mode-medium-res.pdf

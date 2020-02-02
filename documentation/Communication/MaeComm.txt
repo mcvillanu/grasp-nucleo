@@ -1,3 +1,43 @@
--------------------- INTRODUCTION --------------------
-The motor class uses the Pololu Library to send unsigned 16bit integers to the control board.
+-------------------- AUTHOR --------------------
+    By:         ... TODO
+    Date:       ... TODO
+    Purpose:    ... TODO
 
+
+-------------------- INTRODUCTION --------------------
+    The motor class uses the Pololu Library to send unsigned 16bit integers to the control board.
+
+
+-------------------- FIELDS --------------------
+    Channel:
+        ... TODO
+    
+    FSR Pin:
+        ... TODO
+    
+    FSR:
+        ... TODO
+    
+    Curr Pos:
+        ... TODO
+    
+    Maestro *:
+        ... TODO
+
+
+-------------------- METHODS --------------------
+    Motor:
+        Default constructor for the motor. Sets up linear actuator on given pin.
+    
+    Setup:
+        ... TODO
+    
+    Move To:
+        Moves the motor to the defined percentage along its arc.
+        i.e.: 50 = 50%, 100 = 100%, etc.
+    
+    Set Speed:
+        ... TODO
+    
+    Set Acceleration:
+        ... TODO

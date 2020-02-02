@@ -8,14 +8,14 @@
 
 class FSR {
     private:
-        int pin;
+        int const pin;
 
     public:
         FSR(int pin);
 
-        void  setup             () const;
-        float getPSI            () const;
-        bool  exceededThreshold () const;
+        void        setup             () const;
+        float const getPSI            () const;
+        bool  const exceededThreshold () const;
 };
 
 #endif

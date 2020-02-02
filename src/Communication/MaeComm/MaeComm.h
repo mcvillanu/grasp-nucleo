@@ -11,27 +11,19 @@
 class Motor {
     private:
         int channel;
-        int fsrpin;
-        FSR fsr = FSR(fsrpin);
+        int fsrPin;
+        FSR fsr;
         uint16_t currPos;
         MicroMaestro * maestro;
 
-    public:
-        /**
-         * Default constructor for the motor. Sets up linear actuator on given pin.
-         **/
+    public: 
         Motor(int const & channel, int const & fsrpin, MicroMaestro * const & maestro);
 
         void setup();
+        void moveTo(uint16_t const & position);
 
-        /**
-         * Moves the motor to the defined percentage along its arc.
-         * 50 = 50%, 100 = 100%, etc.
-         **/
-        void move_to(uint16_t position);
-
-        void setSpeed(uint16_t speed);
-        void setAcceleration(uint16_t accel);
+        void setSpeed(uint16_t const & speed);
+        void setAcceleration(uint16_t const & accel);
 };
 
 #endif
