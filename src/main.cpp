@@ -85,6 +85,7 @@ void loop() {
 
 // Uncomment
 // Maestro servo controller stuff
+<<<<<<< HEAD
 // #ifdef SERIAL_PORT_HARDWARE_OPEN
 //   #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
 // #else
@@ -96,6 +97,40 @@ void loop() {
 // Hand myHand(&maestro);
 // Wrist wrist(32);
 // -Uncomment
+=======
+#ifdef SERIAL_PORT_HARDWARE_OPEN
+  #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
+#else
+  #include <SoftwareSerial.h>
+  #include <HardwareSerial.h>
+  HardwareSerial maestroSerial(PA9, PB7);
+#endif
+MicroMaestro maestro(maestroSerial);
+
+Hand myHand(&maestro);
+Wrist wrist(32);
+
+void setup()
+{
+    Serial.begin(9600);
+    myHand.setup(); //setup from hand attachs all motors to pin outputs
+    // t_Motor.setup();
+    // i_Motor.setup();
+    // m_Motor.setup();
+    // r_Motor.setup();
+    // p_motor.setup();
+    wrist.setup();
+    comms.setup();
+    // servo.attach(PINS::THUMB_PWM);
+    wrist.rotate_by(5*360); 
+    pinMode(3, INPUT);
+    pinMode(PC12, OUTPUT);
+    // Choose which emg pin to read. 
+    // start with close hand. if read to close hand then switch to
+      //   read the other emg for the close signal
+    maestroSerial.begin(9600);
+}
+>>>>>>> ac7c5aa27ee78441d5c131610eb7b8509266de5b
 
 // void setup()
 // {

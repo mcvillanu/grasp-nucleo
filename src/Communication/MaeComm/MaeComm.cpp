@@ -1,4 +1,4 @@
-#include <motor.h>
+#include <MaeComm.h>
 
 
 Motor::Motor(int const & channel, int const & fsrpin, MicroMaestro * const & maestro) : channel(channel), fsrpin(fsrpin), maestro(maestro) {

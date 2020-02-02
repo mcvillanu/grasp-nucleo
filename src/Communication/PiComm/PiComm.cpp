@@ -1,4 +1,4 @@
-#include <communication.h>
+#include <PiComm.h>
 
 
 // void Communication::handshake() {

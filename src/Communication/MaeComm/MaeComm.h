@@ -1,10 +1,10 @@
-#ifndef MOTOR_H
-#define MOTOR_H
+#ifndef MAECOMM_H
+#define MAECOMM_H
 
 #include <fsr.h>
 #include <PololuMaestro.h>
 #include <Arduino.h>
-#include <communication.h>
+#include <PiComm.h>
 
 
 

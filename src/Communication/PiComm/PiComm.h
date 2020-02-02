@@ -1,5 +1,5 @@
-#ifndef COMMUNICATION_H
-#define COMMUNICATION_H
+#ifndef PI_COMM_H
+#define PI_COMM_H
 
 #include <stdlib.h>
 #include <document.h>
