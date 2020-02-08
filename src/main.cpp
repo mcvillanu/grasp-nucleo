@@ -30,6 +30,8 @@ void setup() {
 
 void loop() {
   Pi::writeRawMessage(*jsonString);
+  // char const * const test = "{ \"stringKey\" : \"stringValue\" }";
+  // Serial.println(test);
 }
 
 // Different grip positions for the hand (values in arrays correspond to actuator movement to orient fingers)

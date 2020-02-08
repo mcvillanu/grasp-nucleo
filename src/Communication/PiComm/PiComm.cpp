@@ -141,7 +141,7 @@ void Pi::replaceWithDouble(rapidjson::Document * const & json, std::string const
 }
 std::string * const Pi::stringifyDocumentToJSON(rapidjson::Document * const & json) {
 	rapidjson::StringBuffer s;
-	rapidjson::PrettyWriter<rapidjson::StringBuffer> writer(s);
+	rapidjson::Writer<rapidjson::StringBuffer> writer(s);
 	json->Accept(writer);
 	return new std::string(s.GetString());
 }
@@ -208,5 +208,5 @@ double * const Pi::readDoubleFromMessage(rapidjson::Document const * const & jso
 }
 void Pi::writeRawMessage(std::string const stdstr_msg) {
 	char const * const char_msg = Utils::stdStrToChar(stdstr_msg);
-	Serial.write(char_msg);
+	Serial.println(char_msg);
 }
