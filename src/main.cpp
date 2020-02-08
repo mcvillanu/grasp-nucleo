@@ -1,12 +1,12 @@
 #include <Arduino.h>
 #include <Servo.h>
-#include <motor.h>
-#include <hand.h>
-#include <wrist.h>
-#include <communication.h>
-#include <constants.h>
-#include <emg.h>
-#include <TaskManager.h>
+#include <Communication/MaeComm/MaeComm.h>
+#include <Hand/hand.h>
+#include <Wrist/wrist.h>
+#include <Communication/PiComm/PiComm.h>
+#include <Utilities/Constants.h>
+#include <Communication/EMGComm/EMGComm.h>
+#include <TaskManager/TaskManager.h>
 #include <document.h>
 #include <allocators.h>
 #include <PololuMaestro.h>
@@ -18,18 +18,18 @@ rapidjson::Document * json = nullptr;
 std::string * jsonString = nullptr;
 
 void setup() {
-  Communication::setup();
+  Pi::setup();
 
-  json = Communication::createNewJSON();
-  Communication::addString(json,"stringKey","stringVal");
-  Communication::addBool(json,"boolKey",true);
-  Communication::addInt(json,"intKey",24);
+  json = Pi::createNewJSON();
+  Pi::addString(json,"stringKey","stringVal");
+  Pi::addBool(json,"boolKey",true);
+  Pi::addInt(json,"intKey",24);
 
-  jsonString = Communication::stringifyDocumentToJSON(json);
+  jsonString = Pi::stringifyDocumentToJSON(json);
 }
 
 void loop() {
-  Communication::writeRawMessage(*jsonString);
+  Pi::writeRawMessage(*jsonString);
 }
 
 // Different grip positions for the hand (values in arrays correspond to actuator movement to orient fingers)
@@ -85,7 +85,7 @@ void loop() {
 
 // Uncomment
 // Maestro servo controller stuff
-<<<<<<< HEAD
+// <<<<<<< HEAD
 // #ifdef SERIAL_PORT_HARDWARE_OPEN
 //   #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
 // #else
@@ -97,40 +97,40 @@ void loop() {
 // Hand myHand(&maestro);
 // Wrist wrist(32);
 // -Uncomment
-=======
-#ifdef SERIAL_PORT_HARDWARE_OPEN
-  #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
-#else
-  #include <SoftwareSerial.h>
-  #include <HardwareSerial.h>
-  HardwareSerial maestroSerial(PA9, PB7);
-#endif
-MicroMaestro maestro(maestroSerial);
+// ======
+// #ifdef SERIAL_PORT_HARDWARE_OPEN
+//   #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
+// #else
+//   #include <SoftwareSerial.h>
+//   #include <HardwareSerial.h>
+//   HardwareSerial maestroSerial(PA9, PB7);
+// #endif
+// MicroMaestro maestro(maestroSerial);
 
-Hand myHand(&maestro);
-Wrist wrist(32);
+// Hand myHand(&maestro);
+// Wrist wrist(32);
 
-void setup()
-{
-    Serial.begin(9600);
-    myHand.setup(); //setup from hand attachs all motors to pin outputs
-    // t_Motor.setup();
-    // i_Motor.setup();
-    // m_Motor.setup();
-    // r_Motor.setup();
-    // p_motor.setup();
-    wrist.setup();
-    comms.setup();
-    // servo.attach(PINS::THUMB_PWM);
-    wrist.rotate_by(5*360); 
-    pinMode(3, INPUT);
-    pinMode(PC12, OUTPUT);
-    // Choose which emg pin to read. 
-    // start with close hand. if read to close hand then switch to
-      //   read the other emg for the close signal
-    maestroSerial.begin(9600);
-}
->>>>>>> ac7c5aa27ee78441d5c131610eb7b8509266de5b
+// void setup()
+// {
+//     Serial.begin(9600);
+//     myHand.setup(); //setup from hand attachs all motors to pin outputs
+//     // t_Motor.setup();
+//     // i_Motor.setup();
+//     // m_Motor.setup();
+//     // r_Motor.setup();
+//     // p_motor.setup();
+//     wrist.setup();
+//     comms.setup();
+//     // servo.attach(PINS::THUMB_PWM);
+//     wrist.rotate_by(5*360); 
+//     pinMode(3, INPUT);
+//     pinMode(PC12, OUTPUT);
+//     // Choose which emg pin to read. 
+//     // start with close hand. if read to close hand then switch to
+//       //   read the other emg for the close signal
+//     maestroSerial.begin(9600);
+// }
+// >>>>>>> ac7c5aa27ee78441d5c131610eb7b8509266de5b
 
 // void setup()
 // {

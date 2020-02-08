@@ -1,4 +1,4 @@
-#include "Hand/Hand.h"
+#include <Hand/Hand.h>
 
 Hand::Hand(MicroMaestro* maestro) {
     this->maestro = maestro;
@@ -32,6 +32,6 @@ void Hand::setup() {
 //user choose grip value between 0-4 (reset is grip 5 done by hand)
 void Hand::grip_Choose(int gripVal) {
     for( int i = 0; i < 5; i ++) {
-        this->motors[i].move_to(this->grip_table[gripVal][i]);
+        this->motors[i].moveTo(this->grip_table[gripVal][i]);
     }
 }

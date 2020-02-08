@@ -6,17 +6,15 @@
  * This file may be redistributed under the terms of the MIT license.
  * A copy of this license has been included with this distribution in the file LICENSE.
  */
-
-#include <Wrist.h>
-
 /*
  * Choose one of the sections below that match your board
  */
 #define M0 10
 #define M1 11
 
-#include "motor.h"
+#include <Communication/MaeComm/MaeComm.h>
 #include <Arduino.h>
+#include <Wrist/wrist.h>
 
 Wrist::Wrist(int microsteps) {
     this->stepper = DRV8834(MOTOR_STEPS, this->dir_pin, this->step_pin, this->micro0, this->micro1);

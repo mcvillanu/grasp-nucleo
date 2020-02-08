@@ -1,8 +1,9 @@
 #ifndef WRIST_H
 #define WRIST_H
+
 #include <Arduino.h>
 #include "DRV8834.h"
-#include "constants.h"
+#include <Utilities/Constants.h>
 // Motor steps per revolution. Most steppers are 200 steps or 1.8 degrees/step
 #define MOTOR_STEPS 200
 // Target RPM for cruise speed

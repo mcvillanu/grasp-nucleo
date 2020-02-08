@@ -1,5 +1,4 @@
-#include <hapticFeedback.h>
-#include <Arduino.h>
+#include <HapticFeedback/HapticFeedback.h>
 
 Haptic::Haptic(int pin) {
     this->pin = pin;

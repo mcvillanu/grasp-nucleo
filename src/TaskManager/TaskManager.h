@@ -2,8 +2,8 @@
 #define TASKMANAGER_H
 
 #include <Arduino.h>
-#include <communication.h>
-#include <constants.h>
+#include <Communication/PiComm/PiComm.h>
+#include <Utilities/Constants.h>
 
 
 class TaskManager
