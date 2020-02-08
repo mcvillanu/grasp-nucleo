@@ -21,12 +21,12 @@ class EMG : Base {
 
     public:
         EMG(int pin);
-        
+
         virtual void setup();
 
-        bool const peakDetected(float const & voltage) const;
-        float const EMGVoltage() const;
-        void EMGLoop() const;
+        bool  const peakDetected (float const & voltage) const;
+        float const EMGVoltage   ()                      const;
+        void        EMGLoop      ()                      const;
 };
 
 #endif
