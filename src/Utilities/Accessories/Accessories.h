@@ -3,13 +3,13 @@
 
 #include <string.h>
 #include <stdlib.h>
-#include <document.h>
+#include <cstring>
 #include <Arduino.h>
 
 using namespace std;
 
 
-namespace Utils {
+namespace Accessories {
     /* Utilities for converting between the Standard String, an Array of Characters, and the Arduino System String */
     char      * const stdStrToChar      (std::string const & stdstr_msg);
     String      const stdStrToSysString (std::string const & stdstr_msg);

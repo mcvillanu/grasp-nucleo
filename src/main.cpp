@@ -7,32 +7,15 @@
 #include <Utilities/Constants.h>
 #include <Communication/EMGComm/EMGComm.h>
 #include <TaskManager/TaskManager.h>
-#include <document.h>
-#include <allocators.h>
 #include <PololuMaestro.h>
 
-using namespace std;
-using namespace rapidjson;
 
-rapidjson::Document * json = nullptr;
-std::string * jsonString = nullptr;
 
 void setup() {
   Pi::setup();
-
-  json = Pi::createNewJSON();
-  Pi::addString(json,"stringKey","stringVal");
-  Pi::addBool(json,"boolKey",true);
-  Pi::addInt(json,"intKey",24);
-
-  jsonString = Pi::stringifyDocumentToJSON(json);
 }
 
-void loop() {
-  Pi::writeRawMessage(*jsonString);
-  // char const * const test = "{ \"stringKey\" : \"stringValue\" }";
-  // Serial.println(test);
-}
+void loop() {}
 
 // Different grip positions for the hand (values in arrays correspond to actuator movement to orient fingers)
 // array value in order {thumb, index, middle, ring, pinky}

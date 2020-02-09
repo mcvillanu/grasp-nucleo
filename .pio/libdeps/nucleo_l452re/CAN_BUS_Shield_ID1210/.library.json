@@ -1,0 +1,30 @@
+{
+    "name": "CAN_BUS_Shield", 
+    "keywords": [
+        "can", 
+        "bus", 
+        "mcp2515", 
+        "mcp-2515"
+    ], 
+    "description": "Library provides CAN communication on the CAN-Bus Shield.", 
+    "repository": {
+        "type": "git", 
+        "url": "https://github.com/Seeed-Studio/CAN_BUS_Shield.git"
+    }, 
+    "version": "1.20", 
+    "frameworks": [
+        "arduino"
+    ], 
+    "platforms": [
+        "atmelavr"
+    ], 
+    "authors": [
+        {
+            "email": "techsupport@seeed.cc", 
+            "url": "https://github.com/Seeed-Studio", 
+            "maintainer": false, 
+            "name": "Seeed Studio"
+        }
+    ], 
+    "id": 1210
+}
