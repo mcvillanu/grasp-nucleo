@@ -66,8 +66,8 @@ class Pi {
         static void setup();
         static void destroy();
 
-        static char const * const read();
-        static void write(char const * const & str);
+        static String const read();
+        static void write(String const & str);
 
         static void refresh();
         static void reset();

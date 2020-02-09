@@ -227,11 +227,10 @@ void Pi::destroy() {
 	Serial.flush();
 	Serial.end();
 }
-char const * const const Pi::read() {
-	if (Serial.available() <= 2) return nullptr;
-	return Serial.readStringUntil(*COMMUNICATION::PICOMM::META::END_TAG).c_str();
+String const Pi::read() {
+	return Serial.readStringUntil(*COMMUNICATION::PICOMM::META::ENDTAG);
 }
-void Pi::write(char const * const & msg) {
+void Pi::write(String const & msg) {
 	Serial.println(msg);
 }
 void Pi::refresh() {

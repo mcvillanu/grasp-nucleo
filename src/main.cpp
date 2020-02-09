@@ -15,7 +15,54 @@ void setup() {
   Pi::setup();
 }
 
-void loop() {}
+void loop() {
+  // char const * const msg = "{\"asd\":21}";
+  char const * const msg = Pi::read().c_str();
+
+  int const rSize = JSON_OBJECT_SIZE(10);
+  DynamicJsonDocument rDoc(rSize);
+
+  DeserializationError err = deserializeJson(rDoc,msg);
+
+  int const x = (rDoc["asd"].as<int>()) + 1;
+
+  DynamicJsonDocument tDoc(rSize);
+  tDoc["result"] = x;
+  String tMsg;
+  serializeJson(tDoc,tMsg);
+  Pi::write(tMsg);
+}
+
+// void loop() {
+  // char const * const msg = Pi::read().c_str();
+  // int const rSize = JSON_OBJECT_SIZE(1);
+  // DynamicJsonDocument doc(rSize);
+  // DeserializationError err = deserializeJson(doc,msg);
+  // if (!err) {
+  //   if (doc["asd"].as<int>() == 21) {
+  //     Pi::write("{\"result\":\"3\"}");
+  //   } else {
+  //     Pi::write("{\"result\":\"2\"}");
+  //   }
+  //   // int const size = JSON_OBJECT_SIZE(1);
+  //   // DynamicJsonDocument doc_out(size);
+  //   // doc_out["result"] = "success";
+  //   // serializeJson(doc_out,Serial);
+  // } else {
+  //   Pi::write("{\"result\":\"0\"}");
+  //   // int const size = JSON_OBJECT_SIZE(1);
+  //   // DynamicJsonDocument doc_out(size);
+  //   // doc_out["result"] = "failed";
+  //   // serializeJson(doc_out,Serial);
+  // }
+  // deserializeJson(doc,msg);
+  // if (doc["asd"].as<int>() == 21) Pi::write("{\"result\":x}");
+  // else Pi::write("{\"result\":\"failed\"}");
+  // int x = doc["asd"].as<int>();
+  // Serial.print("{\"result\":");
+  // Serial.print(x);
+  // Serial.print("}\n");
+// }
 
 // Different grip positions for the hand (values in arrays correspond to actuator movement to orient fingers)
 // array value in order {thumb, index, middle, ring, pinky}

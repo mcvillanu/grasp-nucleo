@@ -23,7 +23,7 @@ namespace COMMUNICATION {
     namespace PICOMM {
         namespace META {
             int const          BAUDRATE = 9600;
-            char const * const END_TAG  = "\n";
+            char const * const ENDTAG  = "\n";
         };
         enum JSON_TYPES {
             DNE = -1,
