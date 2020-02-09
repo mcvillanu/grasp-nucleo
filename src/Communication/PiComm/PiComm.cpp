@@ -237,6 +237,11 @@ void Pi::write(char const * const & msg) {
 void Pi::refresh() {
 	Serial.flush();
 }
+void Pi::reset() {
+	Pi::refresh();
+	Pi::destroy();
+	Pi::setup();
+}
 bool const Pi::isSerialActive() {
 	return Pi::serialActive;
 }

@@ -70,6 +70,7 @@ class Pi {
         static void write(char const * const & str);
 
         static void refresh();
+        static void reset();
 
         static bool const isSerialActive();
 };
