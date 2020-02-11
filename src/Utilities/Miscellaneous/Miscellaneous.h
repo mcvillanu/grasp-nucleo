@@ -9,7 +9,7 @@
 using namespace std;
 
 
-namespace Accessories {
+namespace Miscellaneous {
     /* Utilities for converting between the Standard String, an Array of Characters, and the Arduino System String */
     char      * const stdStrToChar      (std::string const & stdstr_msg);
     String      const stdStrToSysString (std::string const & stdstr_msg);

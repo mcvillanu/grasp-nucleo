@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <Arduino.h>
 #include <ArduinoJson.h>
-#include <Utilities/Accessories/Accessories.h>
+#include <Utilities/Miscellaneous/Miscellaneous.h>
 #include <Utilities/Constants.h>
 
 

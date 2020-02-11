@@ -12,25 +12,25 @@
 
 
 void setup() {
-  Pi::setup();
+  // Pi::setup();
 }
 
 void loop() {
   // char const * const msg = "{\"asd\":21}";
-  char const * const msg = Pi::read().c_str();
+  // char const * const msg = Pi::read().c_str();
 
-  int const rSize = JSON_OBJECT_SIZE(10);
-  DynamicJsonDocument rDoc(rSize);
+  // int const rSize = JSON_OBJECT_SIZE(10);
+  // DynamicJsonDocument rDoc(rSize);
 
-  DeserializationError err = deserializeJson(rDoc,msg);
+  // DeserializationError err = deserializeJson(rDoc,msg);
 
-  int const x = (rDoc["asd"].as<int>()) + 1;
+  // int const x = (rDoc["asd"].as<int>()) + 1;
 
-  DynamicJsonDocument tDoc(rSize);
-  tDoc["result"] = x;
-  String tMsg;
-  serializeJson(tDoc,tMsg);
-  Pi::write(tMsg);
+  // DynamicJsonDocument tDoc(rSize);
+  // tDoc["result"] = x;
+  // String tMsg;
+  // serializeJson(tDoc,tMsg);
+  // Pi::write(tMsg);
 }
 
 // void loop() {

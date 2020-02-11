@@ -18,14 +18,28 @@ namespace COMMUNICATION {
         float const CURVE_CONSTANT    = 9000;  // constant given by resistance-pressure curve (1/2 inch medium resistance thrumode) https://www.sensitronics.com/product-res/half-inch-thru-mode-fsr/docs/half-inch-thru-mode-medium-res.pdf
     }
     namespace MAECOMM {
-
     }
     namespace PICOMM {
         namespace META {
-            int const          BAUDRATE = 9600;
-            char const * const ENDTAG  = "\n";
+            int          const BAUDRATE = 9600;
+            char const * const ENDTAG   = "\n";
         };
-        enum JSON_TYPES {
+        enum MSG {
+            OK   = 1,
+            STOP = 2
+        };
+    }
+};
+
+namespace UTILITIES {
+    namespace ACCESSORIES {
+
+    };
+    namespace JSON {
+        namespace META {
+            int const SIZE = 256;
+        };
+        enum TYPES {
             DNE = -1,
             NIL = 0,
             STR = 1,
@@ -35,11 +49,7 @@ namespace COMMUNICATION {
             ARR = 5,
             OBJ = 6
         };
-        enum MSG {
-            OK   = 1,
-            STOP = 2
-        };
-    }
+    };
 };
 
 enum STATE {
