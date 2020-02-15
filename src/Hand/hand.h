@@ -8,8 +8,6 @@
 
 using namespace std;
 
-
-
 class Hand {
     private:
         int selected_grip;
@@ -32,6 +30,7 @@ class Hand {
         };
 
     public:
+        Hand();
         Hand(MicroMaestro* maestro);
         void setup();
         bool next_step();

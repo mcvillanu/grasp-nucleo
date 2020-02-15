@@ -19,6 +19,8 @@ class Wrist {
          **/
         Wrist(int microsteps);
 
+        Wrist();
+
         void setup();
 
         /**

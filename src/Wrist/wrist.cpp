@@ -16,6 +16,10 @@
 #include <Arduino.h>
 #include <Wrist/wrist.h>
 
+Wrist::Wrist(){
+    
+}
+
 Wrist::Wrist(int microsteps) {
     this->stepper = DRV8834(MOTOR_STEPS, this->dir_pin, this->step_pin, this->micro0, this->micro1);
     this->microsteps = microsteps;

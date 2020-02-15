@@ -1,6 +1,9 @@
 #include <TaskManager/TaskManager.h>
 
- TaskManager::TaskManager() {}
+TaskManager:: TaskManager(Wrist wrist, Hand hand){
+    this->wrist = wrist;
+    this->hand = hand;
+}
 
 void TaskManager::executeOrder(int order) {
     switch (order) {
