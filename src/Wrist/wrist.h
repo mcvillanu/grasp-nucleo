@@ -14,12 +14,13 @@
 
 class Wrist {
     public:
+        Wrist();
         /**
          * Default constructor for the Wrist. Sets up stepper motor on.
          **/
         Wrist(int microsteps);
 
-        Wrist();
+     
 
         void setup();
 

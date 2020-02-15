@@ -1,8 +1,6 @@
 #include <Hand/Hand.h>
 
-Hand::Hand(){
-    
-}
+Hand::Hand(){}
 
 Hand::Hand(MicroMaestro* maestro) {
     this->maestro = maestro;

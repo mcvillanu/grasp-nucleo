@@ -86,14 +86,16 @@ namespace VARS {
     const int WRIST_RPM = 100;
 };
 
-namespace STATES {
-    const int OPEN = 0;
-    const int SAFETY = 1;
-    const int RECIEVING = 3;
-    const int GRIP_STANDBY = 4;
-    const int EXECUTING_GRIP = 5;
-    const int WRIST_MOTION = 6;
-    const int BLIND_DIST_SENSING = 7;
-}
+namespace STATEMACHINE {
+    enum STATES {
+        OPEN = 0,
+        SAFETY = 1,
+        RECIEVING = 3,
+        GRIP_STANDBY = 4,
+        EXECUTING_GRIP = 5,
+        WRIST_MOTION = 6,
+        BLIND_DIST_SENSING = 7,
+    };
+};
 
 #endif

@@ -10,20 +10,13 @@
 class TaskManager
 {
     public:
-        TaskManager(Wrist wrist, Hand hand);
-        bool update();
-        void executeOrder(int order);
+        TaskManager(Wrist* wrist, Hand* hand);
+        void update(int order);
+        void executeOrder();
     private:
-        int order;
-        int init;
-        Wrist wrist;
-        Hand hand;
-
-        void gripHammer();
-        void gripPinch();
-        void gripBall();
-        void gripFlat();
-        void gripC();
+        int pendingOrder;
+        Wrist* wrist;
+        Hand* hand;
 };
 
 

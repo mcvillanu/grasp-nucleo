@@ -33,8 +33,8 @@ class Hand {
         Hand();
         Hand(MicroMaestro* maestro);
         void setup();
-        bool next_step();
-        void end_step();
+        // bool next_step();
+        // void end_step();
         void grip_Choose(int gripVal);
 };
 #endif
