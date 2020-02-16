@@ -5,6 +5,6 @@ class StateMachine {
         int currentState;
     public:
         StateMachine();
-        int currentState();
+        int getCurrentState();
         bool setState(int);
 };

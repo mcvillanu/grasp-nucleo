@@ -8,11 +8,22 @@ TaskManager:: TaskManager(Wrist* wrist, Hand* hand, StateMachine* sm){
 }
 
 void TaskManager::executeOrder() {
-    hand -> grip_Choose(pendingOrder);
+    if(stateMachine->getCurrentState() != STATES::IN_GRIP){
+        hand -> grip_Choose(pendingOrder);
+    }
+
+    switch (this->pendingOrder) {
+        case GRIPS::GRIP_FLAT:
+            stateMachine->setState(STATES::RECEIVING);
+            break;
+
+        default:
+            stateMachine->setState(STATES::IN_GRIP);
+    }
 }
 
-void TaskManager::update(int order){
-    pendingOrder = order;
+void TaskManager::updatePendingOrder(int pendingOrder){
+    pendingOrder = pendingOrder;
 }
 
 

@@ -12,7 +12,7 @@ class TaskManager
 {
     public:
         TaskManager(Wrist* wrist, Hand* hand, StateMachine* sm);
-        void update(int order);
+        void updatePendingOrder(int pendingOrder);
         void executeOrder();
     private:
         int pendingOrder;
