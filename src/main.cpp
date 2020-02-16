@@ -12,6 +12,7 @@
 #include <Utilities/JSON/Array/Array.h>
 #include <Utilities/JSON/Base/Base.h>
 #include <Utilities/JSON/Interpreter/Interpreter.h>
+#include <iostream>
 
 
 void setup() {
@@ -19,12 +20,16 @@ void setup() {
 }
 
 void loop() {
+  // Pi::write("{\"result\":\"test\"}");
   String const message = Pi::read();
   Object * const object = Interpreter::deserialize<Object>((String const * const) new String(message));
   int * const val = object->getValue<int>("testKey");
 
   if (*val == 24) Pi::write("{\"result\":\"success\"}");
   else Pi::write("{\"result\":\"failed\"}");
+
+  std::cout << "asdf" << std::endl;
+
   // char const * const msg = "{\"asd\":21}";
   // char const * const msg = Pi::read().c_str();
 

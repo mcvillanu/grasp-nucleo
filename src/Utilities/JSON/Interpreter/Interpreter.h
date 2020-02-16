@@ -73,7 +73,7 @@ template<class T> void Interpreter::Deserializer<T>::operator=(Deserializer cons
 }
 template<class T> bool const Interpreter::Deserializer<T>::operator==(Deserializer const & other) const { return (this->size == other.getSize()); }
 template<class T> bool const Interpreter::Deserializer<T>::operator!=(Deserializer const & other) const { return !this->operator==(other); }
-template<class T> T * const Interpreter::Deserializer<T>::deserialize(String const * const & str) { return nullptr; }
+// template<class T> T * const Interpreter::Deserializer<T>::deserialize(String const * const & str) { return nullptr; }
 template<> Object * const Interpreter::Deserializer<Object>::deserialize(String const * const & str) {
     DynamicJsonDocument document(this->size);
     this->error = deserializeJson(document,*str);
