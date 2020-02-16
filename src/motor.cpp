@@ -21,6 +21,7 @@ void Motor::move_to(uint16_t position) {
         currPos = position;
         // If brake is on, finger can only release
         //analogWrite(this->pin, position);
+        
         maestro->setTarget(this->channel,position);
     } else {
         // TODO: communicate that the brake is on

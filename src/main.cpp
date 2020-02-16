@@ -33,13 +33,13 @@ bool safetyOff = false;
 // Servo servo;
 
 // Maestro servo controller stuff
-#ifdef SERIAL_PORT_HARDWARE_OPEN
-  #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
-#else
+// #ifdef SERIAL_PORT_HARDWARE_OPEN
+//   #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
+// #else
   #include <SoftwareSerial.h>
   #include <HardwareSerial.h>
-  HardwareSerial maestroSerial(PA9, PB7);
-#endif
+  SoftwareSerial maestroSerial(PA13, PB7);
+// #endif
 MicroMaestro maestro(maestroSerial);
 
 Hand myHand(&maestro);
@@ -57,7 +57,7 @@ void setup()
     wrist.setup();
     comms.setup();
     // servo.attach(PINS::THUMB_PWM);
-    wrist.rotate_by(5*360); 
+    // wrist.rotate_by(5*360); 
     pinMode(3, INPUT);
     pinMode(PC12, OUTPUT);
     // Choose which emg pin to read. 
@@ -68,50 +68,59 @@ void setup()
 
 void loop()
 {
-    if( safetyOff == false)
-    {
-        if(comms.get_order() == MSG::SAFETY_OFF)
-        {
-            Serial.println("Safety is still turned off");
-            safetyOff = true;
-        }
-    }
-    else if(safetyOff == true)
-    {
-        delayMicroseconds(wrist.poll());
+    // if( safetyOff == false)
+    // {
+    //     if(comms.get_order() == MSG::SAFETY_OFF)
+    //     {
+    //         Serial.println("Safety is still turned off");
+    //         safetyOff = true;
+    //     }
+    // }
+    // else if(safetyOff == true)
+    // {
+    //     delayMicroseconds(wrist.poll());
 
-        if (!written) {
-            myHand.grip_Choose(0);
-             written = true;
-        }
-        else if (written) {
-            myHand.grip_Choose(5);
-            written = false;
-        }
-        // // if (comms.get_order() == MSG::GRIP_HAMMER){
-        // //     comms.send_confirmation();
-        // //     motor.move_to(0);
-        // //     motor2.move_to(0);
-        // //     // servo.write(100);
-        // //     delay(3000);
-        // //     motor.move_to(50);
-        // //     motor2.move_to(50);
-        // //     delay(3000);
-        // //     // servo.write(60);
-        // //     motor.move_to(100);
-        // //     motor2.move_to(100);
-        // //     delay(5000);
-        // // }
+    //     if (!written) {
+    //         myHand.grip_Choose(0);
+    //          written = true;
+    //     }
+    //     else if (written) {
+    //         myHand.grip_Choose(5);
+    //         written = false;
+    //     }
+    //     // // if (comms.get_order() == MSG::GRIP_HAMMER){
+    //     // //     comms.send_confirmation();
+    //     // //     motor.move_to(0);
+    //     // //     motor2.move_to(0);
+    //     // //     // servo.write(100);
+    //     // //     delay(3000);
+    //     // //     motor.move_to(50);
+    //     // //     motor2.move_to(50);
+    //     // //     delay(3000);
+    //     // //     // servo.write(60);
+    //     // //     motor.move_to(100);
+    //     // //     motor2.move_to(100);
+    //     // //     delay(5000);
+    //     // // }
         
-        int order = comms.get_order();
-        manager.executeOrder(order);
+    //     int order = comms.get_order();
+    //     manager.executeOrder(order);
 
-        float voltage = emg.emg_voltage();
-        Serial.println(voltage);
-        //wrist.rotate_by(180);
-        // wrist.rotate_by(-180);
-        // delay(3000);
+    //     float voltage = emg.emg_voltage();
+    //     Serial.println(voltage);
+    //     //wrist.rotate_by(180);
+    //     // wrist.rotate_by(-180);
+    //     // delay(3000);
 
-    // delay(2000);
-    }
+    // // delay(2000);
+    // }
+    maestro.setTarget(0, 5000);
+    delay(2000);
+    maestro.setTarget(0, 7999);
+    delay(2000);
+    wrist.rotate_by(180);
+    delay(2000);
+    wrist.rotate_by(-180);
+    Serial.println("hello");
+
 }

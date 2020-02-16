@@ -12,8 +12,8 @@
 /*
  * Choose one of the sections below that match your board
  */
-#define M0 10
-#define M1 11
+// #define M0 10
+// #define M1 11
 
 #include "motor.h"
 #include <Arduino.h>
@@ -29,6 +29,9 @@ void Wrist::setup() {
     // if using enable/disable on ENABLE pin (active LOW) instead of SLEEP uncomment next line
     // stepper.setEnableActiveState(LOW);
     stepper.enable();
+    pinMode(PA8, OUTPUT);
+    digitalWrite(PA8, LOW);
+
     /*
      * Set LINEAR_SPEED (accelerated) profile.
      */
