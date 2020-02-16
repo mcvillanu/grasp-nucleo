@@ -37,14 +37,10 @@ void setup() {
   tm = new TaskManager(wrist, hand, sm);
 
   json = Pi::createNewJSON();
-  Pi::addString(json,"stringKey","stringVal");
-  Pi::addBool(json,"boolKey",true);
-  Pi::addInt(json,"intKey",24);
-
-  jsonString = Pi::stringifyDocumentToJSON(json);
 }
 
 void loop() {
+  
   // TODO: write all of this
   // get message from pi
   // translate from message -> command
