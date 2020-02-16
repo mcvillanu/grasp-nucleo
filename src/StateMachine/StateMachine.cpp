@@ -6,10 +6,11 @@ StateMachine::StateMachine(){
     this->currentState = (int) SAFETY_ON;
 }
 
-int StateMachine::currentState(){
+int StateMachine::getCurrentState(){
     return this->currentState;
 }
 
 bool StateMachine::setState(int state){
     this->currentState = state;
+    return true;
 }
