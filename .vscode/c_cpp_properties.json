@@ -84,7 +84,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=40100",
+                "PLATFORMIO=40200",
                 "STM32L452xx",
                 "STM32L4xx",
                 "ARDUINO=10808",
@@ -97,7 +97,14 @@
             "intelliSenseMode": "clang-x64",
             "cStandard": "c11",
             "cppStandard": "c++14",
-            "compilerPath": "\"/Users/raunakbhagat/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc\" -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mcpu=cortex-m4 -mthumb"
+            "compilerPath": "/Users/raunakbhagat/.platformio/packages/toolchain-gccarmnoneeabi/bin/arm-none-eabi-gcc",
+            "compilerArgs": [
+                "-mfpu=fpv4-sp-d16",
+                "-mfloat-abi=hard",
+                "-mcpu=cortex-m4",
+                "-mthumb",
+                ""
+            ]
         }
     ],
     "version": 4

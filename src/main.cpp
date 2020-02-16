@@ -8,14 +8,23 @@
 #include <Communication/EMGComm/EMGComm.h>
 #include <TaskManager/TaskManager.h>
 #include <PololuMaestro.h>
-
+#include <Utilities/JSON/Object/Object.h>
+#include <Utilities/JSON/Array/Array.h>
+#include <Utilities/JSON/Base/Base.h>
+#include <Utilities/JSON/Interpreter/Interpreter.h>
 
 
 void setup() {
-  // Pi::setup();
+  Pi::setup();
 }
 
 void loop() {
+  String const message = Pi::read();
+  Object * const object = Interpreter::deserialize<Object>((String const * const) new String(message));
+  int * const val = object->getValue<int>("testKey");
+
+  if (*val == 24) Pi::write("{\"result\":\"success\"}");
+  else Pi::write("{\"result\":\"failed\"}");
   // char const * const msg = "{\"asd\":21}";
   // char const * const msg = Pi::read().c_str();
 

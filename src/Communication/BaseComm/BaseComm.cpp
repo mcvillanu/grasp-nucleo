@@ -1,8 +1,6 @@
 #include <Communication/BaseComm/BaseComm.h>
 
-
-
-Base::Base(int const pin) : pin(pin) {}
-int const Base::getPin() const {
+BaseComm::Base::Base(int const pin) : pin(pin) {}
+int const BaseComm::Base::getPin() const {
     return this->pin;
 }
