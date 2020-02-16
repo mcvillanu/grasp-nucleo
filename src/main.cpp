@@ -29,6 +29,7 @@ void setup() {
 }
 
 void loop() {
+  // TODO: write all of this
   Pi::writeRawMessage(*jsonString);
 }
 
