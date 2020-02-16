@@ -18,7 +18,7 @@ namespace COMMUNICATION {
         float const CURVE_CONSTANT    = 9000;  // constant given by resistance-pressure curve (1/2 inch medium resistance thrumode) https://www.sensitronics.com/product-res/half-inch-thru-mode-fsr/docs/half-inch-thru-mode-medium-res.pdf
     }
     namespace MAECOMM {
-
+        
     }
     namespace PICOMM {
         namespace META {
@@ -86,16 +86,19 @@ namespace VARS {
     const int WRIST_RPM = 100;
 };
 
-namespace STATEMACHINE {
-    enum STATES {
-        OPEN = 0,
-        SAFETY = 1,
-        RECIEVING = 3,
-        GRIP_STANDBY = 4,
-        EXECUTING_GRIP = 5,
-        WRIST_MOTION = 6,
-        BLIND_DIST_SENSING = 7,
-    };
+namespace STATES {
+    const int SAFETY_ON = 0;
+    const int RECEIVING = 1;
+    const int IN_GRIP = 2;
 };
+
+// change the values for the serial ports
+namespace MAESTRO {
+    const int SERIAL_ONE = 2;
+    const int SERIAL_TWO = 3;
+    const int DEVICE_NUMBER = 255;
+    const int NO_RESET_PIN = 255;
+    const bool CRC_ENABLED = false;
+}
 
 #endif

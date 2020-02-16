@@ -1,8 +1,9 @@
 #include <TaskManager/TaskManager.h>
 
-TaskManager:: TaskManager(Wrist* wrist, Hand* hand){
+TaskManager:: TaskManager(Wrist* wrist, Hand* hand, StateMachine* sm){
     this->wrist = wrist;
     this->hand = hand;
+    this->stateMachine = sm;
     this->pendingOrder = 0;
 }
 

@@ -6,17 +6,19 @@
 #include <Utilities/Constants.h>
 #include <./Hand/hand.h>
 #include <./Wrist/wrist.h>
+#include <./StateMachine/StateMachine.h>
 
 class TaskManager
 {
     public:
-        TaskManager(Wrist* wrist, Hand* hand);
+        TaskManager(Wrist* wrist, Hand* hand, StateMachine* sm);
         void update(int order);
         void executeOrder();
     private:
         int pendingOrder;
         Wrist* wrist;
         Hand* hand;
+        StateMachine* stateMachine;
 };
 
 

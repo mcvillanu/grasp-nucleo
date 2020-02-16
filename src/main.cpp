@@ -5,6 +5,8 @@
 #include <Wrist/wrist.h>
 #include <Communication/PiComm/PiComm.h>
 #include <Utilities/Constants.h>
+#include <stream.h>
+#include <SoftwareSerial.h>
 #include <Communication/EMGComm/EMGComm.h>
 #include <TaskManager/TaskManager.h>
 #include <document.h>
@@ -16,9 +18,23 @@ using namespace rapidjson;
 
 rapidjson::Document * json = nullptr;
 std::string * jsonString = nullptr;
+Hand* hand;
+Wrist* wrist;
+MicroMaestro* maestro;
+TaskManager* tm;
+StateMachine* sm;
 
 void setup() {
   Pi::setup();
+  
+  using namespace MAESTRO;
+  //will have to change the values for serial
+  SoftwareSerial ss(SERIAL_ONE, SERIAL_TWO);
+  maestro = new MicroMaestro(ss, DEVICE_NUMBER, NO_RESET_PIN, CRC_ENABLED);
+  wrist = new Wrist();
+  hand = new Hand(maestro);
+  sm = new StateMachine();
+  tm = new TaskManager(wrist, hand, sm);
 
   json = Pi::createNewJSON();
   Pi::addString(json,"stringKey","stringVal");
@@ -30,6 +46,11 @@ void setup() {
 
 void loop() {
   // TODO: write all of this
+  // get message from pi
+  // translate from message -> command
+  // update command in tm
+  // depending on state, execute tm
+
   Pi::writeRawMessage(*jsonString);
 }
 
