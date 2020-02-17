@@ -20,31 +20,16 @@ void setup() {
 }
 
 void loop() {
-  // Pi::write("{\"result\":\"test\"}");
-  String const message = Pi::read();
-  Object * const object = Interpreter::deserialize<Object>((String const * const) new String(message));
-  int * const val = object->getValue<int>("testKey");
-
-  if (*val == 24) Pi::write("{\"result\":\"success\"}");
-  else Pi::write("{\"result\":\"failed\"}");
-
-  std::cout << "asdf" << std::endl;
-
-  // char const * const msg = "{\"asd\":21}";
-  // char const * const msg = Pi::read().c_str();
-
-  // int const rSize = JSON_OBJECT_SIZE(10);
-  // DynamicJsonDocument rDoc(rSize);
-
-  // DeserializationError err = deserializeJson(rDoc,msg);
-
-  // int const x = (rDoc["asd"].as<int>()) + 1;
-
-  // DynamicJsonDocument tDoc(rSize);
-  // tDoc["result"] = x;
-  // String tMsg;
-  // serializeJson(tDoc,tMsg);
-  // Pi::write(tMsg);
+  String const message("{\"asd\":24}");
+  Object * const obj = Interpreter::deserialize<Object>(new String(message));
+  String str("asd");
+  int * const x = obj->getValue<int>("asd");
+  bool const y = obj->hasKey("asd");
+  if (x) {
+    Pi::write("buffer");
+    Pi::write(String(*x));
+    Pi::write(String(y));
+  }
 }
 
 // void loop() {
