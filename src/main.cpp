@@ -30,6 +30,7 @@ void loop() {
     Pi::write(String(*x));
     Pi::write(String(y));
   }
+  delete obj;
 }
 
 // void loop() {

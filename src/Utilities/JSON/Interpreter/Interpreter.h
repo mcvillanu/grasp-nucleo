@@ -137,7 +137,6 @@ class Interpreter {
         };
         template<class T> class Deserializer {
             private:
-                DynamicJsonDocument * document;
                 int size;
                 DeserializationError error;
                 bool const fix_error();
@@ -153,7 +152,6 @@ class Interpreter {
 
                 T * const deserialize(String const * const & str);
 
-                DynamicJsonDocument * const getDocument() const;
                 int const getSize() const;
                 DeserializationError const getError() const;
         };
@@ -187,13 +185,9 @@ template<class T> String const * const Interpreter::Serializer<T>::serialize(T c
 
 
 
-template<class T> Interpreter::Deserializer<T>::Deserializer() : document(nullptr), size(UTILITIES::JSON::META::SIZE), error(DeserializationError::Ok) { return; }
-template<class T> Interpreter::Deserializer<T>::Deserializer(Deserializer<T> const & other) : document(other.getDocument()), size(other.getSize()), error(other.getError()) { return; }
-template<class T> Interpreter::Deserializer<T>::~Deserializer() {
-    this->document->~BasicJsonDocument();
-    this->document = nullptr;
-    return;
-}
+template<class T> Interpreter::Deserializer<T>::Deserializer() : size(UTILITIES::JSON::META::SIZE), error(DeserializationError::Ok) { return; }
+template<class T> Interpreter::Deserializer<T>::Deserializer(Deserializer<T> const & other) : size(other.getSize()), error(other.getError()) { return; }
+template<class T> Interpreter::Deserializer<T>::~Deserializer() { Pi::write("Interpreter::Deserialization<T>::~Deserialization() [destructor] called."); return; }
 template<class T> bool const Interpreter::Deserializer<T>::fix_error() {
     this->error = DeserializationError::Ok;
     return true;
@@ -204,16 +198,16 @@ template<class T> void Interpreter::Deserializer<T>::operator=(Deserializer cons
 }
 template<class T> bool const Interpreter::Deserializer<T>::operator==(Deserializer const & other) const { return (this->size == other.getSize()); }
 template<class T> bool const Interpreter::Deserializer<T>::operator!=(Deserializer const & other) const { return !this->operator==(other); }
-// template<class T> T * const Interpreter::Deserializer<T>::deserialize(String const * const & str) { return nullptr; }
+template<class T> T * const Interpreter::Deserializer<T>::deserialize(String const * const & str) { return nullptr; }
 template<> Object * const Interpreter::Deserializer<Object>::deserialize(String const * const & str) {
-    DynamicJsonDocument * document = new DynamicJsonDocument((size_t) this->size);
+    DynamicJsonDocument * document = new DynamicJsonDocument(this->size);
     this->error = deserializeJson(*document,*str);
-    return new Object(new JsonObject(document->as<JsonObject>()));
+    return new Object(document, new JsonObject(document->as<JsonObject>()));
 }
 template<> Array * const Interpreter::Deserializer<Array>::deserialize(String const * const & str) {
-    DynamicJsonDocument document(this->size);
-    this->error = deserializeJson(document,*str);
-    return new Array(new JsonArray(document.as<JsonArray>()));
+    DynamicJsonDocument * const document = new DynamicJsonDocument(this->size);
+    this->error = deserializeJson(*document,*str);
+    return new Array(document, new JsonArray(document->as<JsonArray>()));
 }
 template<class T> int const Interpreter::Deserializer<T>::getSize() const { return this->size; }
 template<class T> DeserializationError const Interpreter::Deserializer<T>::getError() const { return this->error; }
@@ -230,7 +224,9 @@ bool const Interpreter::operator==(Interpreter const & other) const { return tru
 bool const Interpreter::operator!=(Interpreter const & other) const { return !this->operator==(other); }
 template<class T> T * const Interpreter::deserialize(String const * const & str) {
     Deserializer<T> * const d = new Deserializer<T>();
-    return d->deserialize(str);
+    T * const ret = d->deserialize(str);
+    delete d;
+    return ret;
 }
 template<class T> String const * const Interpreter::serialize(T const * const & json) {
     Serializer<T> s;

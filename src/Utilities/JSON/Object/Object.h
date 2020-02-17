@@ -7,7 +7,7 @@
 class Object : Base<Object, JsonObject> {
     public:
         Object();
-        Object(JsonObject * const & object);
+        Object(DynamicJsonDocument * const & document, JsonObject * const & object);
         Object(Object const & other);
         ~Object();
 
@@ -25,9 +25,9 @@ class Object : Base<Object, JsonObject> {
 };
 
 Object::Object() : Base<Object,JsonObject>() { return; }
-Object::Object(JsonObject * const & jsonObject) : Base<Object,JsonObject>(jsonObject) { return; }
-Object::Object(Object const & other) : Base<Object,JsonObject>(other.getSelf()) { return; }
-Object::~Object() { return; }
+Object::Object(DynamicJsonDocument * const & document, JsonObject * const & jsonObject) : Base<Object,JsonObject>(document, jsonObject) { return; }
+Object::Object(Object const & other) : Base<Object,JsonObject>(other.getDocument(), other.getSelf()) { return; }
+Object::~Object() { Pi::write("Object destructor called"); return; }
 void Object::operator=(Object const & other) { return; }
 bool const Object::operator==(Object const & other) const { return true; }
 bool const Object::operator!=(Object const & other) const { return this->operator==(other); }
