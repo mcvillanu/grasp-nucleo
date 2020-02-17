@@ -13,7 +13,7 @@ template<class X, class T> class Base {
     public:
         Base();
         Base(DynamicJsonDocument * const & document, T * const & self);
-        ~Base();
+        virtual ~Base();
 
         virtual void operator=(X const & other) = 0;
         virtual bool const operator==(X const & other) const = 0;

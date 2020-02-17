@@ -20,16 +20,15 @@ void setup() {
 }
 
 void loop() {
-  String const message("{\"asd\":24}");
+  String const message("{\"asd\":24,\"Kobe\":\"Bryant\"}");
   Object * const obj = Interpreter::deserialize<Object>(new String(message));
   String str("asd");
-  int * const x = obj->getValue<int>("asd");
-  bool const y = obj->hasKey("asd");
-  if (x) {
-    Pi::write("buffer");
-    Pi::write(String(*x));
-    Pi::write(String(y));
-  }
+
+  int * x = new int(0);
+  if (obj->hasKey(str)) x = obj->getValue<int>(str);
+  if (x) Pi::write(String(*x));
+  Pi::write("Buffer");
+  delete x;
   delete obj;
 }
 
