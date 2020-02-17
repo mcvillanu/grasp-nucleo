@@ -19,9 +19,7 @@ class Array : Base<Array,JsonArray> {
 Array::Array() : Base<Array,JsonArray>() { return; }
 Array::Array(JsonArray * const & jsonArray) : Base<Array,JsonArray>(jsonArray) { return; }
 Array::Array(Array const & other) : Base<Array,JsonArray>(other.getSelf()) { return; }
-Array::~Array() {
-    return;
-}
+Array::~Array() { return; }
 void Array::operator=(Array const & other) { return; }
 bool const Array::operator==(Array const & other) const { return true; }
 bool const Array::operator!=(Array const & other) const { return this->operator==(other); }

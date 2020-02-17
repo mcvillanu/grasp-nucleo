@@ -35,17 +35,15 @@ bool const Object::hasKey(String const & key) const {
     if (this->self) return this->self->containsKey("asd");
     return false;
 }
-template<class T> T * const Object::getValue(String const & key) const { return ((this->hasKey(key)) ? (new T(this->self->getMember(key).as<T>())) : nullptr); }
+template<class T> T * const Object::getValue(String const & key) const { return ((this->hasKey(key)) ? (new T(this->self->operator[](key.c_str()).as<T>())) : nullptr); }
 template<class T> bool const Object::setValue(String const & key, T * const val) {
     if (this->hasKey(key)) return false;
-    // ((*(this->self))[key]).as<T>() = val;
-    this->self->getMember(key).as<T>() = val;
+    this->self->operator[](key.c_str()).as<T>() = val;
     return true;
 }
 template<class T> bool const Object::replaceValue(String const & key, T * const val) {
     if (!this->hasKey(key)) return false;
-    // (*(this->self))[key].as<T>() = val;
-    this->self->getMember(key).as<T>() = val;
+    this->self->operator[](key.c_str()).as<T>() = val;
     return true;
 }
 JsonObject * const Object::getSelf() const {
