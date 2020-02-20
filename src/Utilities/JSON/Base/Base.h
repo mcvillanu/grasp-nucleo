@@ -28,9 +28,6 @@ template<class X, class T> class Base {
 template<class X, class T> Base<X,T>::Base() : document(new DynamicJsonDocument(UTILITIES::JSON::META::SIZE)), self(nullptr) { return; }
 template<class X, class T> Base<X,T>::Base(DynamicJsonDocument * const & document, T * const & self) : document(document), self(self) { return; }
 template<class X, class T> Base<X,T>::~Base() {
-    delete this->document;
-    delete this->self;
-    this->self = nullptr;
     return;
 }
 template<class X, class T> T * const Base<X,T>::getSelf() const { return this->self; }

@@ -25,14 +25,15 @@ class Object : Base<Object, JsonObject> {
 Object::Object() : Base<Object,JsonObject>() { return; }
 Object::Object(DynamicJsonDocument * const & document, JsonObject * const & jsonObject) : Base<Object,JsonObject>(document, jsonObject) { return; }
 Object::Object(Object const & other) : Base<Object,JsonObject>(other.getDocument(), other.getSelf()) { return; }
-Object::~Object() { return; }
+Object::~Object() { delete this->self; delete this->document; return; }
 void Object::operator=(Object const & other) { return; }
 bool const Object::operator==(Object const & other) const { return true; }
 bool const Object::operator!=(Object const & other) const { return this->operator==(other); }
 bool const Object::hasKey(String const & key) const {
-    if (this->self) return this->self->containsKey("asd");
+    if (this->self) return this->self->containsKey(key.c_str());
     return false;
 }
+template<> String * const Object::getValue<String>(String const & key) const { return ((this->hasKey(key)) ? (new String(Miscellaneous::charToSysStr(this->self->operator[](key.c_str()).as<char *>()))) : nullptr); }
 template<class T> T * const Object::getValue(String const & key) const { return ((this->hasKey(key)) ? (new T(this->self->operator[](key.c_str()).as<T>())) : nullptr); }
 template<class T> bool const Object::setValue(String const & key, T * const val) {
     if (this->hasKey(key)) return false;

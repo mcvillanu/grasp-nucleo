@@ -37,7 +37,7 @@ namespace UTILITIES {
     };
     namespace JSON {
         namespace META {
-            size_t const SIZE = 32;
+            size_t const SIZE = 1024;
         };
         enum TYPES {
             DNE = -1,

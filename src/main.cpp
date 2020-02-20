@@ -12,6 +12,7 @@
 #include <Utilities/JSON/Array/Array.h>
 #include <Utilities/JSON/Base/Base.h>
 #include <Utilities/JSON/Interpreter/Interpreter.h>
+#include <Utilities/Miscellaneous/Miscellaneous.h>
 #include <iostream>
 
 
@@ -20,15 +21,29 @@ void setup() {
 }
 
 void loop() {
-  String const message("{\"asd\":24,\"Kobe\":\"Bryant\"}");
+  String const message("{\"Kobe\":24, \"Bean\":\"stringVal\", \"Bryant\":true}");
   Object * const obj = Interpreter::deserialize<Object>(new String(message));
-  String str("asd");
+  // String key_0("Kobe");
+  // String key_1("Bean");
+  // String key_2("Bryant");
 
-  int * x = new int(0);
-  if (obj->hasKey(str)) x = obj->getValue<int>(str);
-  if (x) Pi::write(String(*x));
-  Pi::write("Buffer");
-  delete x;
+  // int * x = obj->getValue<int>(key_0);
+  // String * y = obj->getValue<String>(key_1);
+  // bool * z = obj->getValue<bool>(key_2);
+  
+  // if (x) Pi::write(String(*x));
+  // if (y) Pi::write(*y);
+  // if (z) Pi::write(String(*z));
+
+  // delete x;
+  // delete y;
+  // delete z;
+  // delete obj;
+  Pi::write("test");
+  Pi::write("a");
+  Pi::write("b");
+  Pi::write("c");
+
   delete obj;
 }
 
