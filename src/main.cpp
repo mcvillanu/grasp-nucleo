@@ -38,7 +38,7 @@ bool safetyOff = false;
 // #else
   #include <SoftwareSerial.h>
   #include <HardwareSerial.h>
-  SoftwareSerial maestroSerial(PA13, PB7);
+  SoftwareSerial maestroSerial(PA12, PB13);
 // #endif
 MicroMaestro maestro(maestroSerial);
 
