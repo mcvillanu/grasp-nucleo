@@ -25,7 +25,7 @@ class Object : Base<Object, JsonObject> {
 Object::Object() : Base<Object,JsonObject>() { return; }
 Object::Object(DynamicJsonDocument * const & document, JsonObject * const & jsonObject) : Base<Object,JsonObject>(document, jsonObject) { return; }
 Object::Object(Object const & other) : Base<Object,JsonObject>(other.getDocument(), other.getSelf()) { return; }
-Object::~Object() { delete this->self; delete this->document; return; }
+Object::~Object() { return; }
 void Object::operator=(Object const & other) { return; }
 bool const Object::operator==(Object const & other) const { return true; }
 bool const Object::operator!=(Object const & other) const { return this->operator==(other); }

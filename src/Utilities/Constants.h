@@ -33,9 +33,20 @@ namespace COMMUNICATION {
 
 namespace UTILITIES {
     namespace ACCESSORIES {
-
     };
     namespace JSON {
+        namespace INTERPRETER {
+            namespace DESERIALIZER {
+                enum RESOLVE_TYPES {
+                    UNRESOLVABLE = -1,
+                    RESOLVED = 0,
+                    RESOLVABLE = 1
+                };
+            };
+            namespace SERIALIZER {
+
+            };
+        };
         namespace META {
             size_t const SIZE = 1024;
         };
