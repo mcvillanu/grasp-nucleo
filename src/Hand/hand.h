@@ -15,13 +15,7 @@ class Hand {
         int selected_grip;
         int step = 0;
         MicroMaestro* maestro;
-        Motor motors[5] = {
-            Motor(PINS::PWM::THUMB_PWM,  PINS::FSR::THUMB_FSR,  maestro),
-            Motor(PINS::PWM::INDEX_PWM,  PINS::FSR::INDEX_FSR,  maestro),
-            Motor(PINS::PWM::MIDDLE_PWM, PINS::FSR::MIDDLE_FSR, maestro),
-            Motor(PINS::PWM::RING_PWM,   PINS::FSR::RING_FSR,   maestro),
-            Motor(PINS::PWM::PINKY_PWM,  PINS::FSR::PINKY_FSR,  maestro)
-        };
+        std::vector<Motor> motors;
         vector<vector<int>> grip_table {
             { {100, 100, 100, 100, 100} },
             { {50,   60,  60, 100, 100} },

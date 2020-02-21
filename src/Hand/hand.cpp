@@ -2,6 +2,11 @@
 
 Hand::Hand(MicroMaestro* maestro) {
     this->maestro = maestro;
+    this->motors.push_back(Motor(PINS::PWM::THUMB_PWM,  PINS::FSR::THUMB_FSR,  maestro));
+    this->motors.push_back(Motor(PINS::PWM::INDEX_PWM,  PINS::FSR::INDEX_FSR,  maestro));
+    this->motors.push_back(Motor(PINS::PWM::MIDDLE_PWM, PINS::FSR::MIDDLE_FSR, maestro));
+    this->motors.push_back(Motor(PINS::PWM::RING_PWM,   PINS::FSR::RING_FSR,   maestro));
+    this->motors.push_back(Motor(PINS::PWM::PINKY_PWM,  PINS::FSR::PINKY_FSR,  maestro));
 }
 
 void Hand::setup() {
