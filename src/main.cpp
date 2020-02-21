@@ -21,29 +21,26 @@ void setup() {
 }
 
 void loop() {
-  String const message("{\"Kobe\":24, \"Bean\":\"stringVal\", \"Bryant\":true}");
-  Object * const obj = Interpreter::deserialize<Object>(new String(message));
-  // String key_0("Kobe");
-  // String key_1("Bean");
-  // String key_2("Bryant");
+  String * const message = new String("{\"a\":24, \"b\":\"stringVal\", \"c\":true}");
+  Object * const obj = Interpreter::deserialize<Object>(message);
 
-  // int * x = obj->getValue<int>(key_0);
-  // String * y = obj->getValue<String>(key_1);
-  // bool * z = obj->getValue<bool>(key_2);
+  int * x = obj->getValue<int>("a");
+  String * y = obj->getValue<String>("b");
+  bool * z = obj->getValue<bool>("c");
   
-  // if (x) Pi::write(String(*x));
-  // if (y) Pi::write(*y);
-  // if (z) Pi::write(String(*z));
+  if (x) Pi::write(String(*x));
+  if (y) Pi::write(*y);
+  if (z) Pi::write(String(*z));
 
-  // delete x;
-  // delete y;
-  // delete z;
-  // delete obj;
+  delete x;
+  delete y;
+  delete z;
   Pi::write("test");
-  Pi::write("a");
-  Pi::write("b");
-  Pi::write("c");
+  Pi::write("1");
+  Pi::write("2");
+  Pi::write("3");
 
+  delete message;
   delete obj;
 }
 
