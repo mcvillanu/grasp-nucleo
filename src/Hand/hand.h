@@ -13,7 +13,7 @@ class Hand {
         int selected_grip;
         int step = 0;
         MicroMaestro* maestro;
-        std::vector<Motor> motors;
+        vector<Motor> motors;
         vector<vector<int>> grip_table {
             // hammer
             { {4001, 4001, 4001, 4001, 4001} },
@@ -33,8 +33,7 @@ class Hand {
         Hand();
         Hand(MicroMaestro* maestro);
         void setup();
-        // bool next_step();
-        // void end_step();
+       
         void grip_Choose(int gripVal);
 };
 #endif

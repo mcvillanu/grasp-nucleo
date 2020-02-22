@@ -16,47 +16,44 @@
 #include <Utilities/JSON/Interpreter/Interpreter.h>
 #include <Utilities/Miscellaneous/Miscellaneous.h>
 #include <iostream>
-#include <SoftwareSerial.h>
 
 using namespace std;
 // using namespace rapidjson;
 
 // rapidjson::Document *json = nullptr;
 // std::string *jsonString = nullptr;
-Hand *hand;
+
 Wrist *wrist;
-MicroMaestro *maestro;
 TaskManager *tm;
 StateMachine *sm;
+SoftwareSerial maestroSerial(COMMUNICATION::MAECOMM::RX, COMMUNICATION::MAECOMM::TX);
+MicroMaestro maestro(maestroSerial);
+Hand hand(&maestro);
 
 void setup()
 {
-  // Pi::setup();
-  Serial.begin(9600);
+  Pi::setup();
+  // Serial.begin(9600);
   using namespace MAESTRO;
-  //will have to change the values for serial
-  SoftwareSerial ss(COMMUNICATION::MAECOMM::RX, COMMUNICATION::MAECOMM::TX);
-  maestro = new MicroMaestro(ss, DEVICE_NUMBER, NO_RESET_PIN, CRC_ENABLED);
   wrist = new Wrist();
-  hand = new Hand(maestro);
   sm = new StateMachine();
-  tm = new TaskManager(wrist, hand, sm);
- 
-  // json = Pi::createNewJSON();
-  ss.begin(9600);
+  tm = new TaskManager(wrist, &hand, sm);
+  hand.setup();
+  maestroSerial.begin(9600);
 }
-Motor motor(0,0,maestro);
+// Motor motor(0,0,maestro);
 void loop()
 {
-  
-  motor.moveTo(4001);
-  // hand->grip_Choose(0);
+
+  //for debugging
+  // motor.moveTo(4001);
+  hand.grip_Choose(0);
   delay(2000);
-  // hand->grip_Choose(1);
-  motor.moveTo(7999);
+  hand.grip_Choose(1);
+  // motor.moveTo(7999);
   delay(2000);
-  
-  // Serial.println("hey");
+
+
   // int gripInt = 5;
   // String * const message = new String(Pi::read());
   // Object * const obj = Interpreter::deserialize<Object>(message);
