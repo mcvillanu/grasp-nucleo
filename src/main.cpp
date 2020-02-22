@@ -133,7 +133,7 @@ void loop() {
 //   #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
 // #else
 //   #include <SoftwareSerial.h>
-//   SoftwareSerial maestroSerial(10, 11);
+//   SoftwareSerial maestroSerial(COMMUNICATION::MAECOMM::RX, COMMUNICATION::MAECOMM::TX);
 // #endif
 // MicroMaestro maestro(maestroSerial);
 

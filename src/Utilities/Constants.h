@@ -17,8 +17,10 @@ namespace COMMUNICATION {
         float const PULLDOWN_RESISTOR = 10000; // value of pulldown resistor (in Ohms)
         float const CURVE_CONSTANT    = 9000;  // constant given by resistance-pressure curve (1/2 inch medium resistance thrumode) https://www.sensitronics.com/product-res/half-inch-thru-mode-fsr/docs/half-inch-thru-mode-medium-res.pdf
     }
-    namespace MAECOMM {
-    }
+    enum MAECOMM {
+        RX = PA12,
+        TX = PB12 
+    };
     namespace PICOMM {
         namespace META {
             int          const BAUDRATE = 9600;
@@ -77,12 +79,12 @@ enum GRIPS {
 };
 
 namespace PINS {
-    enum PWM {
-        THUMB_PWM  = PA1,
-        INDEX_PWM  = PB0,
-        MIDDLE_PWM = PA15,
-        RING_PWM   = PA6,
-        PINKY_PWM  = PA11
+    enum CHANN {
+        THUMB_MOTOR  = 0,
+        INDEX_MOTOR  = 1,
+        MIDDLE_MOTOR = 2,
+        RING_MOTOR   = 3,
+        PINKY_MOTOR = 4
     };
     enum WRIST {
         WRIST_STEP = PB6,
