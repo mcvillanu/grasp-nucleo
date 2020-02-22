@@ -73,13 +73,14 @@ enum STATE {
 enum GRIPS {
     GRIP_HAMMER = 0,
     GRIP_PINCH  = 1,
-    GRIP_BALL   = 2,
-    GRIP_C      = 3,
-    GRIP_FLAT   = 4
+    GRIP_FLAT   = 2,
+    GRIP_BALL      = 3,
+    GRIP_C   = 4,
+    GRIP_RESET = 5
 };
 
 namespace PINS {
-    enum CHANN {
+    enum CHAN {
         THUMB_MOTOR  = 0,
         INDEX_MOTOR  = 1,
         MIDDLE_MOTOR = 2,

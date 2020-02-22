@@ -15,11 +15,17 @@ class Hand {
         MicroMaestro* maestro;
         std::vector<Motor> motors;
         vector<vector<int>> grip_table {
+            // hammer
             { {4001, 4001, 4001, 4001, 4001} },
+            // pinch
             { {6000,   6400,  6400, 4001, 4001} },
+            // card/flat
             { {4001,  4800,  4800,  5200,  5600} },
+            //ball
             { {6000,   6000,  6000,  6000,  6000} },
+            //cup
             { {6000,   6000,  6000,  6000,  7000} },
+            // reset  
             { {7999,     7999,   7999,   7999,   7999} }
         };
 
