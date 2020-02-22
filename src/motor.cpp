@@ -12,20 +12,21 @@ Motor::Motor(int channel, int fsrpin, MicroMaestro* maestro) {
 }
 
 void Motor::setup() {
+    // maestro->setTarget(0,4000);
     // this->servo.attach(this->pin);
-    pinMode(this->channel, OUTPUT);
+    // pinMode(this->channel, OUTPUT);
 }
 
 void Motor::move_to(uint16_t position) {
-    if (!fsr.safetyBrake() || position<=currPos){
-        currPos = position;
-        // If brake is on, finger can only release
-        //analogWrite(this->pin, position);
+    // if (!fsr.safetyBrake() || position<=currPos){
+    //     currPos = position;
+    //     // If brake is on, finger can only release
+    //     //analogWrite(this->pin, position);
         
         maestro->setTarget(this->channel,position);
-    } else {
-        // TODO: communicate that the brake is on
-    }
+    // } else {
+    //     // TODO: communicate that the brake is on
+    // }
     
 }
 
@@ -36,3 +37,9 @@ void Motor::setSpeed(uint16_t speed){
 void Motor::setAcceleration(uint16_t accel){
     maestro->setAcceleration(channel,accel);
 }
+
+// void Motor::set_grip(int grip) {
+//     for( int i = 0; i < 5; i ++) {
+//     //     this->motors[i].move_to(this->grip_table[gripVal][i]);    
+//     // }
+// }

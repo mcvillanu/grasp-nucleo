@@ -5,8 +5,10 @@
 #include <communication.h>
 #include <constants.h>
 #include <emg.h>
+#include <motor.h>
 #include <TaskManager.h>
 #include <PololuMaestro.h>
+#include <SoftwareSerial.h>
 
 // Motor motor(PINS::THUMB_PWM);
 // Motor motor2(PINS::INDEX_PWM);
@@ -29,98 +31,52 @@ int grasp_Val;
 Communication comms(9600);
 Emg_signal emg(PINS::EMG_SIG);
 TaskManager manager;
-bool safetyOff = false;
+bool safetyOff = true;
 // Servo servo;
 
 // Maestro servo controller stuff
 // #ifdef SERIAL_PORT_HARDWARE_OPEN
 //   #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
 // #else
-  #include <SoftwareSerial.h>
-  #include <HardwareSerial.h>
-  SoftwareSerial maestroSerial(PA12, PB13);
+//   #include <HardwareSerial.h>
+  SoftwareSerial maestroSerial(PA12, PB12);
 // #endif
 MicroMaestro maestro(maestroSerial);
 
+// Motor motor1(0,1, &maestro);
+// Motor motor2(1,1, &maestro);
+// Motor motor3(2,1, &maestro);
+
 Hand myHand(&maestro);
+
 Wrist wrist(32);
 
 void setup()
 {
     Serial.begin(9600);
-    myHand.setup(); //setup from hand attachs all motors to pin outputs
-    // t_Motor.setup();
-    // i_Motor.setup();
-    // m_Motor.setup();
-    // r_Motor.setup();
-    // p_motor.setup();
-    wrist.setup();
-    comms.setup();
-    // servo.attach(PINS::THUMB_PWM);
-    // wrist.rotate_by(5*360); 
-    pinMode(3, INPUT);
-    pinMode(PC12, OUTPUT);
-    // Choose which emg pin to read. 
-    // start with close hand. if read to close hand then switch to
-      //   read the other emg for the close signal
+    myHand.setup(); //setup from hand attachs all motors to pin outputs  
+    Serial.println("setup");
     maestroSerial.begin(9600);
+   
 }
 
 void loop()
 {
-    // if( safetyOff == false)
-    // {
-    //     if(comms.get_order() == MSG::SAFETY_OFF)
-    //     {
-    //         Serial.println("Safety is still turned off");
-    //         safetyOff = true;
-    //     }
-    // }
-    // else if(safetyOff == true)
-    // {
-    //     delayMicroseconds(wrist.poll());
+    Serial.println("hi");
 
-    //     if (!written) {
-    //         myHand.grip_Choose(0);
-    //          written = true;
-    //     }
-    //     else if (written) {
-    //         myHand.grip_Choose(5);
-    //         written = false;
-    //     }
-    //     // // if (comms.get_order() == MSG::GRIP_HAMMER){
-    //     // //     comms.send_confirmation();
-    //     // //     motor.move_to(0);
-    //     // //     motor2.move_to(0);
-    //     // //     // servo.write(100);
-    //     // //     delay(3000);
-    //     // //     motor.move_to(50);
-    //     // //     motor2.move_to(50);
-    //     // //     delay(3000);
-    //     // //     // servo.write(60);
-    //     // //     motor.move_to(100);
-    //     // //     motor2.move_to(100);
-    //     // //     delay(5000);
-    //     // // }
-        
-    //     int order = comms.get_order();
-    //     manager.executeOrder(order);
-
-    //     float voltage = emg.emg_voltage();
-    //     Serial.println(voltage);
-    //     //wrist.rotate_by(180);
-    //     // wrist.rotate_by(-180);
-    //     // delay(3000);
-
-    // // delay(2000);
-    // }
-    maestro.setTarget(0, 5000);
+    myHand.grip_Choose(2);
     delay(2000);
-    maestro.setTarget(0, 7999);
+    myHand.grip_Choose(4);
     delay(2000);
-    wrist.rotate_by(180);
-    delay(2000);
-    wrist.rotate_by(-180);
-    Serial.println("hello");
+    // motor1.move_to(4500);
+    // motor2.move_to(4500);
+    // motor3.move_to(4500);
+    // maestro.setTarget(0, 7999);
+    // myHand.grip_Choose(1);
+    // delay(2000);
+    // wrist.rotate_by(180);
+    // delay(2000);
+    // wrist.rotate_by(-180);
+    // Serial.println("hello");
 
 }

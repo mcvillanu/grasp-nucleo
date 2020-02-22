@@ -1,7 +1,9 @@
 #ifndef MOTOR_H
 #define MOTOR_H
 #include <fsr.h>
+#include <vector>
 #include <PololuMaestro.h>
+using namespace std;
 class Motor {
     public:
         /**
@@ -19,12 +21,14 @@ class Motor {
 
         void setSpeed(uint16_t speed);
         void setAcceleration(uint16_t accel);
+        void set_grip(int grip);
     private:
         int channel;
         int fsrpin;
         Fsr fsr = Fsr(fsrpin);
         uint16_t currPos; // current position
         MicroMaestro* maestro;
-
+ 
+        
 };
 #endif
