@@ -34,7 +34,7 @@ class Hand {
         int selected_grip;
         int step = 0;
         MicroMaestro* maestro;
-        std::vector<Motor> motors;
+        vector<Motor> motors;
         // Motor * motors;
         vector<vector<int>> grip_table {
             //Grip 0 (Hammer)

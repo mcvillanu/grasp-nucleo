@@ -43,7 +43,7 @@ bool safetyOff = true;
 // #endif
 MicroMaestro maestro(maestroSerial);
 
-// Motor motor1(0,1, &maestro);
+Motor motor1(0,1, &maestro);
 // Motor motor2(1,1, &maestro);
 // Motor motor3(2,1, &maestro);
 
@@ -63,17 +63,19 @@ void setup()
 void loop()
 {
     Serial.println("hi");
+    // motor1.move_to(4001);
 
-    myHand.grip_Choose(4);
+
+    myHand.grip_Choose(0);
     delay(2000);
-    // myHand.grip_Choose(4);
+    myHand.grip_Choose(1);
     // delay(2000);
-    // motor1.move_to(4500);
+    // motor1.move_to(7999);
     // motor2.move_to(4500);
     // motor3.move_to(4500);
     // maestro.setTarget(0, 7999);
     // myHand.grip_Choose(1);
-    // delay(2000);
+    delay(2000);
     // wrist.rotate_by(180);
     // delay(2000);
     // wrist.rotate_by(-180);

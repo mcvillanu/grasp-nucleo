@@ -7,6 +7,7 @@
 Hand::Hand(MicroMaestro* maestro) {
     this->maestro = maestro;
     // this->motors = new Motor(0,  0,  maestro);
+    this->motors.push_back(Motor(0,  0,  maestro));
     this->motors.push_back(Motor(1,  0,  maestro));
     this->motors.push_back(Motor(2, 0, maestro));
     this->motors.push_back(Motor(3,  0,   maestro));
@@ -24,6 +25,6 @@ void Hand::grip_Choose(int gripVal) {
         this->motors[i].move_to(this->grip_table[gripVal][i]);
     }
         Serial.println("hwi");
-        // this->motors->move_to(7999);
+        // this->motors->move_to(this->grip_table[gripVal][0]);
 
 }
