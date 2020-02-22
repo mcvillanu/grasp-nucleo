@@ -64,10 +64,10 @@ void loop()
 {
     Serial.println("hi");
 
-    myHand.grip_Choose(2);
-    delay(2000);
     myHand.grip_Choose(4);
     delay(2000);
+    // myHand.grip_Choose(4);
+    // delay(2000);
     // motor1.move_to(4500);
     // motor2.move_to(4500);
     // motor3.move_to(4500);

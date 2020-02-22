@@ -35,23 +35,7 @@ class Hand {
         int step = 0;
         MicroMaestro* maestro;
         std::vector<Motor> motors;
-        // vector<vector<int>> grip_table {
-        //     { {100, 100, 100, 100, 100} },
-        //     { {50,   60,  60, 100, 100} },
-        //     { {100,  20,  20,  30,  40} },
-        //     { {50,   50,  50,  50,  50} },
-        //     { {50,   50,  50,  50,  75} },
-        //     { {0,     0,   0,   0,   0} }
-        // };
-
-        // Motor motors[5] = {
-        //     Motor(0,PINS::THUMB_FSR,maestro),
-        //     Motor(1,PINS::INDEX_FSR,maestro),
-        //     Motor(2,PINS::MIDDLE_FSR,maestro),
-        //     Motor(3,PINS::RING_FSR,maestro),
-        //     Motor(4,PINS::PINKY_FSR,maestro),
-        // };
-
+        // Motor * motors;
         vector<vector<int>> grip_table {
             //Grip 0 (Hammer)
             {
