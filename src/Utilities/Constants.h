@@ -89,7 +89,7 @@ namespace PINS {
     };
     enum WRIST {
         WRIST_STEP = PB6,
-        WRIST_DIR  = PB15,
+        WRIST_DIR  = PA7,
         WRIST_M0   = PA9,
         WRIST_M1   = PC7
     };

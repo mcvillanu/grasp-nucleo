@@ -10,9 +10,8 @@ TaskManager:: TaskManager(Wrist* wrist, Hand* hand, StateMachine* sm){
 bool TaskManager::executeOrder() {
     if(stateMachine->getCurrentState() != STATES::IN_GRIP){
         hand -> grip_Choose(pendingOrder);
-
         switch (this->pendingOrder) {
-            case GRIPS::GRIP_FLAT:
+            case GRIPS::GRIP_RESET:
                 stateMachine->setState(STATES::RECEIVING);
                 break;
 
