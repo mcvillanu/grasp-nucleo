@@ -7,7 +7,7 @@
 class Array : Base<Array,JsonArray> {
     public:
         Array();
-        Array(JsonArray * const & array);
+        Array(DynamicJsonDocument * const & document, JsonArray * const & array);
         Array(Array const & other);
         ~Array();
 
@@ -17,11 +17,9 @@ class Array : Base<Array,JsonArray> {
 };
 
 Array::Array() : Base<Array,JsonArray>() { return; }
-Array::Array(JsonArray * const & jsonArray) : Base<Array,JsonArray>(jsonArray) { return; }
-Array::Array(Array const & other) : Base<Array,JsonArray>(other.getSelf()) { return; }
-Array::~Array() {
-    return;
-}
+Array::Array(DynamicJsonDocument * const & document, JsonArray * const & jsonArray) : Base<Array,JsonArray>(document, jsonArray) { return; }
+Array::Array(Array const & other) : Base<Array,JsonArray>(other.getDocument(), other.getSelf()) { return; }
+Array::~Array() { return; }
 void Array::operator=(Array const & other) { return; }
 bool const Array::operator==(Array const & other) const { return true; }
 bool const Array::operator!=(Array const & other) const { return this->operator==(other); }

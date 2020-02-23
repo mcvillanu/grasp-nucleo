@@ -14,6 +14,7 @@
 #include <Utilities/JSON/Array/Array.h>
 #include <Utilities/JSON/Base/Base.h>
 #include <Utilities/JSON/Interpreter/Interpreter.h>
+#include <Utilities/Miscellaneous/Miscellaneous.h>
 #include <iostream>
 
 using namespace std;
@@ -43,31 +44,27 @@ void setup() {
 }
 
 void loop() {
-  // Pi::write("{\"result\":\"test\"}");
-  String const message = Pi::read();
-  Object * const object = Interpreter::deserialize<Object>((String const * const) new String(message));
-  int * const val = object->getValue<int>("testKey");
+  String * const message = new String("{\"a\":24, \"b\":\"stringVal\", \"c\":true}");
+  Object * const obj = Interpreter::deserialize<Object>(message);
 
-  if (*val == 24) Pi::write("{\"result\":\"success\"}");
-  else Pi::write("{\"result\":\"failed\"}");
+  int * x = obj->getValue<int>("a");
+  String * y = obj->getValue<String>("b");
+  bool * z = obj->getValue<bool>("c");
+  
+  if (x) Pi::write(String(*x));
+  if (y) Pi::write(*y);
+  if (z) Pi::write(String(*z));
 
-  std::cout << "asdf" << std::endl;
+  delete x;
+  delete y;
+  delete z;
+  Pi::write("test");
+  Pi::write("1");
+  Pi::write("2");
+  Pi::write("3");
 
-  // char const * const msg = "{\"asd\":21}";
-  // char const * const msg = Pi::read().c_str();
-
-  // int const rSize = JSON_OBJECT_SIZE(10);
-  // DynamicJsonDocument rDoc(rSize);
-
-  // DeserializationError err = deserializeJson(rDoc,msg);
-
-  // int const x = (rDoc["asd"].as<int>()) + 1;
-
-  // DynamicJsonDocument tDoc(rSize);
-  // tDoc["result"] = x;
-  // String tMsg;
-  // serializeJson(tDoc,tMsg);
-  // Pi::write(tMsg);
+  delete message;
+  delete obj;
 }
 
 // void loop() {
@@ -159,7 +156,7 @@ void loop() {
 //   #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
 // #else
 //   #include <SoftwareSerial.h>
-//   SoftwareSerial maestroSerial(10, 11);
+//   SoftwareSerial maestroSerial(COMMUNICATION::MAECOMM::RX, COMMUNICATION::MAECOMM::TX);
 // #endif
 // MicroMaestro maestro(maestroSerial);
 
