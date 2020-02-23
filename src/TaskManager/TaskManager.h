@@ -14,8 +14,9 @@ class TaskManager
         TaskManager(Wrist* wrist, Hand* hand, StateMachine* sm);
         void updatePendingOrder(int pendingOrder);
         bool executeOrder();
-    private:
         int pendingOrder;
+    private:
+      
         Wrist* wrist;
         Hand* hand;
         StateMachine* stateMachine;

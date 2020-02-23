@@ -22,6 +22,6 @@ void Hand::grip_Choose(int gripVal) {
     for( int i = 0; i < 5; i ++) {
         this->motors[i].moveTo(this->grip_table[gripVal][i]);
      
-    Pi::write(String(this->grip_table[gripVal][i]));
+   // Pi::write(String(this->grip_table[gripVal][i]));
     }
 }

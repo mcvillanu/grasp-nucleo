@@ -27,14 +27,13 @@ Wrist *wrist;
 TaskManager *tm;
 StateMachine *sm;
 SoftwareSerial maestroSerial(COMMUNICATION::MAECOMM::RX, COMMUNICATION::MAECOMM::TX);
-MicroMaestro * maestro;
+MicroMaestro *maestro;
 // MicroMaestro maestro(maestroSerial);
-Hand * hand;
+Hand *hand;
 // Hand hand(&maestro);
 
 void setup()
 {
-  
   // Serial.begin(9600);
   using namespace MAESTRO;
   wrist = new Wrist();
@@ -50,7 +49,7 @@ void setup()
 void loop()
 {
 
-  //for debugging
+  // // for debugging
   // motor.moveTo(4001);
   // hand->grip_Choose(0);
   // delay(2000);
@@ -59,59 +58,91 @@ void loop()
   // delay(2000);
 
   int gripInt = 5;
-  String *const message = new String("{\"grip\":\"hammer\", \"c\":true}"); //new String(Pi::read());/
+  String *const message = new String(Pi::read()); //= new String("{\"grip\":\"ball\", \"c\":true}"); ///
   Object *const obj = Interpreter::deserialize<Object>(message);
 
   String *grip = obj->getValue<String>("grip");
-  bool * safety = obj->getValue<bool>("c");
+  //bool *safety = obj->getValue<bool>("c");
 
   // bool safety = obj->getValue<bool>("safety");
   // Serial.println("hi");
   if (grip)
+  {
     Pi::write(*grip);
-  if (safety)
-    Pi::write(String(*safety));
+    // hand->grip_Choose(5);
 
-  tm->updatePendingOrder(GRIPS::GRIP_RESET);
-  tm->executeOrder();
+    //if (safety)
+    // Pi::write(String(*safety));
 
-  delay(2000);
-  
-  tm->updatePendingOrder(GRIPS::GRIP_HAMMER);
+    // debugging purposes
+    // tm->updatePendingOrder(GRIPS::GRIP_RESET);
+    // tm->executeOrder();
 
-  tm->executeOrder();
-  delay(2000);
-//   using namespace STATES;
-//   // if //(sm->getCurrentState() == SAFETY_ON){
-//   //   sm->setState(0);
-//   // } else {
-//     sm->setState(RECEIVING);
-//     tm->updatePendingOrder(GRIPS::GRIP_RESET);
-//     tm->executeOrder();
-//     sm->setState(RECEIVING);
-//   // }
-// delay(2000);
-//   using namespace GRIPS;
-//   if (*grip == "mug") { gripInt = GRIP_C; }
-//   else if (*grip =="pinch") { gripInt = GRIP_PINCH; }
-//   else if (*grip =="ball") { gripInt = GRIP_BALL; }
-//   else if (*grip =="hammer") { gripInt = GRIP_HAMMER; Pi::write("elif");}
-//   else if (*grip =="flat") { gripInt = GRIP_FLAT; }
-//   else if (*grip =="test") { gripInt = GRIP_RESET; }
+    // delay(2000);
 
-//   tm->updatePendingOrder(gripInt);
+    // tm->updatePendingOrder(GRIPS::GRIP_HAMMER);
 
-//   if (sm->getCurrentState() == STATES::RECEIVING) {
-//     tm->executeOrder();
-//   }
+    // tm->executeOrder();
+    // delay(2000);
 
+    using namespace STATES;
+    // // if //(sm->getCurrentState() == SAFETY_ON){
+    // //   sm->setState(0);
+    // // } else {
+    // sm->setState(RECEIVING);
 
-//   delete grip;
-//   delete safety;
-//   delete message;
-//   delete obj;
+    // // tm->updatePendingOrder(GRIPS::GRIP_RESET);
+
+    // // tm->executeOrder();
+
+    // // sm->setState(RECEIVING);
+    // // // }
+    // // delay(2000);
+    using namespace GRIPS;
+    if (*grip == "mug")
+    {
+      gripInt = GRIP_C;
+    }
+    else if (*grip == "pinch")
+    {
+      gripInt = GRIP_PINCH;
+    }
+    else if (*grip == "ball")
+    {
+      gripInt = GRIP_RESET;
+    }
+    else if (*grip == "hammer")
+    {
+      gripInt = GRIP_HAMMER;
+    }
+    else if (*grip == "flat")
+    {
+      gripInt = GRIP_FLAT;
+    }
+    else if (*grip == "test")
+    {
+      gripInt = GRIP_RESET;
+    }
+    //Pi::write(String(gripInt));
+    tm->updatePendingOrder(gripInt);
+
+    // if (sm->getCurrentState() == STATES::RECEIVING)
+    // {
+    tm->executeOrder();
+    delay(100);
+    // }
+  }
+  else {
+    Pi::write("waiting");
+    Pi::refresh();
+  }
+
+  // delete grip;
+  // //delete safety;
+  // delete message;
+  // delete obj;
   // delay(2000);
-  
+
   // tm->updatePendingOrder(1);
   // sm->setState(STATES::RECEIVING);
 
@@ -119,7 +150,6 @@ void loop()
   //   tm->executeOrder();
   // }
   // delay(2000);
-  
 }
 // void setup() {
 //   using namespace MAESTRO;
@@ -138,7 +168,7 @@ void loop()
 //   int * x = obj->getValue<int>("a");
 //   String * y = obj->getValue<String>("b");
 //   bool * z = obj->getValue<bool>("c");
-  
+
 //   if (x) Pi::write(String(*x));
 //   if (y) Pi::write(*y);
 //   if (z) Pi::write(String(*z));
@@ -187,25 +217,25 @@ void loop()
 
 // }
 // void loop() {
-//   String * const message = new String("{\"a\":24, \"b\":\"stringVal\", \"c\":true}");
+//   String * const message = new String(Pi::read());//new String("{\"a\":24, \"b\":\"stringVal\", \"c\":true}");
 //   Object * const obj = Interpreter::deserialize<Object>(message);
 
-//   int * x = obj->getValue<int>("a");
-//   String * y = obj->getValue<String>("b");
-//   bool * z = obj->getValue<bool>("c");
+//   //int * x = obj->getValue<int>("a");
+//   String * y = obj->getValue<String>("grip");
+//   //bool * z = obj->getValue<bool>("c");
 
-//   if (x) Pi::write(String(*x));
+//   //if (x) Pi::write(String(*x));
 //   if (y) Pi::write(*y);
-//   if (z) Pi::write(String(*z));
+//   //if (z) Pi::write(String(*z));
 
-//   delete x;
+//   //delete x;
 //   delete y;
-//   delete z;
-//   Pi::write("test");
-//   Pi::write("1");
-//   Pi::write("2");
-//   Pi::write("3");
-
+//   //delete z;
+//   // Pi::write("test");
+//   // Pi::write("1");
+//   // Pi::write("2");
+//   // Pi::write("3");
+// delay(100);
 //   delete message;
 //   delete obj;
 // }

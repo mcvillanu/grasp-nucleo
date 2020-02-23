@@ -15,10 +15,18 @@ void Pi::destroy() {
 	Serial.end();
 }
 String const Pi::read() {
-	return Serial.readStringUntil(*COMMUNICATION::PICOMM::META::ENDTAG);
+	String newstring;
+	// try {
+		newstring = Serial.readStringUntil(*COMMUNICATION::PICOMM::META::ENDTAG);
+	// }
+	// catch (std::exception const& e) {
+	// 	return "false";
+	// }
+	return newstring;
 }
 void Pi::write(String const & msg) {
 	Serial.println(msg);
+	Serial.flush();
 }
 void Pi::refresh() {
 	Serial.flush();
