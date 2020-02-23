@@ -10,14 +10,15 @@ void Motor::setup() {
     pinMode(this->channel, OUTPUT);
 }
 void Motor::moveTo(uint16_t const & position) {
-    if (!fsr.exceededThreshold() || position<=currPos){
-        currPos = position;
+    // if (!fsr.exceededThreshold() || position<=currPos){
+    //     currPos = position;
         // If brake is on, finger can only release
         // analogWrite(this->pin, position);
         maestro->setTarget(this->channel,position);
-    } else {
-        // TODO: communicate that the brake is on
-    }
+    // } else {
+    //     // TODO: communicate that the brake is on
+    // }
+  
     
 }
 void Motor::setSpeed(uint16_t const & speed) {

@@ -27,8 +27,10 @@ Wrist *wrist;
 TaskManager *tm;
 StateMachine *sm;
 SoftwareSerial maestroSerial(COMMUNICATION::MAECOMM::RX, COMMUNICATION::MAECOMM::TX);
-MicroMaestro maestro(maestroSerial);
-Hand hand(&maestro);
+MicroMaestro * maestro;
+// MicroMaestro maestro(maestroSerial);
+Hand * hand;
+// Hand hand(&maestro);
 
 void setup()
 {
@@ -37,9 +39,10 @@ void setup()
   using namespace MAESTRO;
   wrist = new Wrist();
   sm = new StateMachine();
-    hand.setup();
-  tm = new TaskManager(wrist, &hand, sm);
-
+  maestro = new MicroMaestro(maestroSerial);
+  hand = new Hand(maestro);
+  hand->setup();
+  tm = new TaskManager(wrist, hand, sm);
   maestroSerial.begin(9600);
   Pi::setup();
 }
@@ -49,9 +52,9 @@ void loop()
 
   //for debugging
   // motor.moveTo(4001);
-  // hand.grip_Choose(0);
+  // hand->grip_Choose(0);
   // delay(2000);
-  // hand.grip_Choose(5);
+  // hand->grip_Choose(5);
   // // motor.moveTo(7999);
   // delay(2000);
 
@@ -69,35 +72,44 @@ void loop()
   if (safety)
     Pi::write(String(*safety));
 
-  using namespace STATES;
-  // if //(sm->getCurrentState() == SAFETY_ON){
-  //   sm->setState(0);
-  // } else {
-    sm->setState(RECEIVING);
-    tm->updatePendingOrder(GRIPS::GRIP_RESET);
-    tm->executeOrder();
-    sm->setState(RECEIVING);
-  // }
-delay(2000);
-  using namespace GRIPS;
-  if (*grip == "mug") { gripInt = GRIP_C; }
-  else if (*grip =="pinch") { gripInt = GRIP_PINCH; }
-  else if (*grip =="ball") { gripInt = GRIP_BALL; }
-  else if (*grip =="hammer") { gripInt = GRIP_HAMMER; Pi::write("elif");}
-  else if (*grip =="flat") { gripInt = GRIP_FLAT; }
-  else if (*grip =="test") { gripInt = GRIP_RESET; }
+  tm->updatePendingOrder(GRIPS::GRIP_RESET);
+  tm->executeOrder();
 
-  tm->updatePendingOrder(gripInt);
+  delay(2000);
+  
+  tm->updatePendingOrder(GRIPS::GRIP_HAMMER);
 
-  if (sm->getCurrentState() == STATES::RECEIVING) {
-    tm->executeOrder();
-  }
+  tm->executeOrder();
+  delay(2000);
+//   using namespace STATES;
+//   // if //(sm->getCurrentState() == SAFETY_ON){
+//   //   sm->setState(0);
+//   // } else {
+//     sm->setState(RECEIVING);
+//     tm->updatePendingOrder(GRIPS::GRIP_RESET);
+//     tm->executeOrder();
+//     sm->setState(RECEIVING);
+//   // }
+// delay(2000);
+//   using namespace GRIPS;
+//   if (*grip == "mug") { gripInt = GRIP_C; }
+//   else if (*grip =="pinch") { gripInt = GRIP_PINCH; }
+//   else if (*grip =="ball") { gripInt = GRIP_BALL; }
+//   else if (*grip =="hammer") { gripInt = GRIP_HAMMER; Pi::write("elif");}
+//   else if (*grip =="flat") { gripInt = GRIP_FLAT; }
+//   else if (*grip =="test") { gripInt = GRIP_RESET; }
+
+//   tm->updatePendingOrder(gripInt);
+
+//   if (sm->getCurrentState() == STATES::RECEIVING) {
+//     tm->executeOrder();
+//   }
 
 
-  delete grip;
-  delete safety;
-  delete message;
-  delete obj;
+//   delete grip;
+//   delete safety;
+//   delete message;
+//   delete obj;
   // delay(2000);
   
   // tm->updatePendingOrder(1);
