@@ -10,15 +10,17 @@ TaskManager:: TaskManager(Wrist* wrist, Hand* hand, StateMachine* sm){
 bool TaskManager::executeOrder() {
     if(stateMachine->getCurrentState() != STATES::IN_GRIP){
         hand -> grip_Choose(pendingOrder);
-        switch (this->pendingOrder) {
-            case GRIPS::GRIP_RESET:
-                stateMachine->setState(STATES::RECEIVING);
-                break;
+        delay(1000);
+        Pi::write("inside");
+        // switch (this->pendingOrder) {
+        //     case GRIPS::GRIP_RESET:
+        //         stateMachine->setState(STATES::RECEIVING);
+        //         break;
 
-            default:
-                stateMachine->setState(STATES::IN_GRIP);
-                break;
-        }
+        //     default:
+        //         stateMachine->setState(STATES::IN_GRIP);
+        //         break;
+        // }
 
         return true;
     } else {

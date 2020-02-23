@@ -17,7 +17,6 @@ void Hand::setup() {
     }
 }
 
-
 //user choose grip value between 0-4 (reset is grip 5 done by hand)
 void Hand::grip_Choose(int gripVal) {
     for( int i = 0; i < 5; i ++) {
