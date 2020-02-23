@@ -45,56 +45,44 @@ void setup()
 void loop()
 {
 
-  //for debugging
-  // motor.moveTo(4001);
-  hand.grip_Choose(0);
-  delay(2000);
-  hand.grip_Choose(1);
-  // motor.moveTo(7999);
-  delay(2000);
+  // //for debugging
+  // // motor.moveTo(4001);
+  // hand.grip_Choose(0);
+  // delay(2000);
+  // hand.grip_Choose(1);
+  // // motor.moveTo(7999);
+  // delay(2000);
 
 
-  // int gripInt = 5;
-  // String * const message = new String(Pi::read());
-  // Object * const obj = Interpreter::deserialize<Object>(message);
+  int gripInt;
+  String * const message = new String("{\"grip\":\"hammer\"}");
+  Object * const obj = Interpreter::deserialize<Object>(message);
 
-  // String * grip = obj->getValue<String>("knownGrips");
+  String * grip = obj->getValue<String>("grip");
   // bool safety = obj->getValue<bool>("safety");
 
-  // if (safety == 1) {
-  //   // in safe mode
-  //   sm->setState(0);
-  // }
-  // else {
-  //   sm->setState(1);
-  //   tm->updatePendingOrder(5);
-  //   tm->executeOrder();
-  // }
+  using namespace STATES;
+  if (sm->getCurrentState() == SAFETY_ON){
+    sm->setState(0);
+  } else {
+    tm->updatePendingOrder(GRIPS::GRIP_RESET);
+    tm->executeOrder();
+    sm->setState(RECEIVING);
+  }
 
-  // if (*grip == "mug") {
-  //   gripInt = 4;
-  // }
-  // else if (*grip =="pinch") {
-  //   gripInt = 1;
-  // }
-  // else if (*grip =="ball") {
-  //   gripInt = 3;
-  // }
-  // else if (*grip =="hammer") {
-  //   gripInt = 0;
-  // }
-  // else if (*grip =="flat") {
-  //   gripInt = 2;
-  // }
-  // else if (*grip =="test") { //reset
-  //   gripInt = 5;
-  // }
+  using namespace GRIPS;
+  if (*grip == "mug") { gripInt = GRIP_C; }
+  else if (*grip =="pinch") { gripInt = GRIP_PINCH; }
+  else if (*grip =="ball") { gripInt = GRIP_BALL; }
+  else if (*grip =="hammer") { gripInt = GRIP_HAMMER; }
+  else if (*grip =="flat") { gripInt = GRIP_FLAT; }
+  else if (*grip =="test") { gripInt = GRIP_RESET; }
   
-  // tm->updatePendingOrder(gripInt);
+  tm->updatePendingOrder(gripInt);
 
-  // if (sm->getCurrentState() == 1) {
-  //   tm->executeOrder();
-  // }
+  if (sm->getCurrentState() == STATES::RECEIVING) {
+    tm->executeOrder();
+  }
 }
 
 

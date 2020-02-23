@@ -65,19 +65,14 @@ namespace UTILITIES {
     };
 };
 
-enum STATE {
-    ACTIVE         = 0,
-    SAFE_SHUTDOWN  = 1
-};
-
-enum GRIPS {
-    GRIP_HAMMER = 0,
-    GRIP_PINCH  = 1,
-    GRIP_FLAT   = 2,
-    GRIP_BALL      = 3,
-    GRIP_C   = 4,
-    GRIP_RESET = 5
-};
+namespace GRIPS {
+    const int GRIP_HAMMER = 0;
+    const int GRIP_PINCH  = 1;
+    const int GRIP_FLAT   = 2;
+    const int GRIP_BALL   = 3;
+    const int GRIP_C      = 4;
+    const int GRIP_RESET  = 5;
+}
 
 namespace PINS {
     enum CHAN {
