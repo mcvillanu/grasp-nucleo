@@ -9,9 +9,12 @@
 #include <SoftwareSerial.h>
 #include <Communication/EMGComm/EMGComm.h>
 #include <TaskManager/TaskManager.h>
-#include <document.h>
-#include <allocators.h>
 #include <PololuMaestro.h>
+#include <Utilities/JSON/Object/Object.h>
+#include <Utilities/JSON/Array/Array.h>
+#include <Utilities/JSON/Base/Base.h>
+#include <Utilities/JSON/Interpreter/Interpreter.h>
+#include <iostream>
 
 using namespace std;
 using namespace rapidjson;
@@ -40,15 +43,63 @@ void setup() {
 }
 
 void loop() {
-  
-  // TODO: write all of this
-  // get message from pi
-  // translate from message -> command
-  // update command in tm
-  // depending on state, execute tm
+  // Pi::write("{\"result\":\"test\"}");
+  String const message = Pi::read();
+  Object * const object = Interpreter::deserialize<Object>((String const * const) new String(message));
+  int * const val = object->getValue<int>("testKey");
 
-  Pi::writeRawMessage(*jsonString);
+  if (*val == 24) Pi::write("{\"result\":\"success\"}");
+  else Pi::write("{\"result\":\"failed\"}");
+
+  std::cout << "asdf" << std::endl;
+
+  // char const * const msg = "{\"asd\":21}";
+  // char const * const msg = Pi::read().c_str();
+
+  // int const rSize = JSON_OBJECT_SIZE(10);
+  // DynamicJsonDocument rDoc(rSize);
+
+  // DeserializationError err = deserializeJson(rDoc,msg);
+
+  // int const x = (rDoc["asd"].as<int>()) + 1;
+
+  // DynamicJsonDocument tDoc(rSize);
+  // tDoc["result"] = x;
+  // String tMsg;
+  // serializeJson(tDoc,tMsg);
+  // Pi::write(tMsg);
 }
+
+// void loop() {
+  // char const * const msg = Pi::read().c_str();
+  // int const rSize = JSON_OBJECT_SIZE(1);
+  // DynamicJsonDocument doc(rSize);
+  // DeserializationError err = deserializeJson(doc,msg);
+  // if (!err) {
+  //   if (doc["asd"].as<int>() == 21) {
+  //     Pi::write("{\"result\":\"3\"}");
+  //   } else {
+  //     Pi::write("{\"result\":\"2\"}");
+  //   }
+  //   // int const size = JSON_OBJECT_SIZE(1);
+  //   // DynamicJsonDocument doc_out(size);
+  //   // doc_out["result"] = "success";
+  //   // serializeJson(doc_out,Serial);
+  // } else {
+  //   Pi::write("{\"result\":\"0\"}");
+  //   // int const size = JSON_OBJECT_SIZE(1);
+  //   // DynamicJsonDocument doc_out(size);
+  //   // doc_out["result"] = "failed";
+  //   // serializeJson(doc_out,Serial);
+  // }
+  // deserializeJson(doc,msg);
+  // if (doc["asd"].as<int>() == 21) Pi::write("{\"result\":x}");
+  // else Pi::write("{\"result\":\"failed\"}");
+  // int x = doc["asd"].as<int>();
+  // Serial.print("{\"result\":");
+  // Serial.print(x);
+  // Serial.print("}\n");
+// }
 
 // Different grip positions for the hand (values in arrays correspond to actuator movement to orient fingers)
 // array value in order {thumb, index, middle, ring, pinky}

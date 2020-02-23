@@ -11,9 +11,7 @@
 #include <Utilities/Constants.h>
 #include <Communication/BaseComm/BaseComm.h>
 
-
-
-class EMG : Base {
+class EMG : BaseComm::Base {
     private:
         float voltage;
         bool flex;

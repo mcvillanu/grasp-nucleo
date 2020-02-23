@@ -1,8 +1,6 @@
 #include <Communication/EMGComm/EMGComm.h>
 
-
-
-EMG::EMG(int pin) : Base::Base(pin) {}
+EMG::EMG(int pin) : BaseComm::Base(pin) {}
 void EMG::setup() {
     pinMode(this->pin,INPUT);
 }
