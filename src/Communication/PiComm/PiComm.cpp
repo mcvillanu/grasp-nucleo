@@ -16,10 +16,10 @@ void Pi::destroy() {
 }
 String const Pi::read() {
 	String newstring;
-	// try {
+//	try {
 		newstring = Serial.readStringUntil(*COMMUNICATION::PICOMM::META::ENDTAG);
 	// }
-	// catch (std::exception const& e) {
+	// catch (int e) {
 	// 	return "false";
 	// }
 	return newstring;

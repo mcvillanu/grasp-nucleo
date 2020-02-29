@@ -99,9 +99,9 @@ void loop()
     // // // }
     // // delay(2000);
     using namespace GRIPS;
-    if (*grip == "mug")
+    if (*grip == "cup")
     {
-      gripInt = GRIP_C;
+      gripInt = GRIP_RESET;
     }
     else if (*grip == "pinch")
     {
@@ -111,7 +111,7 @@ void loop()
     {
       gripInt = GRIP_RESET;
     }
-    else if (*grip == "hammer")
+    else if (*grip == "close")
     {
       gripInt = GRIP_HAMMER;
     }
@@ -119,9 +119,9 @@ void loop()
     {
       gripInt = GRIP_FLAT;
     }
-    else if (*grip == "test")
+    else if (*grip == "open")
     {
-      gripInt = GRIP_RESET;
+      gripInt = GRIP_C;
     }
     //Pi::write(String(gripInt));
     tm->updatePendingOrder(gripInt);
@@ -133,16 +133,17 @@ void loop()
     // }
   }
   else {
-    Pi::write("waiting");
-    Pi::refresh();
+   // Pi::write("waiting");
+    // String *const mes = new String(Pi::read());
+    // Pi::write(*(mes));
+    //Pi::refresh();
   }
 
-  // delete grip;
+  delete grip;
   // //delete safety;
-  // delete message;
-  // delete obj;
-  // delay(2000);
-
+  delete message;
+  delete obj;
+  //delay(2000);
   // tm->updatePendingOrder(1);
   // sm->setState(STATES::RECEIVING);
 
