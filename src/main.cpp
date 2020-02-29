@@ -49,109 +49,114 @@ void setup()
 void loop()
 {
 
-  // // for debugging
+  // for debugging
   // motor.moveTo(4001);
-  // hand->grip_Choose(0);
-  // delay(2000);
-  // hand->grip_Choose(5);
-  // // motor.moveTo(7999);
-  // delay(2000);
-
-  int gripInt = 5;
-  String *const message = new String(Pi::read()); //= new String("{\"grip\":\"ball\", \"c\":true}"); ///
-  Object *const obj = Interpreter::deserialize<Object>(message);
-
-  String *grip = obj->getValue<String>("grip");
-  //bool *safety = obj->getValue<bool>("c");
-
-  // bool safety = obj->getValue<bool>("safety");
-  // Serial.println("hi");
-  if (grip)
-  {
-    Pi::write(*grip);
-    // hand->grip_Choose(5);
-
-    //if (safety)
-    // Pi::write(String(*safety));
-
-    // debugging purposes
-    // tm->updatePendingOrder(GRIPS::GRIP_RESET);
-    // tm->executeOrder();
-
-    // delay(2000);
-
-    // tm->updatePendingOrder(GRIPS::GRIP_HAMMER);
-
-    // tm->executeOrder();
-    // delay(2000);
-
-    using namespace STATES;
-    // // if //(sm->getCurrentState() == SAFETY_ON){
-    // //   sm->setState(0);
-    // // } else {
-    // sm->setState(RECEIVING);
-
-    // // tm->updatePendingOrder(GRIPS::GRIP_RESET);
-
-    // // tm->executeOrder();
-
-    // // sm->setState(RECEIVING);
-    // // // }
-    // // delay(2000);
-    using namespace GRIPS;
-    if (*grip == "cup")
-    {
-      gripInt = GRIP_RESET;
-    }
-    else if (*grip == "pinch")
-    {
-      gripInt = GRIP_PINCH;
-    }
-    else if (*grip == "ball")
-    {
-      gripInt = GRIP_RESET;
-    }
-    else if (*grip == "close")
-    {
-      gripInt = GRIP_HAMMER;
-    }
-    else if (*grip == "flat")
-    {
-      gripInt = GRIP_FLAT;
-    }
-    else if (*grip == "open")
-    {
-      gripInt = GRIP_C;
-    }
-    //Pi::write(String(gripInt));
-    tm->updatePendingOrder(gripInt);
-
-    // if (sm->getCurrentState() == STATES::RECEIVING)
-    // {
-    tm->executeOrder();
-    delay(100);
-    // }
+  hand->grip_Choose(0);
+  delay(2000);
+  hand->grip_Choose(5);
+  for (int i = 0; i < 400; i++){
+    Pi::write(String(hand->maestro->getMovingState()));
+    delay(5);
   }
-  else {
-   // Pi::write("waiting");
-    // String *const mes = new String(Pi::read());
-    // Pi::write(*(mes));
-    //Pi::refresh();
-  }
-
-  delete grip;
-  // //delete safety;
-  delete message;
-  delete obj;
-  //delay(2000);
-  // tm->updatePendingOrder(1);
-  // sm->setState(STATES::RECEIVING);
-
-  // if (sm->getCurrentState() == STATES::RECEIVING) {
-  //   tm->executeOrder();
-  // }
-  // delay(2000);
 }
+  // motor.moveTo(7999);
+  //delay(2000);
+
+//   int gripInt = 5;
+//   String *const message = new String(Pi::read()); //= new String("{\"grip\":\"ball\", \"c\":true}"); ///
+//   Object *const obj = Interpreter::deserialize<Object>(message);
+
+//   String *grip = obj->getValue<String>("grip");
+//   //bool *safety = obj->getValue<bool>("c");
+
+//   // bool safety = obj->getValue<bool>("safety");
+//   // Serial.println("hi");
+//   if (grip)
+//   {
+//     Pi::write(*grip);
+//     // hand->grip_Choose(5);
+
+//     //if (safety)
+//     // Pi::write(String(*safety));
+
+//     // debugging purposes
+//     // tm->updatePendingOrder(GRIPS::GRIP_RESET);
+//     // tm->executeOrder();
+
+//     // delay(2000);
+
+//     // tm->updatePendingOrder(GRIPS::GRIP_HAMMER);
+
+//     // tm->executeOrder();
+//     // delay(2000);
+
+//     using namespace STATES;
+//     // // if //(sm->getCurrentState() == SAFETY_ON){
+//     // //   sm->setState(0);
+//     // // } else {
+//     // sm->setState(RECEIVING);
+
+//     // // tm->updatePendingOrder(GRIPS::GRIP_RESET);
+
+//     // // tm->executeOrder();
+
+//     // // sm->setState(RECEIVING);
+//     // // // }
+//     // // delay(2000);
+//     using namespace GRIPS;
+//     if (*grip == "cup")
+//     {
+//       gripInt = GRIP_RESET;
+//     }
+//     else if (*grip == "pinch")
+//     {
+//       gripInt = GRIP_PINCH;
+//     }
+//     else if (*grip == "ball")
+//     {
+//       gripInt = GRIP_RESET;
+//     }
+//     else if (*grip == "close")
+//     {
+//       gripInt = GRIP_HAMMER;
+//     }
+//     else if (*grip == "flat")
+//     {
+//       gripInt = GRIP_FLAT;
+//     }
+//     else if (*grip == "open")
+//     {
+//       gripInt = GRIP_C;
+//     }
+//     //Pi::write(String(gripInt));
+//     tm->updatePendingOrder(gripInt);
+
+//     // if (sm->getCurrentState() == STATES::RECEIVING)
+//     // {
+//     tm->executeOrder();
+//     delay(100);
+//     // }
+//   }
+//   else {
+//    // Pi::write("waiting");
+//     // String *const mes = new String(Pi::read());
+//     // Pi::write(*(mes));
+//     //Pi::refresh();
+//   }
+
+//   delete grip;
+//   // //delete safety;
+//   delete message;
+//   delete obj;
+//   //delay(2000);
+//   // tm->updatePendingOrder(1);
+//   // sm->setState(STATES::RECEIVING);
+
+//   // if (sm->getCurrentState() == STATES::RECEIVING) {
+//   //   tm->executeOrder();
+//   // }
+//   // delay(2000);
+// }
 // void setup() {
 //   using namespace MAESTRO;
 //   wrist = new Wrist();

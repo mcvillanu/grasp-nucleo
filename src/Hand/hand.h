@@ -12,10 +12,9 @@ class Hand {
     private:
         int selected_grip;
         int step = 0;
-        MicroMaestro* maestro;
         vector<Motor> motors;
         vector<vector<int>> grip_table {
-            // hammer
+            // hammer // 4000-8000 and 4000 is closed
             { {4100, 4100, 4100, 4100, 4100} },
             // pinch
             { {4100,   4100,  4100, 6400, 6400} },
@@ -33,6 +32,7 @@ class Hand {
         Hand();
         Hand(MicroMaestro* maestro);
         void setup();
+        MicroMaestro* maestro;
        
         void grip_Choose(int gripVal);
 };
