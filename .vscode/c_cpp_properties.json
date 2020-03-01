@@ -4,7 +4,8 @@
             "name": "!!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags"
         },
         {
-            "name": "Win32",
+            "name": "Mac",
+            "macFrameworkPath": [],
             "includePath": [
                 "c:/Users/villa/vsc_projects/grasp-nucleo/src",
                 "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
