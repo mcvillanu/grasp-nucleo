@@ -1,0 +1,27 @@
+-------------------- AUTHOR --------------------
+    By:         Kevin Huang
+    Date:       N/A
+    Purpose:    APIs to interact with the FSRs and get pressure readings based on the voltage reading.
+
+
+-------------------- INTRODUCTION --------------------
+    ... TODO
+
+
+-------------------- FIELDS --------------------
+    Pin:
+        ... TODO
+
+
+-------------------- METHODS --------------------
+    FSR:
+        Default constructor for the FSR.
+
+    Safety Brake:
+        Returns true if psi is above a threshold
+
+    Get PSI:
+        Useful link: https://learn.adafruit.com/force-sensitive-resistor-fsr/using-an-fsr
+        Gets psi from reading voltage of pin.
+        Given pressure, F, pulldown resistance (R), resistance vs pressure curve constant (C), supply voltage VCC = 5V, and voltage reading V_o we have:
+        F = C / R  * 1 / (Vcc / V_o - 1)

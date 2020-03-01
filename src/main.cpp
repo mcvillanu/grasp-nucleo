@@ -1,117 +1,105 @@
 #include <Arduino.h>
-// #include <Servo.h>
-#include <hand.h>
-#include <wrist.h>
-#include <communication.h>
-#include <constants.h>
-#include <emg.h>
-#include <TaskManager.h>
+#include <Servo.h>
+#include <Communication/MaeComm/MaeComm.h>
+#include <Hand/hand.h>
+#include <Wrist/wrist.h>
+#include <Communication/PiComm/PiComm.h>
+#include <Utilities/Constants.h>
+#include <stream.h>
+#include <SoftwareSerial.h>
+#include <Communication/EMGComm/EMGComm.h>
+#include <TaskManager/TaskManager.h>
 #include <PololuMaestro.h>
+#include <Utilities/JSON/Object/Object.h>
+#include <Utilities/JSON/Array/Array.h>
+#include <Utilities/JSON/Base/Base.h>
+#include <Utilities/JSON/Interpreter/Interpreter.h>
+#include <Utilities/Miscellaneous/Miscellaneous.h>
+#include <iostream>
 
-// Motor motor(PINS::THUMB_PWM);
-// Motor motor2(PINS::INDEX_PWM);
+int stringToIntGrip(String grip);
+void readFromPi();
 
-// Different grip positions for the hand (values in arrays correspond to actuator movement to orient fingers)
-//array value in order {thumb, index, middle, ring, pinky}
-// int hammer[] = {100, 100, 100, 100, 100}; // Need to move this into hand.cpp
-// int pinch[] = {50, 60, 60, 100, 100};
-// int card[] = {100, 20, 20, 30, 40};
-// int ball[] = {50, 50, 50, 50, 50};
-// int cup[] = {50, 50, 50, 50, 75};
-// int reset[] = {0, 0, 0, 0, 0};
-bool written = false; // prevents restarting the pwm signal that has been started from being reset
-int grasp_Val;
-// Motor t_Motor(PINS::THUMB_PWM);
-// Motor i_Motor(PINS::INDEX_PWM);
-// Motor m_Motor(PINS::MIDDLE_PWM);
-// Motor r_Motor(PINS::RING_PWM);
-// Motor p_Motor(PINS::RING_PWM);
-Communication comms(9600);
-Emg_signal emg(PINS::EMG_SIG);
-TaskManager manager;
-bool safetyOff = false;
-// Servo servo;
+using namespace std;
 
-// Maestro servo controller stuff
-#ifdef SERIAL_PORT_HARDWARE_OPEN
-  #define maestroSerial SERIAL_PORT_HARDWARE_OPEN
-#else
-  #include <SoftwareSerial.h>
-  #include <HardwareSerial.h>
-  HardwareSerial maestroSerial(PA9, PB7);
-#endif
-MicroMaestro maestro(maestroSerial);
+Wrist *wrist;
+TaskManager *tm;
+StateMachine *sm;
+SoftwareSerial maestroSerial(COMMUNICATION::MAECOMM::RX, COMMUNICATION::MAECOMM::TX);
+MicroMaestro * maestro;
+Hand * hand;
 
-Hand myHand(&maestro);
-Wrist wrist(32);
+String * message;
+Object * obj;
+int grip;
+bool * safety;
 
 void setup()
 {
-    Serial.begin(9600);
-    myHand.setup(); //setup from hand attachs all motors to pin outputs
-    // t_Motor.setup();
-    // i_Motor.setup();
-    // m_Motor.setup();
-    // r_Motor.setup();
-    // p_motor.setup();
-    wrist.setup();
-    comms.setup();
-    // servo.attach(PINS::THUMB_PWM);
-    wrist.rotate_by(5*360); 
-    pinMode(3, INPUT);
-    pinMode(PC12, OUTPUT);
-    // Choose which emg pin to read. 
-    // start with close hand. if read to close hand then switch to
-      //   read the other emg for the close signal
-    maestroSerial.begin(9600);
+  using namespace MAESTRO;
+  wrist = new Wrist();
+  sm = new StateMachine();
+  maestro = new MicroMaestro(maestroSerial);
+  hand = new Hand(maestro);
+  hand->setup();
+  tm = new TaskManager(wrist, hand, sm);
+  maestroSerial.begin(9600);
+  Pi::setup();
+  wrist->setup();
+  //wrist = new Wrist(1);
+  
 }
 
 void loop()
 {
-    if( safetyOff == false)
-    {
-        if(comms.get_order() == MSG::SAFETY_OFF)
-        {
-            Serial.println("Safety is still turned off");
-            safetyOff = true;
-        }
+  readFromPi();
+
+  while(safety){
+    readFromPi();
+  }
+
+  tm->updatePendingOrder(grip);
+
+  if(sm->getCurrentState() == STATES::RECEIVING){
+    tm->executeOrder();
+    delay(2000);
+    sm->setState(STATES::IN_GRIP);
+  }
+
+  while(sm->getCurrentState() == STATES::IN_GRIP){
+    readFromPi();
+
+    if(grip == GRIPS::GRIP_RESET){
+      tm->updatePendingOrder(GRIPS::GRIP_RESET);
+      tm->executeOrder();
+      delay(2000);
+      sm->setState(STATES::RECEIVING);
     }
-    else if(safetyOff == true)
-    {
-        delayMicroseconds(wrist.poll());
+  }
 
-        if (!written) {
-            myHand.grip_Choose(0);
-             written = true;
-        }
-        else if (written) {
-            myHand.grip_Choose(5);
-            written = false;
-        }
-        // // if (comms.get_order() == MSG::GRIP_HAMMER){
-        // //     comms.send_confirmation();
-        // //     motor.move_to(0);
-        // //     motor2.move_to(0);
-        // //     // servo.write(100);
-        // //     delay(3000);
-        // //     motor.move_to(50);
-        // //     motor2.move_to(50);
-        // //     delay(3000);
-        // //     // servo.write(60);
-        // //     motor.move_to(100);
-        // //     motor2.move_to(100);
-        // //     delay(5000);
-        // // }
-        
-        int order = comms.get_order();
-        manager.executeOrder(order);
+  if (sm->getCurrentState() == STATES::RECEIVING) {
+      tm->executeOrder();
+  }
 
-        float voltage = emg.emg_voltage();
-        Serial.println(voltage);
-        //wrist.rotate_by(180);
-        // wrist.rotate_by(-180);
-        // delay(3000);
-
-    // delay(2000);
-    }
+  delete safety;
+  delete message;
+  delete obj;
 }
+
+int stringToIntGrip(String * grip){
+  using namespace GRIPS;
+  if (*grip == "mug") { return GRIP_C; }
+  else if (*grip =="pinch") { return GRIP_PINCH; }
+  else if (*grip =="ball") { return GRIP_BALL; }
+  else if (*grip =="hammer") { return GRIP_HAMMER; }
+  else if (*grip =="flat") { return GRIP_FLAT; }
+  return GRIP_RESET;
+}
+
+void readFromPi(){
+  message = new String("{\"grip\":\"hammer\", \"c\":false}");
+  obj = Interpreter::deserialize<Object>(message);
+  grip = stringToIntGrip(obj->getValue<String>("grip"));
+  safety = obj->getValue<bool>("c");
+};
+

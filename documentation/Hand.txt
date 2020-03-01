@@ -1,0 +1,41 @@
+Hand:
+    Default constructor for the hand.
+
+Setup:
+    Sets up the motors and the hand. Uses the base ordering schema defined in communication.
+
+Next Step:
+    For EMG Motion. Moves to the next step of the defined grip pattern.
+    Returns True if there are more steps to be done, false otherwise.
+
+End Step:
+    For Non-EMG Motion. Queues the final step of the grip to the motors.
+
+Grip Choose:
+    User chooses 1 of 5 grips, that value determines grip positions for each.
+
+Selected Grip:
+    ... TODO
+
+Step:
+    ... TODO
+
+Maestro:
+    ... TODO
+
+Motors:
+    ... TODO
+
+Grip Table:
+    Grip 0 (Hammer)
+        Finger 1-5
+    Grip 1 (Pinch)
+        Finger 1-5
+    Grip 2 (Card)
+        Finger 1-5
+    Grip 3 (Ball)
+        Finger 1-5
+    Grip 4 (Cup)
+        Finger 1-5
+    Grip 5 (Reset)
+        Finger 1-5

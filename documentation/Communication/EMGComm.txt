@@ -1,0 +1,30 @@
+-------------------- AUTHOR --------------------
+    By:         Allison Yao
+    Date:       June 1, 2019
+    Purpose:    APIs to detect when the EMG signal voltage is above a certain threshold and throw a flag.
+
+
+-------------------- INTRODUCTION --------------------
+    ... TODO
+
+
+-------------------- FIELDS --------------------
+    Pin:
+        The specific GPIO pin connected to the EMG.
+
+    Voltage:
+        ... TODO
+
+    Flex:
+        ... TODO
+
+    Array Voltage:
+        ... TODO
+
+
+-------------------- METHODS --------------------
+    EMG (Constructor):
+        Default constructor for EMG input, initializes input pin.
+
+    Peak Detected:
+        Returns a flag that means a flex has occured.
