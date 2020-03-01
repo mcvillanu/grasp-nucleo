@@ -48,6 +48,7 @@ void setup()
   tm = new TaskManager(wrist, hand, sm);
   maestroSerial.begin(9600);
   Pi::setup();
+  wrist->setup();
 }
 
 void loop()
@@ -75,6 +76,27 @@ void loop()
       sm->setState(STATES::RECEIVING);
     }
   }
+}
+
+
+bool TaskManager::executeOrder() {
+    hand->grip_Choose(this->pendingOrder);
+    // if(stateMachine->getCurrentState() != STATES::IN_GRIP){
+    //     hand -> grip_Choose(this->pendingOrder);
+    //     switch (this->pendingOrder) {
+    //         case GRIPS::GRIP_RESET:
+    //             stateMachine->setState(STATES::RECEIVING);
+    //             break;
+
+    //         default:
+    //             stateMachine->setState(STATES::IN_GRIP);
+    //             break;
+    //     }
+
+    //     return true;
+    // } else {
+    //     return false;
+    // }
 }
 
 

@@ -13,8 +13,8 @@ class StateMachine {
         Hand * hand;
         String * message;
         Object * obj;
-
-
+        
+        bool executeOrder();
         int stringToIntGrip(String grip);
         void readFromPi();
 
@@ -23,4 +23,7 @@ class StateMachine {
         StateMachine();
         int getCurrentState();
         bool setState(int);
+        void setup();
+        void loop();
+
 };
