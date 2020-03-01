@@ -45,6 +45,9 @@ void setup()
   tm = new TaskManager(wrist, hand, sm);
   maestroSerial.begin(9600);
   Pi::setup();
+  wrist->setup();
+  //wrist = new Wrist(1);
+  
 }
 
 void loop()
