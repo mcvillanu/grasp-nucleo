@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include <Manager/manager.h>
 #include <SoftwareSerial.h>
 
@@ -9,16 +8,6 @@ Hand * hand;
 Manager * manager;
 
 void setup()
-=======
-#include <StateMachine/StateMachine.h>
-
-
-using namespace std;
-
-StateMachine *sm;
-
-void loop()
->>>>>>> 56c27451e4a8d46ff3a28472057928d88abf95b0
 {
   Pi::setup();
   
@@ -30,30 +19,13 @@ void loop()
   hand = new Hand(maestro);
   Pi::write("\ndone hand");
   hand->setup();
-<<<<<<< HEAD
   Pi::write("hello");
   manager = new Manager(wrist, hand);
-=======
-  tm = new TaskManager(wrist, hand, sm);
-  maestroSerial.begin(9600);
-  Pi::setup();
-  wrist->setup();
-  //wrist = new Wrist(1);
->>>>>>> 56c27451e4a8d46ff3a28472057928d88abf95b0
   
 }
 
-int main()
+void loop()
 {
-<<<<<<< HEAD
   Pi::write("hello");
   manager->run();
 }
-=======
-  loop();
-
-  delete safety;
-  delete message;
-  delete obj;
-}
->>>>>>> 56c27451e4a8d46ff3a28472057928d88abf95b0
