@@ -12,7 +12,9 @@ Hand::Hand(MicroMaestro* maestro) {
 }
 
 void Hand::setup() {
+    Pi::write("\nin setup");
     for( int i = 0; i < 5; i ++) {
+        Pi::write("\n help  " + i);
         this->motors[i].setup();    
     }
 }
@@ -21,6 +23,7 @@ void Hand::setup() {
 void Hand::grip_Choose(int gripVal) {
     for( int i = 0; i < 5; i ++) {
         this->motors[i].moveTo(this->grip_table[gripVal][i]);
+        Pi::write("\nin grip_choose");
      
    // Pi::write(String(this->grip_table[gripVal][i]));
     }

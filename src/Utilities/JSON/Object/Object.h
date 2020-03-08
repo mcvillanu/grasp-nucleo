@@ -3,6 +3,7 @@
 
 #include <ArduinoJson.h>
 #include <Utilities/JSON/Base/Base.h>
+#include <Utilities/Miscellaneous/Miscellaneous.h>
 
 class Object : Base<Object, JsonObject> {
     public:

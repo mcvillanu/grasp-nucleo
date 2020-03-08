@@ -4,12 +4,10 @@
             "name": "!!! WARNING !!! AUTO-GENERATED FILE, PLEASE DO NOT MODIFY IT AND USE https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags"
         },
         {
-            "name": "Mac",
-            "macFrameworkPath": [],
+            "name": "Win32",
             "includePath": [
                 "c:/Users/villa/vsc_projects/grasp-nucleo/src",
                 "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
-                "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Servo/src",
                 "C:/Users/villa/.platformio/lib/ArduinoJson_ID64/src",
                 "c:/Users/villa/vsc_projects/grasp-nucleo/lib/CoAmpCAN",
                 "c:/Users/villa/vsc_projects/grasp-nucleo/lib/CAN_Library",
@@ -41,6 +39,7 @@
                 "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/IWatchdog/src",
                 "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Keyboard/src",
                 "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Mouse/src",
+                "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Servo/src",
                 "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Wire/src",
                 "C:/Users/villa/.platformio/packages/tool-unity",
                 ""
@@ -50,7 +49,6 @@
                 "path": [
                     "c:/Users/villa/vsc_projects/grasp-nucleo/src",
                     "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
-                    "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Servo/src",
                     "C:/Users/villa/.platformio/lib/ArduinoJson_ID64/src",
                     "c:/Users/villa/vsc_projects/grasp-nucleo/lib/CoAmpCAN",
                     "c:/Users/villa/vsc_projects/grasp-nucleo/lib/CAN_Library",
@@ -82,6 +80,7 @@
                     "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/IWatchdog/src",
                     "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Keyboard/src",
                     "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Mouse/src",
+                    "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Servo/src",
                     "C:/Users/villa/.platformio/packages/framework-arduinoststm32/libraries/Wire/src",
                     "C:/Users/villa/.platformio/packages/tool-unity",
                     ""

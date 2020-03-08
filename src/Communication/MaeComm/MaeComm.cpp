@@ -7,6 +7,7 @@ Motor::Motor(int const & channel, int const & fsrPin, MicroMaestro * const & mae
 }
 void Motor::setup() {
     // this->servo.attach(this->pin);
+    Pi::write("in motor setup");
     pinMode(this->channel, OUTPUT);
 }
 void Motor::moveTo(uint16_t const & position) {
