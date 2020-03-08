@@ -3,10 +3,10 @@
 
 class FSRMatrix {
     public:
-        const int FSR_MATRIX_ROW_COUNT = 10;
-        const int FSR_MATRIX_COLUMN_COUNT = 16;
+        const int FSR_MATRIX_ROW_COUNT = 7;
+        const int FSR_MATRIX_COLUMN_COUNT = 11;
         const int ROWS_PER_MUX = 8;
-        const int MUX_COUNT = 2;
+        const int MUX_COUNT = 1;
         const int CHANNEL_PINS_PER_MUX = 3;
 
         /**

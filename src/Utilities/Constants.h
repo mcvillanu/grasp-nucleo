@@ -95,6 +95,18 @@ namespace PINS {
         const int MIDDLE_FSR = 0;
         const int RING_FSR   = 0;
         const int PINKY_FSR  = 0;
+
+        namespace MATRIX{
+            const int PIN_ADC_INPUT = A0;
+            const int PIN_SHIFT_REGISTER_DATA = 2;
+            const int PIN_SHIFT_REGISTER_CLOCK = 3;
+            const int PIN_MUX_CHANNEL_0 = 4; //channel pins 0, 1, 2, etc must be wired to consecutive Arduino pins
+            const int PIN_MUX_CHANNEL_1 = 5;
+            const int PIN_MUX_CHANNEL_2 = 6;
+            const int PIN_MUX_INHIBIT_0 = 7; //inhibit = active low enable. All mux IC enables must be wired to consecutive Arduino pins
+            const int PIN_MUX_INHIBIT_1 = 8;
+        }
+        
     }
     enum EMG {
         EMGSIGNAL   = PC12
