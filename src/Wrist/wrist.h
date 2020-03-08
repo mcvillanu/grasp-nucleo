@@ -31,13 +31,9 @@ class Wrist {
         void rotate_by(int angle);
 
         unsigned poll();
-        DRV8834 stepper = DRV8834(MOTOR_STEPS, dir_pin, step_pin, micro0, micro1);
+        BasicStepperDriver stepper = BasicStepperDriver(MOTOR_STEPS, PINS::WRIST_DIR, PINS::WRIST_STEP);
     private:
-        int step_pin = PINS::WRIST_STEP;
-        int dir_pin = PINS::WRIST_DIR;
-        int micro0 = PINS::WRIST_M0;
-        int micro1 = PINS::WRIST_M1;
-        int microsteps;
+        int microsteps = 1;
 
 };
 #endif
