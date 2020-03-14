@@ -18,5 +18,11 @@ class Manager
         bool safety;
         Wrist * wrist;
         Hand * hand;
+
+        //states:
+        void safety();
+        void Manager::executeGrip();
+        void Manager::reset();
+        void Manager::poll();
 };
 #endif

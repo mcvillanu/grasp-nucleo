@@ -52,6 +52,13 @@ void Manager::reset()
   this->currentState = STATES::RECEIVING;
 }
 
+void Manager::poll()
+{
+  //BMS
+  //EMG???
+  //sets safety based off of BMS?
+}
+
 void Manager::run(){
 
   while(true)
@@ -61,6 +68,7 @@ void Manager::run(){
     Pi::write("\n safety: " + (this->currentState==SAFETY_ON));
     //debug
     this->readFromPi();
+    poll();
     if(this->currentState == STATES::SAFETY_ON && this->safety == false)
     {
       this->currentState = STATES::RECEIVING;
