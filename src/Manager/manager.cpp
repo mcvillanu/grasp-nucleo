@@ -2,12 +2,15 @@
 
 int Manager::stringToIntGrip(String * grip){
   using namespace GRIPS;
-  if (*grip == "mug") { return GRIP_C; }
-  else if (*grip == "pinch") { return GRIP_PINCH; }
-  else if (*grip == "ball") { return GRIP_BALL; }
-  else if (*grip == "hammer") { return GRIP_HAMMER; }
-  else if (*grip == "flat") { return GRIP_FLAT; }
-  return GRIP_RESET;
+  switch (*grip)
+  {
+  case "mug":     return GRIP_C;
+  case "pinch":   return GRIP_PINCH;
+  case "ball":    return GRIP_BALL;
+  case "hammer":  return GRIP_HAMMER;
+  case "flat":    return GRIP_FLAT;
+  default:        return GRIP_RESET;
+  }
 }
 
 Manager::Manager(Wrist* wrist, Hand* hand): wrist(wrist), hand(hand) {
