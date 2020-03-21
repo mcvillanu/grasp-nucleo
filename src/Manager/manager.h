@@ -15,14 +15,14 @@ class Manager
         int stringToIntGrip(String * grip);
         int currentState;
         int pendingGrip;
-        bool safety;
+        bool safetyBool;
         Wrist * wrist;
         Hand * hand;
 
         //states:
         void safety();
-        void Manager::executeGrip();
-        void Manager::reset();
-        void Manager::poll();
+        void executeGrip();
+        void reset();
+        void poll();
 };
 #endif

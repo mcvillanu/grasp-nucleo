@@ -9,15 +9,17 @@ Manager::Manager(Wrist* wrist, Hand* hand): wrist(wrist), hand(hand) {
 
 int Manager::stringToIntGrip(String * grip){
   using namespace GRIPS;
-  switch (*grip)
-  {
-  case "mug":     return GRIP_C;
-  case "pinch":   return GRIP_PINCH;
-  case "ball":    return GRIP_BALL;
-  case "hammer":  return GRIP_HAMMER;
-  case "flat":    return GRIP_FLAT;
-  default:        return GRIP_RESET;
-  }
+  if (*grip == "mug")
+    return GRIP_C;
+  if (*grip == "pinch")
+    return GRIP_PINCH;
+  if (*grip == "ball")
+    return GRIP_BALL;
+  if (*grip == "hammer")
+    return GRIP_HAMMER;
+  if (*grip == "flat")
+    return GRIP_FLAT;
+  return GRIP_RESET;
 }
 
 
@@ -28,13 +30,13 @@ void Manager::readFromPi(){
     // this->safety = obj->getValue<bool>("c");
 
     this->pendingGrip = GRIPS::GRIP_HAMMER;
-    this->safety = false;
+    this->safetyBool = false;
 }
 
-void safety()
+void Manager::safety()
 {
   Pi::write("\n received safety");
-  hand->grip_Choose(this->pending);
+  hand->grip_Choose(this->pendingGrip);
   this->currentState = STATES::SAFETY_ON;
 }
 
@@ -65,15 +67,15 @@ void Manager::run(){
   {
     //debug
     Pi::write("\n current state: " + this->currentState);
-    Pi::write("\n safety: " + (this->currentState==SAFETY_ON));
+    Pi::write("\n safety: " + (this->currentState==STATES::SAFETY_ON));
     //debug
     this->readFromPi();
     poll();
-    if(this->currentState == STATES::SAFETY_ON && this->safety == false)
+    if(this->currentState == STATES::SAFETY_ON && this->safetyBool == false)
     {
       this->currentState = STATES::RECEIVING;
     }
-    if (this->safety)
+    if (this->safetyBool)
     {
       safety();
     }

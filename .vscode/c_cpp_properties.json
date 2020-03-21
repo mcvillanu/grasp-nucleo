@@ -9,9 +9,9 @@
             "includePath": [
                 "/Users/tiffalth/Documents/GitHub/grasp-nucleo/src",
                 "/Users/tiffalth/.platformio/lib/ArduinoJson_ID64/src",
+                "/Users/tiffalth/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
                 "/Users/tiffalth/Documents/GitHub/grasp-nucleo/lib/CoAmpCAN",
                 "/Users/tiffalth/Documents/GitHub/grasp-nucleo/lib/CAN_Library",
-                "/Users/tiffalth/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
                 "/Users/tiffalth/Documents/GitHub/grasp-nucleo/.pio/libdeps/nucleo_l452re/CAN_BUS_Shield_ID1210",
                 "/Users/tiffalth/.platformio/packages/framework-arduinoststm32/libraries/SPI/src",
                 "/Users/tiffalth/Documents/GitHub/grasp-nucleo/.pio/libdeps/nucleo_l452re/PololuMaestro_ID647",
@@ -49,9 +49,9 @@
                 "path": [
                     "/Users/tiffalth/Documents/GitHub/grasp-nucleo/src",
                     "/Users/tiffalth/.platformio/lib/ArduinoJson_ID64/src",
+                    "/Users/tiffalth/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
                     "/Users/tiffalth/Documents/GitHub/grasp-nucleo/lib/CoAmpCAN",
                     "/Users/tiffalth/Documents/GitHub/grasp-nucleo/lib/CAN_Library",
-                    "/Users/tiffalth/.platformio/packages/framework-arduinoststm32/libraries/SoftwareSerial/src",
                     "/Users/tiffalth/Documents/GitHub/grasp-nucleo/.pio/libdeps/nucleo_l452re/CAN_BUS_Shield_ID1210",
                     "/Users/tiffalth/.platformio/packages/framework-arduinoststm32/libraries/SPI/src",
                     "/Users/tiffalth/Documents/GitHub/grasp-nucleo/.pio/libdeps/nucleo_l452re/PololuMaestro_ID647",
@@ -86,7 +86,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=40201",
+                "PLATFORMIO=40301",
                 "STM32L452xx",
                 "STM32L4xx",
                 "ARDUINO=10808",
