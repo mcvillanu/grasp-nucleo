@@ -33,7 +33,9 @@ class Hand {
         Hand();
         Hand(MicroMaestro* maestro);
         void setup();
-       
         void grip_Choose(int gripVal);
+        // FSR or destination reached flag 
+        int motor_flag[5] = { 0 , 0 , 0 , 0 , 0 };
+       
 };
 #endif
