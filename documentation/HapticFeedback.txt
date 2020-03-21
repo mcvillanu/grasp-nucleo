@@ -1,0 +1,36 @@
+ -------------------- AUTHOR --------------------
+    By:         Tiffany
+    Date:       21 March 2020
+    Purpose:    Documentation on Haptic Feedback class
+
+-------------------- INTRODUCTION --------------------
+
+-------------------- FIELDS --------------------
+pin:
+    indicate the pin connected to the haptic motor
+
+-------------------- METHODS --------------------
+Haptic:
+    default constructor for the haptic feedback
+
+setup:
+    sets up the haptic feedback, with pin as the output
+
+//need to improve when comm between haptic and fsr is established//
+haptic:
+    triggers the haptic Feedback
+        turns on the motor to a specified power for 1000ms
+        turns off the motor for a specified time
+
+    power of motor and time delay when motor is off will be set depending on the type/shape of object
+    examples of usage:
+        haptic.haptic(50, 200); // High power vibrate and short delay
+        haptic.haptic(50, 1000); // high power vibrate with medium delay
+        haptic.haptic(50, 2000); // high power vibrate with long delay
+        haptic.haptic(165, 200); // low power vibrate with short delay
+        haptic.haptic(165, 1000); // low power vibrate with medium delay
+        haptic.haptic(165, 2000); // low power vibrate with long delay
+
+    
+
+

@@ -1,0 +1,76 @@
+ -------------------- AUTHOR --------------------
+    By:         Tiffany
+    Date:       21 March 2020
+    Purpose:    Documentation on the Manager class
+
+-------------------- INTRODUCTION --------------------
+[Updated ver: merged TaskManager with StateMachine]
+
+-------------------- FIELDS --------------------
+currentState:
+    indidcates the current state machine
+    STATES:
+        SAFETY_ON
+        RECEIVING
+        IN_GRIP
+
+pendingGrip:
+    indicates what grip is to be done next
+    GRIPS:
+        GRIP_HAMMER
+        GRIP_PINCH
+        GRIP_FLAT
+        GRIP_BALL
+        GRIP_C
+        GRIP_RESET
+
+safety:
+    boolean to indicate whether the task manager can move ahead or not
+        true - safety is on
+        false - safety is off (and task manager can proceed to its next tasks)
+
+* Wrist:
+    Pointer to the wrist
+
+* Hand:
+    Pointer to the hand
+
+-------------------- METHODS --------------------
+Manager:
+    Default constructor of the state machine
+
+stringToIntGrip:
+    Takes the grip name and returns its corresponding grip value
+    (refer to Constants.h for grip values)
+
+readFromPI:
+    //to be fixed as the method is further worked on//
+    Takes a string of message from the PI, and parses it using the JSON parser
+
+safety:
+    Triggers the state machine to SAFETY_ON state
+
+Manager::executeGrip:
+    Hand executes the pending grip.
+    Give indication that the hand is currently in action after delay.
+
+Manager::reset:
+    Hand executes reset.
+    Give indication that the hand is ready to for new grip (state = RECEIVING) after delay
+
+Manager::poll:
+    ... TODO
+    //will be added once the method is finished//
+
+run:
+    Excutes the task manager.
+    Execution of the task manager depends on the current state machine
+
+    if state = SAFETY_ON and safety is off, then state will move to RECEIVING
+    if state = RECEIVING, then executeGrip() will occur
+    if state = IN_GRIP and pendingGrip = reset, reset() will occur
+    if state = IN_GRIP and pendingGrip is not reset, error message will occur
+
+
+
+

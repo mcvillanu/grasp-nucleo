@@ -1,0 +1,28 @@
+-------------------- AUTHOR --------------------
+    By:         Tiffany
+    Date:       14 March 2020
+    Purpose:    Documentation on wrist class
+
+-------------------- INTRODUCTION --------------------
+The wrist class contains all the main functions needed to use the wrist.
+In the setup of the wrist, it involves instantitating the stepper motors on.
+The main purpose of the wrist is to be able to rotate.
+
+-------------------- FIELDS --------------------
+Microsteps:
+    ... TODO
+
+-------------------- METHODS --------------------
+Wrist:
+    Default constructor for the wrist.
+
+Setup:
+    Sets up the steppers and the wrist.
+
+Rotate_by:
+    Rotates the wrist by the defined angle.
+
+Poll:
+    Polls and returns the waiting time until the next change in microseconds
+
+

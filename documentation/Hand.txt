@@ -1,8 +1,48 @@
+-------------------- AUTHOR --------------------
+    By:         Tiffany
+    Date:       14 March 2020
+    Purpose:    Documentation on the hand class
+
+-------------------- INTRODUCTION --------------------
+The hand class contains all the main functions needed to use and move the hand.
+In the setup of the hand, it involves instantiating it with the Maestro and its respective motors.
+The main purpose of the hand is to allow the user to choose a particular grip of action.
+
+-------------------- FIELDS --------------------
+Selected grip:
+    Value assigned to it depend on the grip chosen by the user.
+
+//i have no idea wat step is, even in hand.cpp
+Step:
+    ... TODO
+
+Maestro:
+    Initializes the hand using the Maestro board.
+
+Motors:
+    Initializes the hand with the associated motors for each finger
+
+Grip Table:
+    Table of positions for each grip
+
+-------------------- METHODS --------------------
 Hand:
     Default constructor for the hand.
 
 Setup:
     Sets up the motors and the hand. Uses the base ordering schema defined in communication.
+
+Grip Choose:
+    User chooses 1 of 5 grips available. 
+    Grip chosen will depend on the grip value associated with it.
+    Possible grips:
+        Grip 0 (Hammer)
+        Grip 1 (Pinch)
+        Grip 2 (Card/flat)
+        Grip 3 (Ball)
+        Grip 4 (Cup)
+
+
 
 Next Step:
     For EMG Motion. Moves to the next step of the defined grip pattern.
@@ -10,32 +50,3 @@ Next Step:
 
 End Step:
     For Non-EMG Motion. Queues the final step of the grip to the motors.
-
-Grip Choose:
-    User chooses 1 of 5 grips, that value determines grip positions for each.
-
-Selected Grip:
-    ... TODO
-
-Step:
-    ... TODO
-
-Maestro:
-    ... TODO
-
-Motors:
-    ... TODO
-
-Grip Table:
-    Grip 0 (Hammer)
-        Finger 1-5
-    Grip 1 (Pinch)
-        Finger 1-5
-    Grip 2 (Card)
-        Finger 1-5
-    Grip 3 (Ball)
-        Finger 1-5
-    Grip 4 (Cup)
-        Finger 1-5
-    Grip 5 (Reset)
-        Finger 1-5
