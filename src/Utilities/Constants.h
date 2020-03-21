@@ -31,6 +31,10 @@ namespace COMMUNICATION {
             STOP = 2
         };
     }
+    enum BMSCOMM {
+        ADDRESS = 0x16,
+        COMMAND = 0xF
+    };
 };
 
 namespace UTILITIES {
