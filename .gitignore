@@ -11,5 +11,5 @@
 /extras/fuzzing/*_fuzzer_seed_corpus.zip
 .vs/
 .vscode/
-.pio/*
+.pio/
 .pio/build/*

@@ -85,7 +85,7 @@
                 ]
             },
             "defines": [
-                "PLATFORMIO=40201",
+                "PLATFORMIO=40301",
                 "STM32L452xx",
                 "STM32L4xx",
                 "ARDUINO=10808",
