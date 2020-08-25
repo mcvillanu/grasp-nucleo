@@ -7,10 +7,9 @@ MicroMaestro * maestro;
 Hand * hand;
 Manager * manager;
 
-void setup()
-{
+void setup() {
   Pi::setup();
-  
+
   wrist = new Wrist();
   Pi::write("\ndone wrist");
   maestroSerial.begin(9600);

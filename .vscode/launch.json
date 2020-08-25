@@ -12,9 +12,9 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug",
-            "executable": "/Users/tiffalth/Documents/GitHub/grasp-nucleo/.pio/build/nucleo_l452re/firmware.elf",
-            "toolchainBinDir": "/Users/tiffalth/.platformio/packages/toolchain-gccarmnoneeabi/bin",
-            "svdPath": "/Users/tiffalth/.platformio/platforms/ststm32/misc/svd/STM32L4x2.svd",
+            "executable": "/Users/raunakbhagat/Software/Projects/BEAR/grasp-nucleo/.pio/build/nucleo_l452re/firmware.elf",
+            "toolchainBinDir": "/Users/raunakbhagat/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "svdPath": "/Users/raunakbhagat/.platformio/platforms/ststm32/misc/svd/STM32L4x2.svd",
             "preLaunchTask": {
                 "type": "PlatformIO",
                 "task": "Pre-Debug"
@@ -25,9 +25,9 @@
             "type": "platformio-debug",
             "request": "launch",
             "name": "PIO Debug (skip Pre-Debug)",
-            "executable": "/Users/tiffalth/Documents/GitHub/grasp-nucleo/.pio/build/nucleo_l452re/firmware.elf",
-            "toolchainBinDir": "/Users/tiffalth/.platformio/packages/toolchain-gccarmnoneeabi/bin",
-            "svdPath": "/Users/tiffalth/.platformio/platforms/ststm32/misc/svd/STM32L4x2.svd",
+            "executable": "/Users/raunakbhagat/Software/Projects/BEAR/grasp-nucleo/.pio/build/nucleo_l452re/firmware.elf",
+            "toolchainBinDir": "/Users/raunakbhagat/.platformio/packages/toolchain-gccarmnoneeabi/bin",
+            "svdPath": "/Users/raunakbhagat/.platformio/platforms/ststm32/misc/svd/STM32L4x2.svd",
             "internalConsoleOptions": "openOnSessionStart"
         }
     ]
