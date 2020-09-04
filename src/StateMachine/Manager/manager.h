@@ -12,15 +12,12 @@
 
 
 #include <StateMachine/AbstractState/abstractstate.h>
-
-
-
-#define SAFETY_ID    0
-#define RECEIVING_ID 1
-#define EXECUTE_ID   2
-#define FAILURE_ID   3
-#define STANDBY_ID   4
-#define WRIST_ID     5
+#include <StateMachine/States/Execute/execute.h>
+#include <StateMachine/States/Failure/failure.h>
+#include <StateMachine/States/Receiving/receiving.h>
+#include <StateMachine/States/Safety/safety.h>
+#include <StateMachine/States/Standby/standby.h>
+#include <StateMachine/States/Wrist/wrist.h>
 
 
 
@@ -42,33 +39,5 @@ class Manager {
 };
 
 
-
-// #include <Wrist/wrist.h>
-// #include <Hand/hand.h>
-// // #include <Utilities/JSON/Interpreter/Interpreter.h>
-// #include <Arduino.h>
-
-
-
-// class Manager {
-//     public:
-//         Manager(Wrist* wrist, Hand* hand);
-//         void run();
-//         void readFromPi();
-
-//     private:
-//         int stringToIntGrip(String * grip);
-//         int currentState;
-//         int pendingGrip;
-//         bool safetyBool;
-//         Wrist * wrist;
-//         Hand * hand;
-
-//         //states:
-//         void safety();
-//         void executeGrip();
-//         void reset();
-//         void poll();
-// };
 
 #endif

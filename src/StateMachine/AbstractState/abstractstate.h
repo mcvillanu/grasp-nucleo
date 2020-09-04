@@ -11,6 +11,10 @@
 
 
 
+#define TEST 99
+
+
+
 class AbstractState {
     private:
         AbstractState() = delete;

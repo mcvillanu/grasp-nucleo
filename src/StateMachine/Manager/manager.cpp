@@ -20,8 +20,6 @@ void Manager::run() {
 			}
 			case (FAILURE_ID): {
 				return;
-				// message = ((Failure *) this->current)->mainLoop();
-				// break;
 			}
 			case (STANDBY_ID): {
 				message = ((Standby *) this->current)->mainLoop();
